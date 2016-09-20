@@ -16,6 +16,39 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        if len(nums) == 0: 
+            return 0
+        
+        start, end = 0, len(nums) - 1
+        while start < end:
+            if target <= nums[start]:
+                return start
+            elif nums[end] < target:
+                return end + 1
+            elif nums[end] == target:
+                return end
+                
+            mid = start + ( end - start ) // 2
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                start = mid + 1
+            
+        if target <= nums[start]:
+            return start
+        else:
+            return start + 1
+
+
+class Solution(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
         if not nums: return 0
         l, r = 0, len(nums) - 1
         

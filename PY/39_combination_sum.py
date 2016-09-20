@@ -14,6 +14,40 @@
 # [2, 2, 3] 
 # Subscribe to see which companies asked this question
 
+# Rewrite Aug 29, 2016
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        self.dfsHelper(res, sorted(candidates), [], target)
+        return res
+
+    def dfsHelper(self, res, nums, line, target):
+        sumList = sum(line)
+        if sumList == target:
+            res.append(line)
+            return
+        elif sumList > target:
+            return
+        else:
+            for i, num in enumerate(nums):
+                self.dfsHelper(res, nums[i:], line + [num], target)
+
+
+
+
+
+
+
+
+
+
+
+
 # DFS
 # Similar to combination
 # Passing nums[i:] to DFS call

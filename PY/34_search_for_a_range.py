@@ -11,6 +11,52 @@
 # return [3, 4].
 # 
 # Subscribe to see which companies asked this question
+
+class Solution2(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if len(nums) == 0:
+            return [ -1, -1 ]
+        
+        res = [ -1, -1 ]
+        # Search left end
+        start, end = 0, len(nums) - 1
+        while start <= end:
+            mid = start + (end - start) // 2
+            if nums[mid] == target and ( mid - 1 < 0 or nums[mid-1] != nums[mid] ):
+                res[0] = mid
+                break
+            elif nums[mid] < target:
+                start = mid + 1
+            else:
+                end = mid - 1
+
+        # Search right end
+        start, end = 0, len(nums) - 1
+        while start <= end:
+            mid = start + (end - start) // 2
+            if nums[mid] == target and (mid + 1 == len(nums) or nums[mid+1] != nums[mid] ):
+                res[1] = mid
+                return res
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                start = mid + 1
+        
+        return res
+
+# Test case
+# [0] 1
+# [0] 0
+# [0, 0] 0
+# [ 0, 1, 3, 4, 5, 7, 7, 8]
+        
+
+
 class Solution(object):
     def searchRange(self, nums, target):
         """

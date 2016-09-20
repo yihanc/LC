@@ -1,0 +1,21 @@
+Goal:
+10 medium or easy everyday
+
+before:
+39 combination sum (sorted; Pass nums[i:]; Append line when sum == target)
+40 combination sum ii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
+46 permutation  (if not nums append; nums[:i] + nums[i+1:]
+47 permutations ii  (similar to permutation; if nums[i] == nums[i-1] continue)
+77 combinations (append res.size == n; Pass nums[i+1:])
+78 subsets  (sorted; nums[i+1:])
+90 subsets ii   (subsets; if nums[i] == nums[i-1] continue)
+216 combination sum iii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
+
+09.18
+35 search insert position
+
+09.20
+34 search for a range (while start <= end)
+74 search in a 2d matrix (standard template, v_mid = matrix[mid // n][mid % n]
+162 find peak element (standard bs)
+240 search in a 2d matrix ii (not binary search. Search from top right)

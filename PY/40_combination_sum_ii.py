@@ -22,3 +22,19 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
+        res = []
+        self.dfsHelper(res, sorted(candidates), [], target)
+        return res
+
+    def dfsHelper(self, res, nums, line, target):
+        sumList = sum(line)
+        if sumList == target:
+            res.append(line)
+            return
+        elif sumList > target:
+            return
+        else:
+            for i, num in enumerate(nums):
+                if i > 0 and nums[i] == nums[i-1]:
+                    continue
+                self.dfsHelper(res, nums[i+1:], line + [num], target)
