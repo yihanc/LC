@@ -39,6 +39,44 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[List[int]]
         """
+        if not root:
+            return []
+        
+        res = []
+        d = deque()
+        d.append([0, root])
+        
+        while d:
+            cur = d.pop()
+            dep = cur[0]
+            cur = cur[1]
+            
+            while len(res) <= dep:
+                res.append([])
+            if dep % 2 == 0:
+                res[dep].append(cur.val)
+            else:
+                res[dep] = [cur.val] + res[dep]
+            
+            if cur.left:
+                d.appendleft([dep+1, cur.left])
+            if cur.right:
+                d.appendleft([dep+1, cur.right])    
+        
+        return res
+
+
+
+#
+
+from collections import deque
+
+class Solution2(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
         if not root: return []
         d = deque()
         res = [[]]

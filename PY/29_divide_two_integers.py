@@ -21,70 +21,31 @@ class Solution(object):
         :type divisor: int
         :rtype: int
         """
-        # Sign
-        sign = True
-        if dividend > 0 and divisor < 0 or (dividend < 0 and divisor > 0):
-            sign = False
-            
-        # MAXINT
-        MAX_INT, MIN_INT = 2147483647, -2147483648
-        
-        # Special Case
-        if divisor == 0 or (dividend == MIN_INT and divisor == -1): 
-            return MAX_INT
-        
-        #
-        res = 0
+        sign = 1
+        if dividend > 0 and divisor < 0 or dividend < 0 and divisor > 0:
+            sign = -1
         dividend, divisor = abs(dividend), abs(divisor)
+
+        res = 0
         while dividend >= divisor:
-            count, tmp = 0, divisor
+            tmp = divisor
+            count = 0
             while dividend >= tmp:
                 tmp <<= 1
                 count += 1
-            tmp >>= 1
-            if count > 0: count -= 1
-            dividend -= tmp
-            res += (1 << count)
-            
-        if sign: return res
-        else: return 0 - res
+            dividend -= (tmp >> 1)
+            res += (1 << (count-1))
 
-import unittest
-class TestSolution(unittest.TestCase):
-    def test_0(self):
-        A = Solution().divide(100, 3)
-        B = 33
-        self.assertEqual(A, B)
-    
-    def test_1(self):
-        A = Solution().divide(0, 3)
-        B = 0
-        self.assertEqual(A, B)
-
-    def test_2(self):
-        A = Solution().divide(4, 3)
-        B = 1
-        self.assertEqual(A, B)
-
-    def test_3(self):
-        A = Solution().divide(4, 0)
-        B = 2147483647
-        self.assertEqual(A, B)
-
-    def test_4(self):
-        A = Solution().divide(10003, 5)
-        B = 2000
-        self.assertEqual(A, B)
-
-    def test_5(self):
-        A = Solution().divide(10003, 0)
-        B = 2147483647
-        self.assertEqual(A, B)
-
-    def test_6(self):
-        A = Solution().divide(-2147483648, -1)
-        B = 2147483647
-        self.assertEqual(A, B)
-
+        # Purely for OJ. since python don't overflow
+        if res * sign > 2147483647:
+            return 2147483647
+        elif res * sign < -2147483648:
+            return -2147483648
+        else:
+            return res * sign
+                
 if __name__ == "__main__":
-    unittest.main()
+    print(Solution().divide(-1,1))
+    print(Solution().divide(100,3))
+    print(Solution().divide(999,3))
+    print(Solution().divide(300000,3))

@@ -22,6 +22,60 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+# Recursive
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        self.dfs(root, res)
+        return res
+
+    def dfs(self, root, res):
+        if not root:
+            return
+        self.dfs(root.left, res)
+        res.append(root.val)
+        self.dfs(root.right, res)
+
+
+# Iterative 
+from collections import deque
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root:
+            return []
+        res = []
+        d = deque()
+        cur = root
+        while d or cur:
+            if cur:
+                d.append(cur)
+                cur = cur.left
+            else:
+                cur = d.pop()
+                res.append(cur.val)
+                cur = cur.right
+        return res
+        
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Iterative 
 from collections import deque

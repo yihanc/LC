@@ -23,6 +23,58 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+# Iterative, Stack
+from collections import deque
+
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root:
+            return []
+
+        res = []
+        d = deque()
+        d.append([0, root])
+
+        while d:
+            cur = d.pop()
+            dep = cur[0]
+            node = cur[1]
+
+            while len(res) <= dep:
+                res.append([])
+            res[dep].append(node.val)
+
+            if node.left:
+                d.appendleft([dep+1, node.left])
+            if node.right:
+                d.appendright([dep+1, node.right])
+
+        return res
+                
+# Recursive
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+
+
+
+
+
+
+
+
+
+
+
+
 # Iterative. FIFO Append left and pop right
 from collections import deque
 

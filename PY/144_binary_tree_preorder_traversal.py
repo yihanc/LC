@@ -20,6 +20,67 @@
 #         self.left = None
 #         self.right = None
 
+# Iterative
+from collections import deque
+
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """ 
+        if not root:
+            return []
+        res = []
+        d = deque()
+        cur = root
+
+        while d or cur:
+            if cur:
+                res.append(cur.val)
+                if cur.right:
+                    d.append(cur.right)
+                cur = cur.left
+            else:
+                cur = d.pop()
+
+        return res
+                
+            
+# Recursive
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """ 
+        res = []
+        self.dfs(root, res)
+        return res
+    
+    def dfs(self, root, res):
+        if not root:
+            return
+        res.append(root.val)
+        self.dfs(root.left, res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Iterative with stack
 
 from collections import deque

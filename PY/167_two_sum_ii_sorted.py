@@ -19,4 +19,20 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+        if len(numers) == 0:
+            return [ -1, -1 ]
         
+        start, end = 0, len(numbers) - 1
+        
+        # "<", not "<="
+        while start < end:
+            sum_n = numbers[start] + numbers[end]
+            if sum_n == target:
+                return [start+1, end+1]
+            elif sum_n > target:
+                end -= 1
+            else:
+                start += 1
+
+        return [ -1, -1 ]
+

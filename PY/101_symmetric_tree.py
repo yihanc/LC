@@ -27,7 +27,27 @@
 # left.val == right.val
 # isSym(left.left, right.right) and isSym(left.right, r
 
-# Iterative
+
+# 2016.09.21
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+        return self.isSymmetricHelper(root.left, root.right)
+        
+    def isSymmetricHelper(self, left, right):
+        if not left and not right:
+            return True
+        if not left and right:
+            return False
+        if not right and left:
+            return False
+        return left.val == right.val and self.isSymmetricHelper(left.left, right.right) and self.isSymmetricHelper(left.right, right.left)
+
 
 # Recursive
 class Solution(object):

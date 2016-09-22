@@ -16,59 +16,57 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if not nums:
+        if len(nums) == 0:
             return -1
 
-        l, r = 0, len(nums) - 1
-        while l + 1 < r:
-            mid = l + (r - l) // 2
-            if mid == target:
-                return mid
-            elif mid > target:
-                
-                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Solution(object):
-    def search(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        l, r = 0, len(nums) - 1
-        
-        while l < r:
-            mid = (l + r) // 2
-            # Special cases
+        start, end = 0, len(nums) - 1
+        while start <= end:
+            mid = start + (end - start) // 2
             if nums[mid] == target:
                 return mid
-            elif nums[l] == target:
-                return l
-            elif nums[r] == target:
-                return r
-            
-            # Cases to update left or right (Note: mid == l)
-            # 1. l < target < mid
-            # 2. l < target, l > mid
-            # 3. target < mid, mid < l
-            if ((target < nums[mid] and target > nums[l] ) or
-                (nums[l] > nums[mid] and (nums[l] < target or target < nums[mid]))):
-                r = mid - 1
+            # Key Part. Note that ">=" for nums[0]
+            elif (( target < nums[mid] and target >= nums[0] )
+                or ( nums[0] > nums[mid] and (target >= nums[0] or target < nums[mid])) ):
+                end = mid - 1
             else:
-                l = mid + 1
-        
-        if target == nums[l]: return l
-        else: return -1
+                start = mid + 1
+
+        return -1
+
+if __name__ == "__main__":
+    sol = Solution()
+    print(sol.search([0], 0))
+    print(sol.search([0], 1))
+    print(sol.search([0,1], 0))
+    print(sol.search([0,1], 1))
+    print(sol.search([0,1], 2))
+    print(sol.search([1,0], 0))
+    print(sol.search([1,0], 1))
+    print(sol.search([1,0], 2))
+    print(sol.search([2,3,1], 2))
+    print(sol.search([2,3,1], 3))
+    print(sol.search([2,3,1], 1))
+    print(sol.search([2,3,1], 4))
+    print(sol.search([3,1,2], 3))
+    print(sol.search([3,1,2], 1))
+    print(sol.search([3,1,2], 2))
+    print(sol.search([3,1,2], 4))
+    print(sol.search([1,2,3], 1))
+    print(sol.search([1,2,3], 2))
+    print(sol.search([1,2,3], 3))
+    print(sol.search([1,2,3], 4))
+
+# Test cases
+# [0] 1
+# [0 1] -1
+# [0 1] 1
+# [1 0] 2
+# [1 0] 0
+# [1 0] 1
+# [2, 3, 1] 2
+# [3, 1, 2] 3
+# [1, 2, 3] 1
+# 0 1 2 3 4 5 6 7
+# 6 7 0 1 2 3 4
+# 7 0 2 4 5 6 
+# 5 6 7 8 0 1 2
