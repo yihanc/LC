@@ -15,7 +15,32 @@ before:
 35 search insert position
 
 09.20
-34 search for a range (while start <= end)
+34 search for a range (std bs)
 74 search in a 2d matrix (standard template, v_mid = matrix[mid // n][mid % n]
-162 find peak element (standard bs)
-240 search in a 2d matrix ii (not binary search. Search from top right)
+162 find peak element (std bs)
+240 search in a 2d matrix ii (not bs. Search from top right)
+167 two sums ii sorted (non-std bs, start < end)
+33 search in a rotated array
+81 search in a rotated array ii (Remove duplicates from start, end)
+153 find minimum in rotated sorted array. (std bs, start <= end)
+154 find minimum in rotated sorted array ii. (std bs, start <= end)
+50 pow x n (n = 0, n < 0, n % 2)
+69 sqrtx (std bs)
+29 divide two integers (how to calculate, sign, overflow)
+
+09.21
+94 bt inorder (recursive and iterative)
+144 binary_tree_preorder_traversal.py  (rec and iter)
+145 bt postorder (recursive, iterative two stack and one stack)
+100 same tree (basic recur)
+101 symmetric tree (basic recur)
+102 bt level order (iter queue, recursive)
+103 bt zigzag level order (iter queue)
+104 maximum depth of bt (basic recur)
+107 level order ii (level order, reverse)
+110 balanced bst (basic recur, need to calculate height)
+111_minimum_depth_of_binary_tree.py (basic recur)
+112_path_sum.py (basic recur)
+
+09.22
+
