@@ -29,8 +29,8 @@ before:
 29 divide two integers (how to calculate, sign, overflow)
 
 09.21
-94 bt inorder (recursive and iterative)
-144 binary_tree_preorder_traversal.py  (rec and iter)
+94 bt inorder (recursive and iter + stack, morris)
+144 binary_tree_preorder_traversal.py  (recur, iter + stack, morris)
 145 bt postorder (recursive, iterative two stack and one stack)
 100 same tree (basic recur)
 101 symmetric tree (basic recur)
@@ -43,4 +43,18 @@ before:
 112_path_sum.py (basic recur)
 
 09.22
+113 path sum ii (dfs)
+
+09.23
+95 unique binary search trees ii.py (dfs)
+96 unique_binary_search_trees.py (dfs)
+98 validate binary search tree (recursive, passing leftMax and rightMin for helper)
+99 recover binary search tree (recursive, iter Morris)
+
+09.24
+105 bs from pre and in (recur, MLE error)
+106 bs from post and in (similar to #105)
+108 sorted array to b-bst (similar to 105)
+114 flatten bst to linked list (iter and recur (preorder)
+
 

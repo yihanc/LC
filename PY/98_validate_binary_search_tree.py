@@ -16,6 +16,38 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# Recursive
+import sys
+
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        return self.isValidBSTHelper(root, sys.maxint, -sys.maxint-1)
+            
+    def isValidBSTHelper(self, root, ltMax, rtMin):
+        if not root:
+            return True
+        
+        if root.val >= ltMax or root.val <= rtMin:
+            return False
+        
+        return self.isValidBSTHelper(root.left, root.val, rtMin) and self.isValidBSTHelper(root.right, ltMax, root.val)
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Recursive. It is valid only:
 # 1. Left is valid, right is valid
 # 2. max left < val and min_right > val

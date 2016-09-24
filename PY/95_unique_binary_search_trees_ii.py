@@ -14,11 +14,56 @@
 # 
 # Subscribe to see which companies asked this question
 # Definition for a binary tree node.
+# Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+class Solution(object):
+    def generateTrees(self, n):
+        """
+        :type n: int
+        :rtype: List[TreeNode]
+        """
+        if n == 0:
+            return []
+        return self.dfs(1, n)
+    
+    def dfs(self, start, end):
+        res = []
+        if start > end:
+            res.append(None)
+        
+        for i in xrange(start, end+1):
+            lcs = self.dfs(start, i - 1)
+            rcs = self.dfs(i+1, end)
+            
+            for lc in lcs:
+                for rc in rcs:
+                    cur = TreeNode(i)
+                    cur.left = lc
+                    cur.right = rc
+                    res.append(cur)
+        
+        return res
+            
+            
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 #
 # Pretty Hard to think. 
 # Trick is for start, end, generate left and right list for each level

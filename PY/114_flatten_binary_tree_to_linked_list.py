@@ -31,13 +31,27 @@
 #         self.left = None
 #         self.right = None
 
-# Iterative
+# Iterative. Easy solution..
 class Solution(object):
     def flatten(self, root):
         """
         :type root: TreeNode
         :rtype: void Do not return anything, modify root in-place instead.
         """
+        cur = root
+        while cur:
+            if cur.left:
+                end = cur.left
+                while end and end.right:
+                    end = end.right
+                end.right = cur.right
+                cur.right = cur.left
+                cur.left = None
+            
+            cur = cur.right
+            
+        
+            
 
 
 # Recursive Preorder

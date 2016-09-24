@@ -3,6 +3,10 @@
 ## Category
 
 ### Tree and Divide & Conquer
+### inorder (recur, iter + stack, morris)
+### preorder (recur, iter + stack, morris)
+### postorder (recur, iter + stack, iter + 2 stack, morris?)
+
 94  Binary Tree Inorder Traversal   41.9%   Medium
 95  Unique Binary Search Trees II   29.9%   Medium
 96  Unique Binary Search Trees  38.9%   Medium

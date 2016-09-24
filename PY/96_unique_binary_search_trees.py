@@ -11,6 +11,24 @@
 #     /     /       \                 \
 #    2     1         2                 3
 #
+
+class Solution(object):
+    def numTrees(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        A = [0] * (n + 1)
+        A[0] = 1
+        A[1] = 1
+        
+        for i in xrange(2, n+1):
+            for k in xrange(0, i):
+                A[i] += A[k]*A[i-1-k]
+        
+        return A[n]
+
+
 #      4        4     4       4     4
 #     /        /     /       /     /
 #    1         3     3      2      1

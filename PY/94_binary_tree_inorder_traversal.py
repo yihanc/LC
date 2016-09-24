@@ -22,6 +22,36 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+# Morris O(1) Traversal
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        cur = root
+        while cur:
+            if not cur.left:
+                res.append(cur.val)
+                cur = cur.right
+            else:
+                prev = cur.left
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+                
+                if not prev.right:
+                    prev.right = cur
+                    cur = cur.left
+                else:
+                    prev.right = None
+                    res.append(cur.val)
+                    cur = cur.right
+                    
+        return res
+
+
 # Recursive
 class Solution(object):
     def inorderTraversal(self, root):
@@ -41,7 +71,7 @@ class Solution(object):
         self.dfs(root.right, res)
 
 
-# Iterative 
+# Iterative stack
 from collections import deque
 class Solution(object):
     def inorderTraversal(self, root):
@@ -64,8 +94,6 @@ class Solution(object):
                 cur = cur.right
         return res
         
-
-
 
 
 

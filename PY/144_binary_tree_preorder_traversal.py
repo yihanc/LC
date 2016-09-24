@@ -20,6 +20,35 @@
 #         self.left = None
 #         self.right = None
 
+# Morris Traversal
+
+class Solution(object):
+    def preorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        cur = root
+        while cur:
+            if not cur.left:
+                res.append(cur.val)
+                cur = cur.right
+            else:
+                prev = cur.left
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+                
+                if not prev.right:
+                    prev.right = cur
+                    res.append(cur.val)
+                    cur = cur.left
+                else:
+                    prev.right = None
+                    cur = cur.right
+                    
+        return res
+
 # Iterative
 from collections import deque
 
