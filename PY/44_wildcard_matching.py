@@ -11,13 +11,14 @@
 # bool isMatch(const char *s, const char *p)
 # 
 # Some examples:
-# isMatch("aa","a") → false
-# isMatch("aa","aa") → true
-# isMatch("aaa","aa") → false
-# isMatch("aa", "*") → true
-# isMatch("aa", "a*") → true
-# isMatch("ab", "?*") → true
-# isMatch("aab", "c*a*b") → false
+# isMatch("aa","a")  false
+# isMatch("aa","aa")  true
+# isMatch("aaa","aa")  false
+# isMatch("aa", "*")  true
+# isMatch("aa", "a*")  true
+# isMatch("ab", "?*")  true
+# isMatch("aab", "c*a*b")  false
+
 class Solution(object):
     def isMatch(self, s, p):
         """
@@ -25,3 +26,67 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
+        if not s and not p:
+            return True
+
+        if pLen - p.count('*') > sLen:   #avoid TLE
+            return False
+
+        i, j = 0, 0
+        while i < len(s) and j < len(p):
+            print(str(i) + " " + str(j))
+            if s[i] != p[j]:
+                return False
+                
+            if s[i] == p[j] or p[j] == '?':
+                i += 1
+                j += 1
+                continue
+        
+            while p[j] == '*':
+                j += 1
+    
+            if j == len(p):
+                return True
+        
+        if i == len(s) and j == len(p):
+            return True
+        else:
+            return False
+
+
+# Python TLE. Too slow
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        sLen, pLen = len(s), len(p)
+        dp = [[False for i in xrange(0, pLen+1)] for j in xrange(0, sLen+1)]
+        dp[0][0] = True
+        print(dp)
+        
+        for j in xrange(0, pLen):
+            print("-- j: " + str(j))
+            if p[j] == '*':
+                dp[0][j+1] = dp[0][j];
+            print(dp)
+        
+        for i in xrange(0, sLen):
+            for j in xrange(0, pLen):
+                print("-- i: " + str(i) + " --- j: " + str(j))
+                if s[i] == p[j] or p[j] == '?':
+                    dp[i+1][j+1] = dp[i][j]
+                elif p[j] == '*':
+                    dp[i+1][j+1] = dp[i+1][j] or dp[i][j+1]
+                print(dp)
+        
+        return dp[sLen][pLen]
+
+if __name__ == "__main__":
+#    print(Solution().isMatch("aa", "a"))
+#    print(Solution().isMatch("aaa", "*b"))
+    print(Solution().isMatch("aaa", "*b"))
+
