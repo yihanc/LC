@@ -11,17 +11,76 @@
 # bool isMatch(const char *s, const char *p)
 # 
 # Some examples:
-# isMatch("aa","a") → false
-# isMatch("aa","aa") → true
-# isMatch("aaa","aa") → false
-# isMatch("aa", "a*") → true
-# isMatch("aa", ".*") → true
-# isMatch("ab", ".*") → true
-# isMatch("aab", "c*a*b") → true
+# isMatch("aa","a")  false
+# isMatch("aa","aa")  true
+# isMatch("aaa","aa")  false
+# isMatch("aa", "a*")  true
+# isMatch("aa", ".*")  true
+# isMatch("ab", ".*")  true
+# isMatch("aab", "c*a*b")  true
 # Subscribe to see which companies asked this question
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        sLen, pLen = len(s), len(p)
+
+        if pLen - 2 * p.count("*") > sLen:
+            return False
+
+        dp = [[False for j in xrange(pLen+1)] for i in xrange(sLen+1)]
+
+        dp[0][0] = True
+
+        for j in xrange(2, pLen+1):
+            if p[j-1] == "*":
+                dp[0][j] = dp[0][j-2]
+
+        for i in xrange(1, sLen+1):
+            for j in xrange(1, pLen+1):
+                if s[i-1] == p[j-1] or p[j-1] == ".":
+                    dp[i][j] = dp[i-1][j-1]
+                elif p[j-1] == "*" and (p[j-2] == "." or s[i-1] == p[j-2]):
+                    dp[i][j] = dp[i][j-2] or dp[i-1][j]
+                elif p[j-1] == "*":
+                    dp[i][j] = dp[i][j-2]
+                else:
+                    pass
+
+        return dp[-1][-1]
+
+if __name__ == "__main__":
+    #Solution().isMatch("aa", "aa")
+    Solution().isMatch("aaa", "ab*ac*a")
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import unittest
 
-class Solution(object):
+class Solution2(object):
     def isMatch(self, s, p):
         """
         :type s: str
@@ -71,5 +130,5 @@ class TestSolution(unittest.TestCase):
     def test_multistar_0(self):
         self.assertTrue(Solution().isMatch("aab", "c*a*b*"))
 
-if __name__ == "__main__":
-    unittest.main()
+# if __name__ == "__main__":
+#     unittest.main()

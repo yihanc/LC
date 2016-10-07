@@ -26,6 +26,42 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
+        sLen, pLen = len(s), len(p)
+
+        if pLen - p.count("*") > sLen:
+            return False
+
+        dp = [[ False for j in xrange(pLen+1)] for i in xrange(sLen+1)]
+
+        dp[0][0] = True
+
+        for j in xrange(1, pLen+1):
+            if p[j-1] == "*":
+                dp[0][j] = dp[0][j-1]
+
+        for i in xrange(1, sLen+1):
+            for j in xrange(1, pLen+1):
+                if s[i-1] == p[j-1] or p[j-1] == "?":
+                    dp[i][j] = dp[i-1][j-1]
+                elif p[j-1] == "*":
+                    dp[i][j] = dp[i-1][j] or dp[i][j-1]
+
+        return dp[-1][-1]
+                
+
+
+
+
+
+
+
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
         if not s and not p:
             return True
 

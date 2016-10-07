@@ -56,5 +56,33 @@ before:
 106 bs from post and in (similar to #105)
 108 sorted array to b-bst (similar to 105)
 114 flatten bst to linked list (iter and recur (preorder)
+116 populating next right pointers. (Iter Top down. From cur connect next level)
+117 populating ii. (Iter top down. Need a start pointer to record last node to connect)
+129 sum root to left numbers. (DFS template)
+124 binary tree maximum path sum (recusrive, maxRtl function)
+120 triangle (DP, Right to left, res update)
 
+09.25
+62 unique path (DP, or math)
+63 unique path ii (DP, 2D matrix)
+64 minimum path sum (DP)
+70 climbing stairs (DP, fibonacci)
+55 jump game (1 loop, O(1) space solution)
+45 jump game ii (Use nextS, nextE, curS, curE to track)
+
+09.26
+53_maximum_subarray.py
+
+09.29
+44_wildcard_matching.py
+10_regular_expression matching. (Similar to wildcard. DP)
+72 Edit Distance (2D string DP. if word1[i] == word2[j]
+
+09.30
+87 scramble string. (Recursion)
+91 decoded ways. (DP, lots of corner cases)
+97 interleaving string (2d DP)
+
+10.1
+115 distinct sequences
 

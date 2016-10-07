@@ -169,6 +169,22 @@ rotate string
 392 Is Subsequence  44.0%   Medium
 403 Frog Jump   40.1%   Hard
 
+# Greedy
+44  Wildcard Matching   18.4%   Hard
+45  Jump Game II    25.8%   Hard
+55  Jump Game   29.0%   Medium
+122 Best Time to Buy and Sell Stock II  44.3%   Medium
+134 Gas Station 28.1%   Medium
+135 Candy   23.4%   Hard
+253 Meeting Rooms II    36.8%   Medium
+316 Remove Duplicate Letters    27.5%   Hard
+321 Create Maximum Number   22.9%   Hard
+330 Patching Array  30.7%   Hard
+358 Rearrange String k Distance Apart   30.2%   Hard
+376 Wiggle Subsequence  34.5%   Medium
+392 Is Subsequence  44.2%   Medium
+402 Remove K Digits 27.5%   Medium
+
 # Linked List
 2   Add Two Numbers 24.9%   Medium
 19  Remove Nth Node From End of List    31.1%   Easy
