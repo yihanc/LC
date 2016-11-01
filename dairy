@@ -86,3 +86,38 @@ before:
 10.1
 115 distinct sequences
 
+10.8
+67 add binary (math)
+66 plus binary (math)
+118 pascals triangle (dp)
+119 pascals triangle ii (dp)
+136 single number (math)
+141 linked list cycle (list)
+38 count and say (simple string)
+
+10.10
+84 largestrecetangle in histogram (84 and 85 are similar)
+85 Maximal Recentangle
+131 palindrome partitioning (dfs)
+132 palindrome partitioning ii(dp, i, j two pointers. check update at the same time)
+139 word break. (forward dp)
+140 word break ii. (backward dp. + dfs)
+127 word ladder (bfs, replace one char and check if it is in dict))
+
+10.26
+
+10.29
+43 multiply strings.
+48 rotate image.    (Flip up down, then flip diagnoal. Watch out the range)
+
+10.30
+49 anagrams.    (Use another dict and list to record, traverse the list to get the result)
+54 spiral matrix. (Use lvl. Watch out case [1,2,3] and [[1],[2],[3]])
+59 spiral matrix ii. (Same template as spiral matrix)
+51 n queens.    (DFS)
+52 n queens ii.     (Same template as n queens, DFS)
+
+10.31
+60 permutation sequence.    (Use math to calculate. Loop each, remove num)
+71 simplify path.   (Split then deque)
+73 set matrix zeroes.   (o(1) space. Use row0 and col0. Then use 1st row and col to store other cells states)

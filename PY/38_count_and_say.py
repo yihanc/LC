@@ -17,4 +17,22 @@ class Solution(object):
         :type n: int
         :rtype: str
         """
-        
+        if n == 0:
+            return ""
+
+        res = "1"
+
+        while n > 1:
+            tmp, res, count, curChar = res, "", 0, ""
+            for i, char in enumerate(tmp):
+                if i == 0 or char != tmp[i-1]:
+                    if count >= 1:
+                        res = res + str(count) + cur_char
+                    cur_char = char
+                    count = 1
+                else:
+                    count += 1
+            res = res + str(count) + cur_char
+            n -= 1
+            
+        return res

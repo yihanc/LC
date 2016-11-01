@@ -132,6 +132,7 @@ rotate string
 96  Unique Binary Search Trees  38.9%   Medium
 97  Interleaving String 23.4%   Hard
 115 Distinct Subsequences   30.0%   Hard
+118 Pascals triangle
 120 Triangle    31.6%   Medium
 121 Best Time to Buy and Sell Stock 37.7%   Easy
 123 Best Time to Buy and Sell Stock III 27.5%   Hard
