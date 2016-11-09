@@ -26,48 +26,33 @@ class Solution(object):
         :rtype: void Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
-        if n < 3:
+        if n <= 1:
             return
-        
+
         l, r = 0, n-1
-
-        while l < r:
-            while nums[l] == 0:
-                l += 1
-        
-            while nums[r] == 2:
+        cur = 0
+        while cur <= r:     # N1. cur from 0 to r, inclusive
+            print(nums)
+            print(str(l) + " " + str(cur) + " " + str(r))
+            if nums[cur] == 0:
+                nums[l], nums[cur] = nums[cur], nums[l]
+                l, cur = l+1, cur+1 
+            elif nums[cur] == 2:        # If cur == 2, don't change cur.
+                nums[r], nums[cur] = nums[cur], nums[r] 
                 r -= 1
-                
-            if nums[l] == 2 and nums[r] == 0:
-                nums[l], nums[r] = 0, 2
-                l, r = l+1, r-1
-                continue
-
-            mid = l + 1
-            while mid != r and nums[mid] == 1:
-                mid += 1
-
-            if mid >= r:
-                break   # QUIT LOOP. All sorted
-
-            if mid == 0:    # swap l
-                tmp = nums[l]
-                nums[l] = nums[mid]
-                nums[mid] = tmp
-                l += 1
-                continue
-            if mid == 2:    # swap r
-                tmp = nums[r]
-                nums[r] = nums[mid]
-                nums[mid] = tmp
-                r -= 1
-                continue
+            else:
+                cur += 1
 
 
 if __name__ == "__main__":
     nums = [] 
-    for i in xrange(3):
+    for i in xrange(10):
         nums.append(random.randint(0,2))
+
+#    nums = [2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 2, 1, 2, 2, 0, 0, 2, 2, 2, 2]
+#    nums = [1, 1, 2, 2, 1, 0, 0, 2, 2, 0, 2, 1, 0, 2, 0, 0, 2, 0, 1, 0]
+#    nums = [0, 0, 0]
+#    nums = [2, 2, 2]
 
     print(nums)
     Solution().sortColors(nums)

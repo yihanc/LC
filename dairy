@@ -121,3 +121,23 @@ before:
 60 permutation sequence.    (Use math to calculate. Loop each, remove num)
 71 simplify path.   (Split then deque)
 73 set matrix zeroes.   (o(1) space. Use row0 and col0. Then use 1st row and col to store other cells states)
+
+11.03
+75 sort colors.     (3 pointers, move cur only nums[cur] is 0 or 1)
+79 word search.     (DFS. Find candidates. Mark board)
+80 remove dup from array (Traverse list + del nums[i])
+83 remove dup from sorted list  (No dummy needed)
+82 remove dup from sorted list ii (Use dummy. while cur, cur.next and cur.next.next))
+
+11.04
+86 parition list    (LL. DummyNode. Find "end" and "curEnd". Use "isEnd" to know when to stop.
+89 gray code    (simple math)
+93 restore ip addresses. (DFS, Exclude "0X", "0XX" cases)
+206 reverse linked list (Reverse template. while then: 1. cur.next, 2. then.next = pre.next, 3.pre.next = then, 4. then = cur.next)
+92 reverse linked list ii (Reverse template with m, n)
+
+11.05
+109 convert sorted list to binary tree. (Simmilar to 107. Recursive Find MID)
+61 rotate list. (1. k % length first. 2. Find pivot and then attach. 3.if k == 0, return the same)
+
+
