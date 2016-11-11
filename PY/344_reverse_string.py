@@ -12,16 +12,13 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        if len(s) <= 1:
-            return s
-    
-        l = list(s)
-    
-        for i,char in enumerate(l):
-            if i >= len(l) / 2:
-                return ''.join(l)
-            tmpchar = l[-(i+1)]
-            l[-(i+1)] = l[i]
-            l[i] = tmpchar
-    
-        return ''.join(l)
+        if not s:
+            return ""
+            
+        S = list(s)
+        i, j = 0, len(S)-1
+        while i < j:
+            S[i], S[j] = S[j], S[i]
+            i, j = i+1, j-1
+        
+        return ''.join(S)

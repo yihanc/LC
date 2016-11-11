@@ -139,5 +139,13 @@ before:
 11.05
 109 convert sorted list to binary tree. (Simmilar to 107. Recursive Find MID)
 61 rotate list. (1. k % length first. 2. Find pivot and then attach. 3.if k == 0, return the same)
-
-
+344 reverse string. (two pointers. s -> list -> ''.join)
+292 nim game. (n % 4)
+371 sum  (bit trick)
+258 Add digits (Math hack. Digital Roots)
+389 find the difference ( two sum similar.)
+283 move zeroes (medium. modify nums directly)
+404 sum of left leaves (bfs deque)
+349 intersection of two arrays (easy)
+237 delete node in LL
+171 excel sheet column number (
