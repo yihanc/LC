@@ -139,6 +139,8 @@ before:
 11.05
 109 convert sorted list to binary tree. (Simmilar to 107. Recursive Find MID)
 61 rotate list. (1. k % length first. 2. Find pivot and then attach. 3.if k == 0, return the same)
+
+11.10 (all easies)
 344 reverse string. (two pointers. s -> list -> ''.join)
 292 nim game. (n % 4)
 371 sum  (bit trick)
@@ -149,3 +151,23 @@ before:
 349 intersection of two arrays (easy)
 237 delete node in LL
 171 excel sheet column number (
+
+11.11
+37 sudoku solver (DFS. getNext(), getCandidates(), lt_i = i // 3 * 3, board is list not string)
+41 first missing positive (Swap to correct position. 1. n+1. 2. )
+
+11.12
+42 trapping water. (1 loop. L-R scan. Two pointers. Update l_max, r_max and res)
+56 merge intervals. (1. Sort by start. 2. Update res's end if needed)
+57 insert intervals. (1. Insert the new Interval first. Then use LC56 idea)
+76 minimum window substring (Substring template)
+65 valid number (4 steps. )
+68 text justification (3 steps.)
+128 longest consecutive sequence (Hashmap + update boundary)
+
+11.13 
+130 surrounded regions (2Dmatrix. BFS boundaries first)
+134 gas station (Greedy puzzle. One loop)
+135 candy (Puzzle. L-R scan)
+138 copy list with random pointer (Graph Copy. 1. Create node and mapping. 2. Copy pointers)
+142 linked list cycle ii ()

@@ -13,4 +13,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        n = len(nums)
+        for i in xrange(n):
+            while nums[i] >= 1 and nums[i] <= n and nums[nums[i]-1] != nums[i]:
+                print("i: ", i, " nums[i]: ", nums[i], " nums[nums[i]-1]: ", nums[nums[i]-1]) 
+                tmp = nums[i]-1     # Bug if no this line
+                nums[i], nums[tmp] = nums[tmp], nums[i]
         
+        for i in xrange(n):
+            if nums[i] != i+1:
+                return i+1
+        return n+1
+
+if __name__ == "__main__":
+    print(Solution().firstMissingPositive([2,1]))

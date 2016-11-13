@@ -13,3 +13,28 @@
 # The solution is guaranteed to be unique.
 # 
 # Subscribe to see which companies asked this question
+
+# Algorithm:
+# 1. Traverse. Record sum_gas and sum_cost and tank
+# 2. Anytime, if tank goes negative, start = i+1, tank to 0
+# 3. If sum_gas < sum_cost. return -1
+#
+class Solution(object):
+    def canCompleteCircuit(self, gas, cost):
+        """
+        :type gas: List[int]
+        :type cost: List[int]
+        :rtype: int
+        """
+        start, tank, sum_gas, sum_cost = 0, 0, 0, 0
+        for i in xrange(len(gas)):
+            sum_gas, sum_cost = sum_gas + gas[i], sum_cost + cost[i]
+            tank += gas[i] - cost[i]
+            if tank < 0:
+                start = i + 1
+                tank = 0
+            
+        if sum_gas < sum_cost:
+            return -1
+        else:
+            return start

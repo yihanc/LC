@@ -1,0 +1,43 @@
+# 138. Copy List with Random Pointer   QuestionEditorial Solution  My Submissions
+# Total Accepted: 83720
+# Total Submissions: 318414
+# Difficulty: Hard
+# Contributors: Admin
+# A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+# 
+# Return a deep copy of the list.
+# 
+# Subscribe to see which companies asked this question
+# Definition for singly-linked list with a random pointer.
+# class RandomListNode(object):
+#     def __init__(self, x):
+#         self.label = x
+#         self.next = None
+#         self.random = None
+
+# Create node and mapping first
+class Solution(object):
+    def copyRandomList(self, head):
+        """
+        :type head: RandomListNode
+        :rtype: RandomListNode
+        """
+        if not head:
+            return None
+
+        dic = {}
+        cur = head
+        while cur:                          # Step 1. Create all nodes. And bind dic
+            node = RandomListNode(cur.label)
+            dic[cur] = node
+            cur = cur.next
+        
+        dic[head]
+        cur = head
+        while cur:                          # Step 2. Update next and random
+            if cur.next: dic[cur].next = dic[cur.next] 
+            if cur.random: dic[cur].random = dic[cur.random]
+            cur = cur.next
+        
+        return dic[head]    
+        
