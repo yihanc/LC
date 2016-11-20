@@ -12,6 +12,75 @@
 # Although the above answer is in lexicographical order, your answer could be in any order you want.
 # 
 
+# Non DFS. 11.19.2016
+from collections import deque
+
+class Solution(object):
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        res = []
+        dic = {
+            "0": " ",
+            "1": "",
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz"
+        }
+        
+        for digit in digits:
+            tmp = res
+            res = []            
+            for char in dic[str(digit)]:
+                if len(tmp) == 0:
+                    res.append(char)
+                
+                for i in xrange(len(tmp)):
+                    res.append(tmp[i] + char)
+        
+        return res
+
+
+# DFS only
+class Solution(object):
+    dic = { "1": "",
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+            "0": " " }
+
+    def letterCombinations(self, digits):
+        """
+        :type digits: str
+        :rtype: List[str]
+        """
+        if not digits: return []
+        res = []
+        self.dfs(digits, 0, res, "")
+        return res
+
+    def dfs(self, digits, i, res, line):
+        if i == len(digits):
+            res.append(line)
+            return
+
+        for char in self.dic[digits[i]]:
+            self.dfs(digits, i+1, res, line + char)
+
+#####
+
 from collections import deque
 
 # Iterative Loop
@@ -44,43 +113,6 @@ class Solution2(object):
                     print("---" + char)
                     res.append(line + char)
         
-        return res
-
-# DFS and FIFO
-class Solution(object):
-    def dfs(self, d, res, line):
-        if not d:
-            res.append(line)
-        else:
-            cur = d.pop()
-            for char in cur:
-                self.dfs(d, res, line + char)
-            d.append(cur)
-        
-    def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
-        if not digits:
-            return []
-        dic = { "1": "",
-            "2": "abc",
-            "3": "def",
-            "4": "ghi",
-            "5": "jkl",
-            "6": "mno",
-            "7": "pqrs",
-            "8": "tuv",
-            "9": "wxyz",
-            "0": " " }
-        d = deque()
-        res, line = [], ""
-        
-        for digit in digits:
-            d.appendleft(dic[digit])
-        
-        self.dfs(d, res, line)
         return res
 
 import unittest

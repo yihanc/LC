@@ -11,7 +11,35 @@
 # string convert(string text, int nRows);
 # convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 # Subscribe to see which companies asked this question
+
+# 11.18.2016
 class Solution(object):
+    def convert(self, s, numRows):
+        """
+        :type s: str
+        :type numRows: int
+        :rtype: str
+        """
+        if numRows <= 1:
+            return s
+        
+        A = [ "" for x in xrange(numRows)]
+        res = ""
+        
+        i = 0
+        while i < len(s):
+            row = i % (2 * (numRows - 1))
+            if row >= numRows:
+                row = 2 * (numRows - 1) - row
+            
+            A[row] += s[i]
+            i += 1
+        
+        return "".join(A)
+           
+        
+
+class Solution2(object):
     def convert(self, s, numRows):
         """
         :type s: str

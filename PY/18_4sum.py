@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*- 
-# 18. 4Sum My Submissions QuestionEditorial Solution
+# -*- coding: utf-8 -*- # 18. 4Sum My Submissions QuestionEditorial Solution
 # Total Accepted: 74089 Total Submissions: 309004 Difficulty: Medium
 # Given an array S of n integers, are there elements a, b, c, and d in S such that a + b + c + d = target? Find all unique quadruplets in the array which gives the sum of target.
 # 
@@ -14,6 +13,47 @@
 #     (-2,  0, 0, 2)
 # Subscribe to see which companies asked this question
 class Solution(object):
+    def fourSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        n = len(nums)
+        if n < 4:
+            return []
+
+        nums.sort()
+        
+        for i in xrange(n - 3):
+            if i > 0 and nums[i] == nums[i-1]:  continue
+            
+            for j in xrange(i+1, n-2):
+                if j > i + 1 and nums[j] == nums[j-1]:  continue
+                
+                k, l = j + 1, len(nums) - 1
+                while k < l:
+                    if k > j + 1 and nums[k] == nums[k-1]:
+                        k += 1
+                        continue
+                    
+                    if l < len(nums) - 1 and nums[l] == nums[l+1]:
+                        l -= 1
+                        continue
+                    
+                    sum = nums[i] + nums[j] + nums[k] + nums[l]
+                    if sum > target: l -= 1
+                    elif sum < target: k += 1
+                    else:
+                        res.append([nums[i], nums[j], nums[k], nums[l]])
+                        l -= 1
+                        k += 1
+        return res
+                    
+        
+
+class Solution2(object):
     def fourSum(self, nums, target):
         """
         :type nums: List[int]
@@ -62,4 +102,5 @@ class TestSolution(unittest.TestCase):
         self.assertEqual(Solution().fourSum(nums, target), expected)
         
 if __name__ == "__main__":
-    unittest.main()
+    Solution().fourSum([1,0,-1,0,-2,2], 0)
+

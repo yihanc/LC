@@ -10,6 +10,26 @@
 # Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively. It doesn't matter what you leave beyond the new length.
 # 
 # Subscribe to see which companies asked this question
+
+# 11.19.2016 
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        res = 0
+        n = len(nums)
+        
+        i = 0
+        while i < n:
+            if i > 0 and nums[i] == nums[i-1]:
+                del nums[i]
+                n -= 1
+            else:
+                i += 1
+        return len(nums)
+
 class Solution(object):
     def removeDuplicates(self, nums):
         """

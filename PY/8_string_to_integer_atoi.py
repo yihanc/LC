@@ -18,7 +18,41 @@
 # 3. overflow
 # 4. invalid input
 # http://www.cplusplus.com/reference/cstdlib/atoi/
+
+# 2016.11.18
 class Solution(object):
+    def myAtoi(self, str):
+        """
+        :type str: str
+        :rtype: int
+        """
+        sign = 1
+        res = 0
+        
+        i = 0
+        while i < len(str) and str[i] == " ": 
+            i += 1
+        
+        if i < len(str) and str[i] == "+":
+            i += 1
+        elif i < len(str) and str[i] == "-":
+            sign = -1
+            i += 1
+            
+        while i < len(str) and str[i] in "0123456789":
+            if sign == 1 and ((res > 214748364) or (res == 214748364 and ord(str[i]) - ord("0") > 7)):
+                return 2147483647
+            if sign == -1 and ((res > 214748364) or (res == 214748364 and ord(str[i]) - ord("0") > 8)):
+                return -2147483648
+                
+            res = res * 10 + ord(str[i]) - ord("0")
+            i += 1
+            
+        return res * sign
+            
+            
+
+class Solution2(object):
     def myAtoi(self, str):
         """
         :type str: str

@@ -29,6 +29,31 @@ class Solution(object):
         sign = 1
         if x < 0:
             sign = -1
+            x = -x
+        res = 0
+        
+        while x > 0:
+            if sign == 1 and res > 214748364 or ( res == 214748364 and x > 7):
+                return 0
+            if sign == -1 and res > 214748364 or ( res == 214748364 and x > 8):
+                return 0
+
+            res = res * 10 + x % 10
+            x = x // 10
+        
+        return sign * res 
+        
+        
+
+class Solution2(object):
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        sign = 1
+        if x < 0:
+            sign = -1
         tmp = str(abs(x))[::-1]
         
         # Handling overflowing case, which is unnecessary in Python

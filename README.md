@@ -187,6 +187,8 @@ rotate string
 402 Remove K Digits 27.5%   Medium
 
 # Linked List
+# Template 1: Reverse list. 
+# Template 2: Merge list
 2   Add Two Numbers 24.9%   Medium
 19  Remove Nth Node From End of List    31.1%   Easy
 21  Merge Two Sorted Lists  36.9%   Easy
@@ -268,3 +270,8 @@ rotate string
 385 Mini Parser 29.1%   Medium
 408 Valid Word Abbreviation     26.6%   Easy
 
+# Water Question
+11 Container With Most Water       35.9%   Medium  
+42 Trapping Rain Water         34.8%   Hard    
+84 Largest Rectangle in Histogram          25.4%   Hard    
+85 Maximal Rectangle       25.5%   Hard

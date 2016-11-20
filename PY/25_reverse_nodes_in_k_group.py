@@ -22,8 +22,40 @@ class ListNode(object):
         self.val = x
         self.next = None
 
-# function to reverse a list
+# 11.19.2016. Reverse Template
 class Solution(object):
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        
+        while pre:
+            # Check next k
+            stop = pre
+            for i in xrange(k):
+                stop = stop.next
+                if not stop:
+                    return dummy.next
+            
+            # Reverse k-1 times
+            cur = pre.next
+            then = cur.next
+            for i in xrange(k-1):
+                cur.next = then.next
+                then.next = pre.next
+                pre.next = then
+                then = cur.next
+            
+            pre = cur
+
+
+# function to reverse a list
+class Solution2(object):
     def reverseListNode(self, head):
         if not head or not head.next: return head
         

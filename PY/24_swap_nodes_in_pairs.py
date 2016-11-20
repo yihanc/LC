@@ -14,7 +14,29 @@
 #         self.val = x
 #         self.next = None
 
+# 11.19.2016 Reverse Template
 class Solution(object):
+    def swapPairs(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        
+        while pre.next and pre.next.next:
+            # Swap Two nodes
+            cur = pre.next
+            then = cur.next
+            cur.next = then.next
+            then.next = pre.next
+            pre.next = then
+            pre = cur
+        
+        return dummy.next
+
+class Solution2(object):
     def swapPairs(self, head):
         """
         :type head: ListNode

@@ -11,6 +11,51 @@
 #     (-1, 0, 1)
 #     (-1, -1, 2)
 # Subscribe to see which companies asked this question
+
+# 11.19.2016
+class Solution(object):
+    def threeSum(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if len(nums) < 3:
+            return []
+        res = []
+        
+        nums.sort()
+        
+        i = 0
+        while i < len(nums) - 2:
+            if i > 0 and nums[i] == nums[i-1]:
+                i += 1
+                continue
+            
+            j, k = i + 1, len(nums) - 1
+            while j < k:
+                if j > i + 1 and nums[j] == nums[j-1]:
+                    j += 1
+                    continue
+                
+                if k + 1 < len(nums) and nums[k] == nums[k+1]:
+                    k -= 1
+                    continue
+                
+                sum = nums[i] + nums[j] + nums[k]
+                if sum > 0:
+                    k -= 1
+                elif sum < 0:
+                    j += 1
+                else:
+                    res.append([nums[i], nums[j], nums[k]])
+                    k -= 1
+                    j += 1
+            i += 1
+            
+        return res
+        
+        
+
 class Solution(object):
     # i from 0 to len(nums) - 2
     # l = i + 1, r from len(nums) -1 

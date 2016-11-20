@@ -23,6 +23,30 @@
 # M   1,000  MMMCM
 #
 # Anyway to make it shorter?
+
+class Solution(object):
+    def intToRoman(self, num):
+        """
+        :type num: int
+        :rtype: str
+        """
+        dic = [
+            ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+            ["", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"],
+            ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"],
+            ["", "M", "MM", "MMM"]
+        ]
+        res = ""
+        
+        lvl = 0
+        while num > 0:
+            res = dic[lvl][num % 10] + res
+            num = num // 10
+            lvl = lvl + 1
+        return res
+
+
+
 class Solution(object):
     def intToRoman(self, num):
         """
