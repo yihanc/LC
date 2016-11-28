@@ -15,8 +15,35 @@
 # 
 # Subscribe to see which companies asked this question
 
-# One loop. O(1) solution
+# 11.26.2016, DP
+# DP. 
 class Solution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        n = len(nums)
+        if n <= 1: return True
+        dp = [ False for x in xrange(n) ]
+        dp[0] = True
+        
+        i, marked = 0, 0
+        while i < n:
+            if not dp[i]: 
+                return False
+                
+            for j in xrange(marked+1, i + nums[i] + 1):
+                dp[j] = dp[i]
+                if j == n - 1: 
+                    return True
+                marked = max(marked, j)
+            i += 1
+        
+        return False
+
+# One loop. O(1) solution
+class Solution3(object):
     def canJump(self, nums):
         """
         :type nums: List[int]
@@ -30,7 +57,7 @@ class Solution(object):
         return True
 
 # DP solution get a TLE
-class Solution(object):
+class Solution2(object):
     def canJump(self, nums):
         """
         :type nums: List[int]

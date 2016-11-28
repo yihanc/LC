@@ -8,8 +8,38 @@
 # You should NOT use internal library such as BigInteger.
 # Subscribe to see which companies asked this question
 
-# This passed OJ
+# 11.26.2016 Rewrite
 class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        m, n = len(num1), len(num2)
+        if num1 == "0" or num2 == "0": return "0"
+        if num1 == "1": return num2
+        if num2 == "1": return num1
+        
+        res = 0
+        
+        i = m - 1
+        while i >= 0:
+            j = n - 1
+            while j >= 0:
+                mul = (ord(num1[i]) - ord("0")) * (ord(num2[j]) - ord("0"))
+                res += mul * ( 10 ** (m - 1 -i + n - 1 -j ))
+                print(mul, res)
+                j -= 1
+            i -= 1
+        print(res)
+        
+        return str(res)
+        
+        
+
+# This passed OJ
+class Solution2(object):
     def multiply(self, num1, num2):
         """
         :type num1: str
@@ -32,4 +62,5 @@ class Solution(object):
 if __name__ == "__main__":
     #print(Solution().multiply("2", "3"))
     print(Solution().multiply("98", "9"))
-#    print(Solution().multiply("123", "456"))
+    #print(Solution().multiply("123", "456"))
+    #print(Solution().multiply("140", "721"))

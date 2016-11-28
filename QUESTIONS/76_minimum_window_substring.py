@@ -25,32 +25,20 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        A = [ 0 ] * 128
+        m, n, res, min_l = len(s), len(t), "", 0
+        if m == 0 or n == 0: return ""
+
+        tdic = {}
         for char in t:
-            A[ord(char)] += 1
+            if char not in t: t[char] = 1
+            else: t[char] += 1
+
+        l, r = 0, 0
+        while r < m:
+            seen = { c : 0 for char in t }
             
-        counter, l, r, min_len, head = len(t), 0, 0, len(s)+1, 0
-        while r < len(s):
-            if A[ord(s[r])] > 0:
-                counter -= 1
-            
-            A[ord(s[r])] -= 1
             r += 1
-            
-            while counter == 0:     # Window found
-                if r - l < min_len: 
-                    head = l        # update head
-                    min_len = r - head
-                
-                A[ord(s[l])] += 1   # When to update l
-                if A[ord(s[l])] > 0:
-                    counter += 1
-                l += 1
-        
-        if min_len == len(s) + 1:   # No window found
-            return ""
-        else:
-            return s[head: head+min_len]
+        return
         
 
 

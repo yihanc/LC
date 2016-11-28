@@ -18,6 +18,11 @@
 # Note: Given n will be between 1 and 9 inclusive.
 # 
 # Subscribe to see which companies asked this question
+
+# 11.27.2016 Rewrite
+# Bug notes: 
+# 1. import math for factorial. otherwise write a function
+# 2. k = (k - 1) % tmp + 1
 import math
 class Solution(object):
     def getPermutation(self, n, k):
@@ -26,23 +31,19 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        if k > math.factorial(n) or n <= 0:     # Invalid cases
-            return ""
-
+        if n <= 0 or k <= 0: return ""
+        
         res = ""
         nums = [ x for x in xrange(1, n+1) ]
-        i = 1
-        while n > i:                    # Note1: Create all chars except the last one
-            tmp = math.factorial(n-i)
-            index = (k - 1) // tmp      # Err1 : Missing brackets
-            res = res + str(nums[index])
-            nums.remove(nums[index])
-            k = k % tmp
-            i += 1
-            
-        return res + str(nums[0])
         
-
+        while n > 1:
+            tmp = math.factorial(n-1)  # 2 
+            i, k = (k - 1) // tmp, (k - 1) % tmp + 1    # k = (k - 1) % tmp + 1 bug
+            res += str(nums[i])
+            del nums[i]
+            n -= 1
+        
+        return res + str(nums[0])
 
 
 

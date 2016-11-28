@@ -31,10 +31,10 @@ class Solution(object):
         if sumList == target:
             res.append(line)
             return
-        elif sumList > target:
+
+        if sumList > target:
             return
-        else:
-            for i, num in enumerate(nums):
-                if i > 0 and nums[i] == nums[i-1]:
-                    continue
+
+        for i, num in enumerate(nums):
+            if i == 0 or nums[i] != nums[i-1]:
                 self.dfsHelper(res, nums[i+1:], line + [num], target)

@@ -16,7 +16,48 @@
 # You should return [1,2,3,6,9,8,7,4,5].
 # 
 # Subscribe to see which companies asked this question
+
+# 11.26.2016 Rewrite. One pass
+# Use lvl = 0, Top -> Right -> Bot -> left
+# If m - lvl - 1 == lvl or n - lvl -1 == lvl, break after Top -> Right -> Break
 class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        if not matrix: return []
+        m, n = len(matrix), len(matrix[0])
+        
+        res = []
+        
+        lvl = 0
+        while lvl < (min(m, n) + 1 ) // 2:
+            for j in xrange(lvl, n-lvl):       #Top row
+                res.append(matrix[lvl][j])
+            
+            for i in xrange(lvl+1, m-lvl):      #Right col
+                res.append(matrix[i][n-lvl-1])
+            
+            if (m - lvl - 1) == lvl or (n - lvl - 1) == lvl:    # Only one row or one col left
+                break
+            
+            j = n - lvl - 2
+            while j >= lvl:
+                res.append(matrix[m-lvl-1][j])
+                j -= 1
+            
+            i = m - lvl - 2
+            while i > lvl:
+                res.append(matrix[i][lvl])
+                i -= 1
+                    
+            lvl += 1
+        
+        return res
+
+
+class Solution2(object):
     def spiralOrder(self, matrix):
         """
         :type matrix: List[List[int]]

@@ -29,6 +29,55 @@ class Solution(object):
         :type n: int
         :rtype: List[List[str]]
         """
+        res = []
+        self.dfs(res, [], 0, n)
+        return res
+    
+    def dfs(self, res, line, dep, n):
+        if dep == n:
+            res.append(line)
+            return
+        
+        for j in xrange(n):
+            tmp = '.' * n
+            if self.isValid(line, dep, j, n):
+                tmp = tmp[:j] + 'Q' + tmp[j+1:]
+                self.dfs(res, line + [tmp], dep + 1, n)
+            tmp = '.' * n
+        
+    def isValid(self, line, dep, j, n):
+        print(line, dep, j, n)
+        for x in xrange(dep):
+            if line[x][j] == 'Q':
+                return False
+            if j - dep + x >= 0 and line[x][j - dep + x] == 'Q':
+                return False
+            if j + dep - x < n and line[x][j + dep - x] == 'Q':
+                return False
+        return True
+        
+if __name__  == "__main__":
+    res = Solution().solveNQueens(4)
+    for line in res:
+        for row in line:
+            print(row)
+
+
+#    for i in xrange(1,11):
+#        res = Solution().solveNQueens(i)
+#        print(str(i) + ":  " + str(len(res)))
+#        for matrix in res:
+#            print("-----")
+#            for row in matrix:
+#                print(row)
+
+
+class Solution2(object):
+    def solveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+        """
         lRes = []
         self.dfs(lRes, [], 0, n)
         return lRes
@@ -58,11 +107,3 @@ class Solution(object):
 
         
 
-if __name__  == "__main__":
-    for i in xrange(1,11):
-        res = Solution().solveNQueens(i)
-        print(str(i) + ":  " + str(len(res)))
-#        for matrix in res:
-#            print("-----")
-#            for row in matrix:
-#                print(row)

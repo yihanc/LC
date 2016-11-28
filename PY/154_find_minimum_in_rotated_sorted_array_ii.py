@@ -11,6 +11,39 @@
 # (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
 # 
 # Find the minimum element.
+
+# Similar to 153. Handle duplicates
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        l, r = 0, n - 1
+        while l <= r:
+            if l == r:
+                return nums[l]
+                
+            mid = (l + r) // 2
+            
+            if nums[mid] == nums[r]:
+                r -= 1
+                continue
+            
+            if nums[l] == nums[r]:
+                l += 1
+                continue
+            
+            if ((mid > 0 and nums[mid-1] > nums[mid])
+                or (mid == 0 and nums[mid] < nums[r])):
+                return nums[mid]
+            
+            if nums[mid] < nums[r]:
+                r = mid - 1
+            else:
+                l = mid + 1
+
 class Solution(object):
     def findMin(self, nums):
         """

@@ -16,8 +16,44 @@
 # ]
 # Subscribe to see which companies asked this question
 
-# Same template as spiral matrix 
+# 11.26.2016 Rewrite
 class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        if n == 0: return []
+        res = [[ 0 for j in xrange(n)] for i in xrange(n)]
+        
+        lvl = 0
+        num = 1
+        while lvl < (n + 1) // 2:
+            for j in xrange(lvl, n - lvl):
+                res[lvl][j] = num
+                num += 1
+            
+            for i in xrange(lvl + 1, n - lvl):
+                res[i][n-lvl-1] = num
+                num += 1
+            
+            if n - lvl - 1 == lvl or n - lvl - 1 == lvl:
+                break
+            
+            for j in xrange(n-lvl-2, lvl-1, -1):
+                res[n-lvl-1][j] = num
+                num += 1
+            
+            for i in xrange(n-lvl-2, lvl, -1):
+                res[i][lvl] = num
+                num += 1
+            
+            lvl += 1
+            
+        return res
+
+# Same template as spiral matrix 
+class Solution2(object):
     def generateMatrix(self, n):
         """
         :type n: int

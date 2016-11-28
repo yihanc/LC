@@ -15,6 +15,28 @@
 # ]
 # Note: All inputs will be in lower-case.
 
+# 11.26.2016 Rewrite.
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        res = []
+        dic = {}
+        
+        index = 0
+        for str in strs:
+            key = "".join(sorted(str))
+            if key not in dic:
+                res.append([str])
+                dic[key] = index
+                index += 1
+            else:
+                res[dic[key]].append(str)
+        
+        return res
+
 # Optimized. Use a map to store sorted word and corresponding position in result list.
 # Search in a map and record [word, position ]in another list
 # Traverse the list to generate result.

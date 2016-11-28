@@ -11,6 +11,33 @@
 # 
 #  Using a Queue to store index that are not matched
 # Scan queue to get all substring and update max length
+
+# 11.22.2016 Rewrite
+# Idea: Use a deque to record index which are not matched
+# Traverse dequeu to get max length of each seg.
+from collections import deque
+class Solution(object):
+    def longestValidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res, d = 0, deque()
+        
+        for i in xrange(len(s)):
+            if d and s[i] == ")" and s[d[-1]] == "(":
+                d.pop()
+            else:
+                d.append(i)
+
+        d.append(len(s))
+        start = -1
+        for index in d:
+            res = max(res, index - start - 1)
+            start = index
+            
+        return res
+
 from collections import deque
 class Solution(object):
     def longestValidParentheses(self, s):

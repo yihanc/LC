@@ -99,21 +99,6 @@ count of smaller number
 recover rotated sorted array
 rotate string
 
-### DFS
-* Key points
-* nums should be sorted in most cases
-* When to append to res? (sum to a value or number of lines or something else?)
-* Contain duplicates?
-* What to pass to the next level? nums[i:] or nums[i+1:] or nums[:i] + nums[i+1:]
-
-39 combination sum (sorted; Pass nums[i:]; Append line when sum == target)
-40 combination sum ii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
-46 permutation  (if not nums append; nums[:i] + nums[i+1:]
-47 permutations ii  (similar to permutation; if nums[i] == nums[i-1] continue)
-77 combinations (append res.size == n; Pass nums[i+1:])
-78 subsets  (sorted; nums[i+1:])
-90 subsets ii   (subsets; if nums[i] == nums[i-1] continue)
-216 combination sum iii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
 
 # DP
 10  Regular Expression Matching 22.9%   Hard
@@ -275,3 +260,46 @@ rotate string
 42 Trapping Rain Water         34.8%   Hard    
 84 Largest Rectangle in Histogram          25.4%   Hard    
 85 Maximal Rectangle       25.5%   Hard
+
+# Rotated Array Question
+33  Search in Rotated Sorted Array          31.7%   Hard    
+81  Search in Rotated Sorted Array II       32.8%   Medium  
+153 Find Minimum in Rotated Sorted Array        38.3%   Medium
+154 Find Minimum in Rotated Sorted Array II         35.9%   Hard    
+
+# Window strings
+30 substring with concatenation of all words.py
+
+# Sudoku. 
+# 1. Traverse Sudoku. for x in xrange(81): board[x//9][x%9]
+# 2. Sub-box. row = i // 3 * 3 + j // 3, col = i % 3 * 3 + j % 3
+36  Valid Sudoku        33.4%   Easy
+37  Sudoku Solver       27.6%   Hard    
+
+# Max Subarray
+53  Maximum Subarray        38.5%   Medium  
+152 Maximum Product Subarray        24.1%   Medium
+
+### Combination Subsets, Permutation
+* Key points
+* nums should be sorted in most cases
+* When to append to res? (sum to a value or number of lines or something else?)
+* Contain duplicates?
+* What to pass to the next level? nums[i:] or nums[i+1:] or nums[:i] + nums[i+1:]
+
+39 combination sum (sorted; Pass nums[i:]; Append line when sum == target)
+40 combination sum ii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
+46 permutation  (if not nums append; nums[:i] + nums[i+1:]
+47 permutations ii  (similar to permutation; if nums[i] == nums[i-1] continue)
+77 combinations (Use BFS. DFS timed out in new case. append res.size == n; Pass nums[i+1:])
+78 subsets  (sorted; nums[i+1:])
+90 subsets ii   (subsets; if nums[i] == nums[i-1] continue)
+216 combination sum iii (similar to combination sum ii; Pass nums[i+1]; Append when sum == target; if nums[i] == nums[i-1] continue)
+
+### Implement Data Structure
+28  Implement strStr()          26.6%   Easy
+146 LRU Cache       15.9%   Hard    
+208 Implement Trie (Prefix Tree)        25.6%   Medium
+225 Implement Stack using Queues        31.0%   Easy
+232 Implement Queue using Stacks        34.8%   Easy
+297 Serialize and Deserialize Binary Tree       31.0%   Hard    

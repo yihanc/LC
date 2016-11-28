@@ -33,6 +33,10 @@
 # Sort nums[i+1:] before returning
 #
 # Subscribe to see which companies asked this question
+
+# 11.22.2016. This is better
+# Use i, j to find the two to swap
+
 class Solution(object):
     def nextPermutation(self, nums):
         """
@@ -47,7 +51,7 @@ class Solution(object):
         while i >= 0:
             j = n - 1
 #            print("i: " + str(i) + " j: " + str(j))
-            while j > i and nums[j] <= nums[i]:         #Fail case [151] without "="
+            while j > i and nums[i] >= nums[j]:         #Fail case [151] without "="
                 j -= 1
 
             if j != i: # Found! 

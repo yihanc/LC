@@ -15,11 +15,43 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# BFS. Iterative. Similar to phone number combination
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        if k <= 0 or n <= 0: return []
+        
+        res = []
+        end = n - k + 2
+        for x in xrange(1, end):
+            res.append([x])
+        
+        while res:
+            end += 1
+            if end == n + 2: break
+            print(res)
+            tmp = res
+            res = []
+            for line in tmp:
+                for num in xrange(line[-1]+1, end):
+                    print(num, line)
+                    res.append(line + [num])
+            
+        return res
+             
+                
+        
+
+# This solution is getting TLE for case (20, 16)
 # DFS. Similar to permutation
 # Only differnces are:
 # 1. sort nums
 # 2. nums[i+1:] vs nums[:i]+nums[i+1:], in DFS call
-class Solution(object):
+class Solution2(object):
     def dfs(self, nums, res, path, k):
         if len(path) == k:
             res.append(path)
@@ -40,5 +72,7 @@ class Solution(object):
         return res
              
 if __name__ == "__main__":
-    print(Solution().combine(4, 2))
-    print(Solution().combine(5, 3))
+#    print(Solution().combine(4, 2))
+#    print(Solution().combine(5, 3))
+    # Solution().combine(20, 16))
+    print(Solution().combine(10, 8))

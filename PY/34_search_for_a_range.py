@@ -12,6 +12,45 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 11.20.2016
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        n = len(nums)
+        res = [-1, -1]
+
+        l, r = 0, n -1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target and (mid == 0 or nums[mid-1] != target):
+                res[0] = mid
+                break
+            
+            if nums[mid] < target:
+                l = mid + 1
+            else:
+                r = mid - 1
+        
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target and (mid == n - 1 or nums[mid+1] != target):
+                res[1] = mid
+                break
+            
+            if nums[mid] > target:
+                r = mid - 1
+            else:
+                l = mid + 1
+                
+        return res
+            
+            
+
 class Solution2(object):
     def searchRange(self, nums, target):
         """

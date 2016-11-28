@@ -21,17 +21,17 @@
 21_merge_two_sorted_lists.py        # dummy while l1 or l2
 22_generate_parentheses.py          # DFS. one int for available "(" and one for ")"
 23_merge_k_sorted_lists.py          # Merge sort.
-24_swap_nodes_in_pairs.py
-25_reverse_nodes_in_k_group.py
+24_swap_nodes_in_pairs.py           # Reverse template
+25_reverse_nodes_in_k_group.py      # Check and reverse template.
 26_remove_duplicates_from_sorted_array.py
 27_remove_element.py
-28_implement_strstr.py
-29_divide_two_integers.py
-30_substring_with_concatenation_of_all_words.py
+28_implement_strstr.py              # Scan all substring
+29_divide_two_integers.py           # 15 // 3, 6 -> 12 -> 24, res += 1 << count
+30_substring_with_concatenation_of_all_words.py     # l, r window. count dic
 31_next_permutation.py
 32_longest_valid_parentheses.py
 33_search_in_rotated_sorted_array.py
-34_search_for_a_range.py
+34_search_for_a_range.py            # Binary Search left edge and right edge
 35_search_insert_position.py
 36_valid_sudoku.py
 37_sudoku_solver.py
@@ -149,7 +149,7 @@
 150_evaluate_reverse_polish_notation.py     # Stack. If "+-*/" pop two, else push
 151_reverse_words_in_a_string.py            # Split
 152_maximum_product_subarray.py
-153_find_minimum_in_rotated_sorted_array.py
+153_find_minimum_in_rotated_sorted_array.py #If one element, return
 154_find_minimum_in_rotated_sorted_array_ii.py
 155_min_stack.py
 162_find_peak_element.py

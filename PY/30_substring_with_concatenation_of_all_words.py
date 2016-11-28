@@ -10,6 +10,61 @@
 # (order does not matter).
 #
 
+# 11.22.2016 Rewrite
+# Idea: 
+# 1. Get occurance of each words in tdic.
+# 2. l, r for keeping the window. seen{} for current counts. count 
+# 3. Loop each word
+#  3.1 If matched and available. Move right by 1 word.
+#  3.2 If in dic and not available. Move left X times till word is avai
+#  3.3 If not in words, move l to r. "0" the seen{}.
+#  3.4 If count == len(words), add to result
+#
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        ns, n = len(s), len(words)
+        if ns == 0 or n == 0: return []
+
+        res, wlen = [], len(words[0])
+        tdic = {}
+        for word in words:  
+            if word not in tdic: tdic[word] = 1
+            else: tdic[word] += 1
+
+        for i in xrange(wlen):
+            l, r, count = i, i + wlen, 0
+
+            seen = { word : 0 for word in words}
+
+            while r <= ns:
+                cur_word = s[r-wlen:r]
+                if cur_word in seen:
+                    if seen[cur_word] < tdic[cur_word]:
+                        seen[cur_word] += 1
+                        count += 1
+                    else:
+                       while s[l:l+wlen] != cur_word:
+                            seen[s[l:l+wlen]] -= 1
+                            count -= 1
+                            l += wlen
+                       l += wlen
+                else:   # Reinitiate
+                    l, count = r, 0
+                    seen = { word : 0 for word in words }
+
+                if count == n:
+                    res.append(l)
+                    seen[s[l:l+wlen]] -= 1
+                    count -= 1
+                    l += wlen
+
+                r += wlen
+        return res
 
 
 

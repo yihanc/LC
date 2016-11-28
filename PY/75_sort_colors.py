@@ -19,7 +19,45 @@
 # Could you come up with an one-pass algorithm using only constant space?
 # Subscribe to see which companies asked this question
 import random
+
+# Rewrite. two pointers. 
+# Note: cur pointer should include both l and r.
 class Solution(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        if n <= 1: return
+    
+        l, r = 0, n - 1
+        
+        cur = 0
+        while cur <= r and l < r:       # Trick. cur should include l and r
+            if nums[l] == 0: 
+                l += 1
+                continue
+            
+            if nums[r] == 2:
+                r -= 1
+                continue
+            
+            if cur < l:
+                cur = l
+            
+            if nums[cur] == 0:
+                nums[l], nums[cur] = nums[cur], nums[l]
+                l += 1
+            elif nums[cur] == 2:
+                nums[r], nums[cur] = nums[cur], nums[r]
+                r -= 1
+            else:
+                cur += 1
+                
+        return
+
+class Solution2(object):
     def sortColors(self, nums):
         """
         :type nums: List[int]

@@ -9,6 +9,43 @@
 # 
 # Note:
 # A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
+
+# 11.22.2016 Rewrite. 3 loop 1 dic
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        n = 9
+        dic = {}
+        
+        for i in xrange(n):
+            for j in xrange(n):
+                if board[i][j] in dic:
+                    return False
+                if board[i][j] != '.':
+                    dic[board[i][j]] = 1
+            dic = {}
+        
+        for j in xrange(n):
+            for i in xrange(n):
+                if board[i][j] in dic:
+                    return False
+                if board[i][j] != '.':
+                    dic[board[i][j]] = 1
+            dic = {}
+        
+        for i in xrange(n):
+            for j in xrange(n):
+                row, col = i // 3 * 3 + j // 3, i % 3 * 3 + j % 3
+                if board[row][col] in dic:
+                    return False
+                if board[row][col] != '.':
+                    dic[board[row][col]] = 1
+            dic = {}
+        return True
+
 class Solution(object):
     def isValidSudoku(self, board):
         """

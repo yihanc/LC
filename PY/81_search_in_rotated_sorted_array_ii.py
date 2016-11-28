@@ -8,7 +8,41 @@
 # Write a function to determine if a given target is in the array.
 # 
 # Subscribe to see which companies asked this question
+
+# Similar to 33. Handle duplicates
 class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: bool
+        """
+        n = len(nums)
+        if not nums: return -1
+        
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return True
+            
+            if nums[l] == nums[r] or nums[l] == nums[mid]:
+                l += 1
+                continue
+            
+            if nums[r] == nums[mid]:
+                r -= 1
+                continue
+                
+            if ((nums[mid] < nums[l] and (target >= nums[l] or target < nums[mid]))
+                or (nums[mid] > nums[l] and target >= nums[l] and target < nums[mid])):
+                r -= 1
+            else:
+                l += 1
+        
+        return False
+
+class Solution2(object):
     def search(self, nums, target):
         """
         :type nums: List[int]

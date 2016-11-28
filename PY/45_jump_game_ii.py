@@ -18,6 +18,29 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 11.26.2016, DP solution.
+# Using marked to skip
+
+class Solution(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n <= 1: return 0
+        dp = [ (n + 1) for x in xrange(n)]
+        dp[0] = 0
+        
+        i, marked = 0, 0
+        while i < n:
+            for j in xrange(marked + 1, i + nums[i] + 1 ):
+                dp[j] = min(dp[j], dp[i] + 1)
+                if j == n - 1:
+                    return dp[j]
+                marked = max(marked, j)     # Skip marked to optimize
+            i += 1
+
 # Using curS, curE, nextS, nextE 4 pointers
 # Time complexity? O(N)
 class Solution(object):

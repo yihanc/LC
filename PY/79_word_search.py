@@ -18,7 +18,61 @@
 # word = "ABCCED", -> returns true,
 # word = "SEE", -> returns true,
 # word = "ABCB", -> returns false.
+
+# 11.27.2016 Backtracking + candidates
 class Solution(object):
+    found = False
+    
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        nword = len(word)
+        if nword == 0: return False
+        
+        m, n = len(board), len(board[0])
+        for i in xrange(m):
+            for j in xrange(n):
+                if board[i][j] == word[0]:
+                    tmp = board[i][j]
+                    board[i][j] = '.'
+                    self.dfs(board, word, i, j, 1, m, n)
+                    board[i][j] = tmp
+                    if self.found:
+                        return True
+                        
+        return False
+            
+    def dfs(self, board, word, i, j, index, m, n):
+        if len(word) == index:
+            self.found = True
+            return
+        
+        candidates = []
+        
+        if i - 1 >= 0 and word[index] == board[i-1][j]:
+            candidates.append([i-1, j])
+        if j - 1 >= 0 and word[index] == board[i][j-1]:
+            candidates.append([i, j-1])
+        if i + 1 < m and word[index] == board[i+1][j]:
+            candidates.append([i+1, j])
+        if j + 1 < n and word[index] == board[i][j+1]:
+            candidates.append([i, j+1])
+            
+        for x, y in candidates:
+            tmp = board[x][y]
+            board[x][y] = '.'
+            self.dfs(board, word, x, y, index+1, m, n)
+            if self.found: 
+                return 
+            board[x][y] = tmp
+            
+        
+        
+
+class Solution2(object):
     def exist(self, board, word):
         """
         :type board: List[List[str]]

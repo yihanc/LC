@@ -11,6 +11,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 11.26.2016. Rewrite
+# Algorithm:
+# Traverse the list
+# 1. Update curMax. curMax = max(nums[i], curMax + nums[i])
+# 2. Update preMax. preMax = max(preMax, curMax)
+
+class Solution(object):
+    def maxSubArray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n == 0: return 0
+        preMax, curMax = nums[0], nums[0]
+        
+        for i in xrange(1, n):
+            curMax = max(nums[i], curMax + nums[i])
+            preMax = max(preMax, curMax)
+        
+        return preMax
+
 
 # Solution
 # 1. If curSum + nums[i] > 0, update curSum to the max of

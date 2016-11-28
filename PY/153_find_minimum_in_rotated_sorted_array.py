@@ -11,7 +11,29 @@
 # You may assume no duplicate exists in the array.
 # 
 # Subscribe to see which companies asked this question
+
+# 11.20.2016 
 class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if (l == r or (mid > 0 and nums[mid-1] > nums[mid])
+                or (mid == 0 and nums[mid] < nums[r])):
+                return nums[mid]
+            
+            if nums[mid] < nums[r]:
+                r = mid - 1
+            else:
+                l = mid + 1
+
+
+class Solution2(object):
     def findMin(self, nums):
         """
         :type nums: List[int]

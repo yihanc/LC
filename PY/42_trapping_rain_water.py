@@ -10,6 +10,33 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 11.25.2016 Rewrite
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        n = len(height)
+        if n <= 2: return 0
+        
+        res = 0
+        l, r = 0, n - 1
+        lmax, rmax = height[0], height[n - 1]
+        
+        while l < r:
+            if lmax < rmax:
+                l += 1
+                res += max(lmax - height[l], 0)
+                lmax = max(lmax, height[l])
+            else:
+                r -= 1
+                res += max(rmax - height[r], 0)
+                rmax = max(rmax, height[r])
+        return res
+                
+            
+
 
 # Better. Two pointers
 class Solution(object):
