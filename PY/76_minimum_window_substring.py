@@ -17,7 +17,6 @@
 # 
 # Subscribe to see which companies asked this question
 
-# Substring Problem Template
 class Solution(object):
     def minWindow(self, s, t):
         """
@@ -25,36 +24,78 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        A = [ 0 ] * 128
+        if not s or not t: return ""
+
+        m, n = len(s), len(t)
+        if m < n: return ""
+        l, r = 0, 0
+        count = n
+        
+        dic = {}
         for char in t:
-            A[ord(char)] += 1
-            
-        counter, l, r, min_len, head = len(t), 0, 0, len(s)+1, 0
-        while r < len(s):
-            if A[ord(s[r])] > 0:
-                counter -= 1
-            
-            A[ord(s[r])] -= 1
+            dic[char] = 1
+        
+        res = s + "."
+        while r < m:
+            if s[r] in dic and dic[s[r]] > 0:
+                dic[s[r]] -= 1
+                count -= 1
             r += 1
-            
-            while counter == 0:     # Window found
-                if r - l < min_len: 
-                    head = l        # update head
-                    min_len = r - head
+
+            print(count, s[r], dic)
+            while count == 0:
+                print("res: ", s[l:r])
+                if len(res) > len(s[l:r]):
+                    res = min(res, s[l:r])
                 
-                A[ord(s[l])] += 1   # When to update l
-                if A[ord(s[l])] > 0:
-                    counter += 1
+                if s[l] in dic:
+                    if dic[s[l]] == 0:
+                        count += 1
+                    dic[s[l]] += 1
                 l += 1
-        
-        if min_len == len(s) + 1:   # No window found
-            return ""
-        else:
-            return s[head: head+min_len]
-        
+
+        return "" if res == (s + ".") else res
+
 
 
 if __name__ == "__main__":
     s = "ADOBECODEBANC"
     t = "ABC"
+    print(s, t)
     print(Solution().minWindow(s, t))
+
+# Substring Problem Template
+# class Solution2(object):
+#     def minWindow(self, s, t):
+#         """
+#         :type s: str
+#         :type t: str
+#         :rtype: str
+#         """
+#         A = [ 0 ] * 128
+#         for char in t:
+#             A[ord(char)] += 1
+#             
+#         counter, l, r, min_len, head = len(t), 0, 0, len(s)+1, 0
+#         while r < len(s):
+#             if A[ord(s[r])] > 0:
+#                 counter -= 1
+#             
+#             A[ord(s[r])] -= 1
+#             r += 1
+#             
+#             while counter == 0:     # Window found
+#                 if r - l < min_len: 
+#                     head = l        # update head
+#                     min_len = r - head
+#                 
+#                 A[ord(s[l])] += 1   # When to update l
+#                 if A[ord(s[l])] > 0:
+#                     counter += 1
+#                 l += 1
+#         
+#         if min_len == len(s) + 1:   # No window found
+#             return ""
+#         else:
+#             return s[head: head+min_len]
+#         

@@ -26,6 +26,34 @@
 #         self.left = None
 #         self.right = None
 
+# 12.03.2016 Rewrite BFS
+from collections import deque
+class Solution(object):
+    def pathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: List[List[int]]
+        """
+        if not root: return []
+        res = []
+        d = deque()
+        d.append([root, [root.val], root.val])
+        
+        while d:
+            cur, line, summ = d.pop()
+            
+            if not cur.left and not cur.right and summ == sum:
+                res.append(line)
+            
+            if cur.left:
+                d.appendleft([cur.left, line + [cur.left.val], summ + cur.left.val])
+                
+            if cur.right:
+                d.appendleft([cur.right, line + [cur.right.val], summ + cur.right.val])
+        
+        return res
+
 class Solution(object):
     def pathSum(self, root, sum):
         """

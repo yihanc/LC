@@ -16,6 +16,31 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 12.3.2016 Rewrite
+
+import sys
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        return self.validate(root, sys.maxint, -sys.maxint-1)
+        
+    def validate(self, root, maxVal, minVal):
+        if not root: return True
+        
+        if root.val >= maxVal or root.val <= minVal: return False
+        
+        lres,  rres = True, True
+        if root.left: 
+            lres = self.validate(root.left, root.val, minVal)
+        if root.right:
+            rres = self.validate(root.right, maxVal, root.val)
+        
+        return lres and rres
+        
+
 # Recursive
 import sys
 

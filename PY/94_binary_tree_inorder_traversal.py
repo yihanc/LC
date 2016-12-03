@@ -23,6 +23,20 @@
 #         self.left = None
 #         self.right = None
 
+# 11.30.2016. One recursive
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root: return []
+        res = []
+        if root.left: res += self.inorderTraversal(root.left)
+        res.append(root.val)
+        if root.right: res += self.inorderTraversal(root.right)
+        return res
+
 # Morris O(1) Traversal
 class Solution(object):
     def inorderTraversal(self, root):

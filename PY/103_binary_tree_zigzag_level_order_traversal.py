@@ -47,9 +47,7 @@ class Solution(object):
         d.append([0, root])
         
         while d:
-            cur = d.pop()
-            dep = cur[0]
-            cur = cur[1]
+            dep, cur = d.pop()
             
             while len(res) <= dep:
                 res.append([])

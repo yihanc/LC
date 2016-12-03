@@ -16,6 +16,34 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 11.29.2016, Using a list
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        d = []
+        heights.append(0)
+        res = 0
+        l = -1
+        i = 0
+        while i < len(heights):
+            while d and heights[d[-1]] >= heights[i]:
+                index = d.pop()
+                h = heights[index]
+                if d: 
+                    l = d[-1]
+                else:
+                    l = -1
+                sides = i - 1 - l
+                res = max(res, h * sides)
+            
+            d.append(i)
+            i += 1
+        
+        return res
+
 # Optimized. Find left and right
 class Solution(object):
     def largestRectangleArea(self, heights):

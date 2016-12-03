@@ -17,7 +17,7 @@
 # 
 # Subscribe to see which companies asked this question
 
-# Substring Problem Template
+
 class Solution(object):
     def minWindow(self, s, t):
         """
@@ -25,20 +25,13 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        m, n, res, min_l = len(s), len(t), "", 0
-        if m == 0 or n == 0: return ""
-
-        tdic = {}
+        
+        dic = {}
         for char in t:
-            if char not in t: t[char] = 1
-            else: t[char] += 1
+            dic[char] = 1
 
-        l, r = 0, 0
-        while r < m:
-            seen = { c : 0 for char in t }
-            
-            r += 1
-        return
+        return res
+        
         
 
 
@@ -46,3 +39,4 @@ if __name__ == "__main__":
     s = "ADOBECODEBANC"
     t = "ABC"
     print(Solution().minWindow(s, t))
+

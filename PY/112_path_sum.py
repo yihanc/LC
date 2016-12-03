@@ -23,6 +23,34 @@
 #         self.left = None
 #         self.right = None
 
+# 12.03.2016 BFS Rewrite
+from collections import deque
+class Solution(object):
+    def hasPathSum(self, root, sum):
+        """
+        :type root: TreeNode
+        :type sum: int
+        :rtype: bool
+        """
+        if not root: return False
+        d = deque()
+        d.append([root, root.val])
+        summ = 0
+        while d:
+            cur, summ  = d.pop()
+            
+            if not cur.left and not cur.right and summ == sum: 
+                return True
+            
+            if cur.left:
+                d.appendleft([cur.left, cur.left.val + summ])
+            if cur.right:
+                d.appendleft([cur.right, cur.right.val + summ])
+            
+        return False
+            
+        
+
 class Solution(object):
     def hasPathSum(self, root, sum):
         """

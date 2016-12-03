@@ -17,56 +17,35 @@
 # 
 # Subscribe to see which companies asked this question
 
-# Careful corner cases:
-# "", return 0
-# "0", return 0
-# "00", return 0
-# "100", return 0
-
-# Several cases:
-# Empty s or "0", return 0
-# in [ "00", "30", "40", "50", "60", "70", "80", "90" ], return 0
-# int(tmp) in 11 ~ 19, 21 ~ 26, dp[i+1] = dp[i] + dp[i-1]
-# in [ "10", "20" ], dp[i+1] = dp[i-1]
-# else, dp[i+1] = dp[i]
-
 class Solution(object):
     def numDecodings(self, s):
         """
         :type s: str
         :rtype: int
         """
+        if not s: return 0
         n = len(s)
-
-        if not s or s[0] == "0":
-            return 0
-
-        dp = [1 for x in xrange(n+1)]
-
-        # i is the index of string
-        for i in xrange(1, n):
-            tmp = s[i-1:i+1]
-            if tmp in [ "00", "30", "40", "50", "60", "70", "80", "90" ]:
-                return 0
-            
-            if (( int(tmp) >= 11 and int(tmp) <= 19 ) or
-                ( int(tmp) >= 21 and int(tmp) <= 26 )):
-                dp[i+1] = dp[i] + dp[i-1]
-            elif tmp in [ "10", "20" ]:
-                dp[i+1] = dp[i-1]
+        dp = [ 0 for x in xrange(n+1) ]
+        dp[0] = 1 
+        if n >= 1:
+            if s[0] == "0":
+                dp[1] = 0
             else:
-                dp[i+1] = dp[i]
+                dp[1] = 1
 
+        for i in xrange(2, n+1):
+            if s[i-1] != "0":
+                dp[i] += dp[i-1]
+            if s[i-2] == "1" or ( s[i-2] == "2" and s[i-1] in "0123456" ):
+                dp[i] += dp[i-2]
+
+        print(s, dp)
         return dp[-1]
+        
 
 if __name__ == "__main__":
-    Solution().numDecodings("")
-    Solution().numDecodings("0")
-    Solution().numDecodings("00")
-    Solution().numDecodings("100")
-    Solution().numDecodings("1")
-    Solution().numDecodings("10")
-    Solution().numDecodings("12")
-    Solution().numDecodings("123")
-    Solution().numDecodings("12321")
-    
+    print(Solution().numDecodings("27"))
+    print(Solution().numDecodings("26"))
+    print(Solution().numDecodings("260"))
+    print(Solution().numDecodings("2601"))
+    print(Solution().numDecodings("2610"))
