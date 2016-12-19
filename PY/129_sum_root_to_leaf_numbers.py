@@ -1,4 +1,5 @@
 # 129. Sum Root to Leaf Numbers  QuestionEditorial Solution  My Submissions
+
 # Total Accepted: 89353
 # Total Submissions: 260777
 # Difficulty: Medium
@@ -25,6 +26,8 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+# Note. Use instance var for res. 
 
 # DFS template..
 class Solution(object):

@@ -18,6 +18,27 @@
 # Traverse again to find out the maximum profit i before and i after
 # DP solution more concise and easier
 # http://postimg.org/image/b0auzohv3/
+
+# 12.03.2016 Rewrite DP
+import sys
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        res = 0
+        buy1, sell1, buy2, sell2 = sys.maxint, 0, sys.maxint, 0
+        
+        for price in prices:
+            sell2 = max(sell2, price - buy2)
+            buy2 = min(buy2, price - sell1)
+            sell1 = max(sell1, price - buy1)
+            buy1 = min(buy1, price)
+
+        return sell2
+        
+
 import sys
 
 class Solution(object):

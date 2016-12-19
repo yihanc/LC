@@ -29,9 +29,6 @@
 #     def __init__(self, x):
 #         self.label = x
 #         self.neighbors = []
-# Notes:
-# 1. Use collections deque for BFS. Popleft
-# 2. Use dic to keep track of node/neighbor and its copy
 
 class Solution(object):
     def cloneGraph(self, node):
@@ -39,25 +36,3 @@ class Solution(object):
         :type node: UndirectedGraphNode
         :rtype: UndirectedGraphNode
         """
-        if not node:
-            return None
-
-        node_copy = UndirectedGraphNode(node.label) 
-        dic = {node: node_copy}
-        queue = collections.dequeue([node])
-
-        while queue:
-            node = queue.popleft()
-            for neighbor in node.neighbors:
-                # Node not visited
-                if neighbor not in dic:
-                    neighbor_copy = UndirectedGraphNode(node.label)
-                    dic[node].append(neighbor_copy)
-                    dic[neighbor] = neighbor_copy
-                    queue.append(neighbor)
-                # Node visited
-                else:
-                    dic[node].neighbors.append(dic[neighbor])
-
-        return node_copy
-            

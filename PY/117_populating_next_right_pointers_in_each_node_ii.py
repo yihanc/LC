@@ -48,6 +48,45 @@
 #     4-> 5 -> 7 -> NULL
 # Subscribe to see which companies asked this question
 
+# 12.03.2016 Rewrite. less code
+# nextlvl and first pointer. If found, update
+
+class Solution:
+    # @param root, a tree link node
+    # @return nothing
+    def connect(self, root):
+        if not root or (not root.left and not root.right):
+            return 
+        
+        first = None
+        
+        curlvl, nextlvl = root, None
+        while curlvl:
+            cur = curlvl
+            while cur:
+                if cur.left: 
+                    if not nextlvl: nextlvl = cur.left
+                    if not first: 
+                        first = cur.left
+                    else:
+                        first.next = cur.left
+                        first = cur.left
+                if cur.right:
+                    if not nextlvl: nextlvl = cur.right
+                    if not first: 
+                        first = cur.right
+                    else:
+                        first.next = cur.right
+                        first = cur.right
+                
+                cur = cur.next
+            
+            curlvl = nextlvl
+            nextlvl = None
+            first = None
+        
+        return 
+
 
 # Steps:
 # "nextHead" to record next level head.

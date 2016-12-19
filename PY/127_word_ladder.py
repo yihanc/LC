@@ -21,13 +21,59 @@
 # All words contain only lowercase alphabetic characters.
 # Subscribe to see which companies asked this question
 
+# 12.04.2016 Rewrite. 2way BFS
+
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: Set[str]
+        :rtype: int
+        """
+        res = 1
+        beginSet, endSet, visited = set([beginWord]), set([endWord]), set([beginWord, endWord])
+        atoz = "abcdefghijklmnopqrstuvwxyz"
+        
+        while beginSet and endSet:
+            isBeginSetSmall = False
+            if len(beginSet) < len(endSet): isBeginSetSmall = True
+            
+            if isBeginSetSmall:
+                small, big = beginSet, endSet
+            else:
+                small, big = endSet, beginSet
+            
+            next = set([])
+            res += 1
+            print(beginSet, endSet, visited)
+            
+            for word in small:
+                for i in xrange(len(word)):
+                    for char in atoz:
+                        tmp = word[:i] + char + word[i+1:]
+                        if tmp in big: 
+                            return res
+                        
+                        if tmp in wordList and tmp not in visited:
+                            visited.add(tmp)
+                            next.add(tmp)
+            
+            if isBeginSetSmall:
+                beginSet = next
+            else:
+                endSet = next
+        
+        return 0
+        
+
 # notes:
 # 1. Don't iterate over dict. Get TLE
 # 2. Remove beginWord from wordList
 
 from collections import deque
 
-class Solution(object):
+class Solution2(object):
     def ladderLength(self, beginWord, endWord, wordList):
         """
         :type beginWord: str

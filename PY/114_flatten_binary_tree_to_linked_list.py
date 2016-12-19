@@ -31,6 +31,31 @@
 #         self.left = None
 #         self.right = None
 
+# 12.03.2016 Rewrite
+class Solution(object):
+    def flatten(self, root):
+        """
+        :type root: TreeNode
+        :rtype: void Do not return anything, modify root in-place instead.
+        """
+        if not root: return
+        
+        cur, pre = root, None
+        while cur:
+            if not cur.left:
+                cur = cur.right
+            else:
+                pre = cur.left
+                
+                while pre.right:
+                    pre = pre.right
+                
+                pre.right = cur.right
+                cur.right = cur.left
+                cur.left = None
+        
+        return
+
 # Iterative. Easy solution..
 class Solution(object):
     def flatten(self, root):

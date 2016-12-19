@@ -31,10 +31,10 @@
 # Subscribe to see which companies asked this question
 
 # Algorithms:
-# 1. Get words in list to form the line.
-# 2. For padding 0, pad 0 except for last word.
-# 3. Add remaining to the last line if needed.
+# 1. words[i j] for the line to be inserted
+# 2. Pad space for the line. 
 
+# 12.10.2016 Rewrite
 class Solution(object):
     def fullJustify(self, words, maxWidth):
         """
@@ -42,44 +42,92 @@ class Solution(object):
         :type maxWidth: int
         :rtype: List[str]
         """
-        res, line = [], []
-        cur_len = 0
-        
-        for word in words:
-            if cur_len + len(word) > maxWidth: 
-                res.append(self.generateLine(line, maxWidth))
-                cur_len = len(word) + 1
-                line = [word]
-                continue
-            
-            cur_len += len(word) + 1
-            line.append(word)
-        
-        if line:
-            last_line = " ".join(line)
-            last_line += " " * (maxWidth - len(last_line))
-            res.append(last_line)
+        if not words: return []
+        res = []
+        n = len(words)
+
+        i = 0
+        while i < n:
+            L = 0
+            j = i                                         # Find words[i:j+1] for current line
+            while j < n:    
+                if L == 0 and len(words[j]) <= maxWidth:
+                    L += len(words[j])
+                elif L != 0 and L + 1 + len(words[j]) <= maxWidth:
+                    L += len(words[j]) + 1
+                else:
+                    break
+                j += 1
+                  
+            line = words[i]                               # Creating line
+            if j != n:
+                count = 0
+                for x in xrange(i+1, j):
+                    line += " " + " " * ((maxWidth - L) // (j - i - 1))
+                    if ((maxWidth - L) % (j - i - 1) - count) > 0:
+                        line += " " + words[x]
+                    else:
+                        line += words[x]
+                    count += 1
+                if j - i == 1:
+                    line += " " * (maxWidth - len(line))
+            else:
+                for x in xrange(i+1, j):
+                    line += " " + words[x]
+                line += " " * (maxWidth - len(line))
+            res.append(line)
+            i = j
         return res
 
-    
-    def generateLine(self, line, maxWidth):
-        if len(line) == 1:              # Corner case. one word in line
-            return line[0] + " " * (maxWidth - len(line[0]))
-            
-        for word in line:
-            maxWidth -= len(word)
-        
-        i = 0
-        while i < len(line) - 1 and maxWidth > 0:       # Note i < len(line) - 1. Distributing 0 except for last word
-            line[i] += " "
-            maxWidth, i = maxWidth - 1, i + 1
-            if i == len(line) - 1:          # Repeat the loop
-                i = 0
-        
-        return "".join(line)
+                
+
 
 if __name__ == "__main__":
-    words = ["This", "is", "an", "example", "of", "text"]# , "justification."]
+    words, n = ["This", "is", "an", "example", "of", "text", "justification."], 16
+#    words, n = ["Listen","to","many,","speak","to","a","few."], 6
 #    words = [""]
-    for row in Solution().fullJustify(words, 16):
+    for row in Solution().fullJustify(words, n):
         print([row])
+
+# class Solution2(object):
+#     def fullJustify(self, words, maxWidth):
+#         """
+#         :type words: List[str]
+#         :type maxWidth: int
+#         :rtype: List[str]
+#         """
+#         res, line = [], []
+#         cur_len = 0
+#         
+#         for word in words:
+#             if cur_len + len(word) > maxWidth: 
+#                 res.append(self.generateLine(line, maxWidth))
+#                 cur_len = len(word) + 1
+#                 line = [word]
+#                 continue
+#             
+#             cur_len += len(word) + 1
+#             line.append(word)
+#         
+#         if line:
+#             last_line = " ".join(line)
+#             last_line += " " * (maxWidth - len(last_line))
+#             res.append(last_line)
+#         return res
+# 
+#     
+#     def generateLine(self, line, maxWidth):
+#         if len(line) == 1:              # Corner case. one word in line
+#             return line[0] + " " * (maxWidth - len(line[0]))
+#             
+#         for word in line:
+#             maxWidth -= len(word)
+#         
+#         i = 0
+#         while i < len(line) - 1 and maxWidth > 0:       # Note i < len(line) - 1. Distributing 0 except for last word
+#             line[i] += " "
+#             maxWidth, i = maxWidth - 1, i + 1
+#             if i == len(line) - 1:          # Repeat the loop
+#                 i = 0
+#         
+#         return "".join(line)

@@ -22,6 +22,45 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+# 12.16.2016 Rewrite
+class Solution(object):
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if not head or k <= 1: return head
+        
+        dummy = ListNode(-1)
+        dummy.next = head
+        
+        cur, n = head, 0
+        while cur:                      # Find length of list
+            cur, n = cur.next, n + 1
+        
+        if k > n: return head
+        
+        curn = n
+        pre = dummy
+        while curn >= k:
+            curk = k
+            cur = pre.next
+            if cur:
+                nex = cur.next
+                
+            while curk > 1:
+                cur.next = nex.next
+                nex.next = pre.next
+                pre.next = nex
+                nex = cur.next
+                curk -= 1
+            pre = cur
+            curn -= k
+    
+        return dummy.next
+
+
 # 11.19.2016. Reverse Template
 class Solution(object):
     def reverseKGroup(self, head, k):

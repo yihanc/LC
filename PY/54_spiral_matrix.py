@@ -17,6 +17,39 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.18.2016 Rewrite
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+        if not matrix: return []
+        m, n = len(matrix), len(matrix[0])
+        res = []
+        
+        lvl = 0
+        while lvl < (min(m, n) + 1) // 2:
+            for j in xrange(lvl, n - lvl):
+                res.append(matrix[lvl][j])
+            
+            for i in xrange(lvl + 1, m - lvl):
+                res.append(matrix[i][n - lvl - 1])
+            
+            if lvl == m - lvl - 1 or lvl == n - lvl - 1:
+                break
+                
+            for j in xrange(n - lvl - 2, lvl - 1, -1):
+                res.append(matrix[m - lvl - 1][j])
+        
+            for i in xrange(m - lvl - 2, lvl, -1):
+                res.append(matrix[i][lvl])
+            
+            lvl += 1
+        
+        return res
+            
+
 # 11.26.2016 Rewrite. One pass
 # Use lvl = 0, Top -> Right -> Bot -> left
 # If m - lvl - 1 == lvl or n - lvl -1 == lvl, break after Top -> Right -> Break

@@ -18,6 +18,34 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.18.2016 Rewrite DP solution. 
+class Solution(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n <= 1: return 0
+        dp = [ n + 1 for x in xrange(n) ]
+        dp[0] = 0
+        maxreach = 0
+        
+        for i in xrange(n):
+            if nums[i] + i <= maxreach:		# When to skip
+                continue
+            else:
+                maxreach = nums[i] + i
+            
+            for j in xrange(i + 1, maxreach + 1): 	# For nums[i], update dp[j]
+                if j < n:
+                    dp[j] = min(dp[j], dp[i] + 1)
+                
+                if j >= n - 1:
+                    return dp[-1]
+        return dp[-1]
+
+
 # Using curS, curE, nextS, nextE 4 pointers
 # Time complexity? O(N)
 class Solution(object):

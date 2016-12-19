@@ -34,6 +34,33 @@
 #
 # Subscribe to see which companies asked this question
 
+# 12.17 Rewrite. Better
+class Solution(object):
+    def nextPermutation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        if n <= 1: return
+        
+        i = n - 2
+        while i >= 0 and nums[i] >= nums[i+1]:
+            i -= 1
+        
+        if i != -1:
+            j = n - 1
+            while j > i and nums[j] <= nums[i]:
+                j -= 1
+            nums[i], nums[j] = nums[j], nums[i]
+        
+        l, r = i + 1, n - 1
+        while l < r:
+            nums[l], nums[r] = nums[r], nums[l]
+            l, r = l + 1, r - 1
+            
+        return
+
 # 11.22.2016. This is better
 # Use i, j to find the two to swap
 

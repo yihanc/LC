@@ -33,6 +33,36 @@
 # 1. Use collections deque for BFS. Popleft
 # 2. Use dic to keep track of node/neighbor and its copy
 
+# 12.07.2016 Rewrite
+# Careful that graph can be multiple path to the same destination
+
+class Solution(object):
+    def cloneGraph(self, node):
+        """
+        :type node: UndirectedGraphNode
+        :rtype: UndirectedGraphNode
+        """
+        if not node: return
+        dic, visited, d = {}, {}, deque()
+        
+        d.append(node)
+        dic[node] = UndirectedGraphNode(node.label)
+
+        while d:
+            cur = d.pop()
+            if cur in visited: continue
+            visited[cur] = True
+
+            for neighbor in cur.neighbors:
+                if neighbor not in dic:
+                    dic[neighbor] = UndirectedGraphNode(neighbor.label)
+
+                dic[cur].neighbors.append(dic[neighbor])
+                if neighbor not in visited: d.appendleft(neighbor)
+
+        return dic[node]
+
+
 class Solution(object):
     def cloneGraph(self, node):
         """

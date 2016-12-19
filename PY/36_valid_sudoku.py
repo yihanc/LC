@@ -10,6 +10,32 @@
 # Note:
 # A valid Sudoku board (partially filled) is not necessarily solvable. Only the filled cells need to be validated.
 
+# 12.17 2016, 3 dics
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        m, n = len(board), len(board[0])
+        
+        for i in xrange(m):
+            mp1 = { x : False for x in "123456789" }
+            mp2 = { x : False for x in "123456789" }
+            mp3 = { x : False for x in "123456789" }
+            
+            for j in xrange(n):
+                c1, c2, c3 = board[i][j], board[j][i], board[i//3*3+j//3][i%3*3 + j%3]
+                if c1 != "." and mp1[c1]: return False
+                if c2 != "." and mp2[c2]: return False
+                if c3 != "." and mp3[c3]: return False
+                
+                if c1 != ".": mp1[c1] = True
+                if c2 != ".": mp2[c2] = True
+                if c3 != ".": mp3[c3] = True
+                    
+        return True
+
 # 11.22.2016 Rewrite. 3 loop 1 dic
 class Solution(object):
     def isValidSudoku(self, board):

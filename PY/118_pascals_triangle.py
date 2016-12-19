@@ -14,6 +14,29 @@
 #   [1,3,3,1],
 #  [1,4,6,4,1]
 # ]
+
+# 12.3.2016 Rewrite
+class Solution(object):
+    def generate(self, numRows):
+        """
+        :type numRows: int
+        :rtype: List[List[int]]
+        """
+        res = []
+        if numRows <= 0: return res
+        
+        i = 0
+        while i < numRows:
+            res.append([1] * (i+1))
+            i += 1
+        
+        for i in xrange(2, numRows):
+            for j in xrange(1, i):
+                res[i][j] = res[i-1][j-1] + res[i-1][j]
+                
+        return res
+
+
 class Solution(object):
     def generate(self, numRows):
         """

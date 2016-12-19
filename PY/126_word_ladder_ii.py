@@ -21,8 +21,8 @@
 # All words have the same length.
 # All words contain only lowercase alphabetic characters.
 
-from collections import deque
-import copy
+
+# 12.6.2016, Two-end BFS. 
 
 class Solution(object):
     def findLadders(self, beginWord, endWord, wordlist):
@@ -32,65 +32,64 @@ class Solution(object):
         :type wordlist: Set[str]
         :rtype: List[List[int]]
         """
-        wordlist.remove(beginWord)
-        tmpList = copy.deepcopy(wordlist)
-        maxDep = self.ladderLength(beginWord, endWord, tmpList)
-        print(maxDep)
-        print(wordlist)
-        res = []
-        atoz = 'abcdefghijklmnopqrstuvwxyz'
+        beginSet, endSet = set([beginWord]), set([endWord])
+        if beginWord in wordlist: wordlist.remove(beginWord)
+        if endWord in wordlist: wordlist.remove(endWord)
+        ATOZ = "abcdefghijklmnopqrstuvwxyz"
+        depFound = False
+        pathMap = {}
 
-        def dfs(dep, line, wordlist):
-            if dep >= maxDep:
-                return
-            
-            cur = line[-1]
-            
-            for i in xrange(len(cur)):
-                for char in atoz:
-                    if cur[i] == char:
-                        continue
-                    
-                    replaced = cur[:i] + char + cur[i+1:]
-                    if replaced == endWord:                  
-                        print(dep)
-                        res.append(line + [replaced])
-                        continue
-                    
-                    if replaced in wordlist:
-                        newWordList = copy.deepcopy(wordlist)
-                        newWordList.remove(replaced)
-                        dfs(dep+1, line + [replaced], newWordList)
-            
-        dfs(1, [beginWord], wordlist)
-        print(res)
+        while beginSet and endSet:
+            if len(beginSet) < len(endSet):
+                isBeginSmall, small, big = True, beginSet, endSet
+            else:
+                isBeginSmall, small, big = False, endSet, beginSet
+
+            nextlvl = set([])
+
+            for word in small:
+                for i in xrange(len(word)):
+                    for char in ATOZ:
+                        newword = word[:i] + char + word[i+1:]
+                        
+                        if newword in big:
+                            depFound = True
+
+                        if newword in big or newword in wordlist:   #Update pathMap
+                            nextlvl.add(newword)
+                            if word not in pathMap:
+                                pathMap[word] = set([])
+                            if newword not in pathMap:
+                                pathMap[newword] = set([])
+
+                            if isBeginSmall:
+                                pathMap[word].add(newword)
+                            else:
+                                pathMap[newword].add(word)
+
+            if depFound: break
+        
+            for word in nextlvl:
+                wordlist.remove(word)
+                                    
+            if isBeginSmall: beginSet = nextlvl
+            else: endSet = nextlvl
+        
+        if not depFound: return []
+
+        res = []                # Generate RES from pathMap
+        res.append([beginWord])    
+        while res[0][-1] != endWord:
+            tmp = res
+            res = []
+            for line in tmp:
+                for newword in pathMap[line[-1]]:
+                    newline = line + [newword]
+                    res.append(newline)
+
         return res
 
-    
-    def ladderLength(self, beginWord, endWord, wordList):
-        d = deque()
-        d.append([beginWord, 1])
-        atoz = 'abcdefghijklmnopqrstuvwxyz'
-
-        while d:
-            cur = d.pop()
-            curWord, curDep, tmpList = cur[0], cur[1], []
             
-            for i in xrange(len(curWord)):
-                for char in atoz:
-                    if curWord[i] == char:
-                        continue
-                    
-                    replaced = curWord[:i] + char + curWord[i+1:]
-                    if replaced == endWord:
-                        return curDep + 1
-                        
-                    if replaced in wordList:
-                        d.appendleft([replaced, curDep + 1])
-                        wordList.remove(replaced)
-        return 0
-
-
 if __name__  == "__main__":
     start = "qa"
     end = "sq"
@@ -120,3 +119,72 @@ if __name__  == "__main__":
 
 
 
+
+# from collections import deque
+# import copy
+# 
+# class Solution(object):
+#     def findLadders(self, beginWord, endWord, wordlist):
+#         """
+#         :type beginWord: str
+#         :type endWord: str
+#         :type wordlist: Set[str]
+#         :rtype: List[List[int]]
+#         """
+#         wordlist.remove(beginWord)
+#         tmpList = copy.deepcopy(wordlist)
+#         maxDep = self.ladderLength(beginWord, endWord, tmpList)
+#         print(maxDep)
+#         print(wordlist)
+#         res = []
+#         atoz = 'abcdefghijklmnopqrstuvwxyz'
+# 
+#         def dfs(dep, line, wordlist):
+#             if dep >= maxDep:
+#                 return
+#             
+#             cur = line[-1]
+#             
+#             for i in xrange(len(cur)):
+#                 for char in atoz:
+#                     if cur[i] == char:
+#                         continue
+#                     
+#                     replaced = cur[:i] + char + cur[i+1:]
+#                     if replaced == endWord:                  
+#                         print(dep)
+#                         res.append(line + [replaced])
+#                         continue
+#                     
+#                     if replaced in wordlist:
+#                         newWordList = copy.deepcopy(wordlist)
+#                         newWordList.remove(replaced)
+#                         dfs(dep+1, line + [replaced], newWordList)
+#             
+#         dfs(1, [beginWord], wordlist)
+#         print(res)
+#         return res
+# 
+#     
+#     def ladderLength(self, beginWord, endWord, wordList):
+#         d = deque()
+#         d.append([beginWord, 1])
+#         atoz = 'abcdefghijklmnopqrstuvwxyz'
+# 
+#         while d:
+#             cur = d.pop()
+#             curWord, curDep, tmpList = cur[0], cur[1], []
+#             
+#             for i in xrange(len(curWord)):
+#                 for char in atoz:
+#                     if curWord[i] == char:
+#                         continue
+#                     
+#                     replaced = curWord[:i] + char + curWord[i+1:]
+#                     if replaced == endWord:
+#                         return curDep + 1
+#                         
+#                     if replaced in wordList:
+#                         d.appendleft([replaced, curDep + 1])
+#                         wordList.remove(replaced)
+#         return 0

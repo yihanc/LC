@@ -22,12 +22,12 @@
 22_generate_parentheses.py          # DFS. one int for available "(" and one for ")"
 23_merge_k_sorted_lists.py          # Merge sort.
 24_swap_nodes_in_pairs.py           # Reverse template
-25_reverse_nodes_in_k_group.py      # Check and reverse template.
+25_reverse_nodes_in_k_group.py      # Find n. if k > n or k <= 1 no change. Use loop to reverse
 26_remove_duplicates_from_sorted_array.py
 27_remove_element.py
-28_implement_strstr.py              # Scan all substring
-29_divide_two_integers.py           # 15 // 3, 6 -> 12 -> 24, res += 1 << count
-30_substring_with_concatenation_of_all_words.py     # l, r window. count dic
+28_implement_strstr.py              # Count occurence first. Scan all substring.
+29_divide_two_integers.py           # << cal. 1. Minus case. 2. Overflow case
+30_substring_with_concatenation_of_all_words.py     # Two dic. l, r count. No deepcopy dic TLE.
 31_next_permutation.py
 32_longest_valid_parentheses.py
 33_search_in_rotated_sorted_array.py
@@ -41,13 +41,13 @@
 41_first_missing_positive.py
 42_trapping_rain_water.py
 43_multiply_strings.py
-44_wildcard_matching.py         # Same template as 10_, 
-45_jump_game_ii.py
+44_wildcard_matching.py         # Same template as 10_. Count "*" for MLE case.
+45_jump_game_ii.py              # DP or lvl BFS
 46_permutation.py
 47_permutations_ii.py
 48_rotate_image.py
 49_group_anagrams.py
-50_powx_n.py
+50_powx_n.py                    # Recursive
 51_n_queens.py
 52_n_queens_ii.py
 53_maximum_subarray.py
@@ -102,7 +102,7 @@
 102_binary_tree_level_order_traversal.py
 103_binary_tree_zigzag_level_order_traversal.py
 104_maximum_depth_of_binary_tree.py
-105_construct_binary_tree_from_preorder_and_inorder_traversal.py
+105_construct_binary_tree_from_preorder_and_inorder_traversal.py    # TLE if list slicing. Watch out INDEX
 106_construct_binary_tree_from_inorder_and_postorder_traversal.py
 107_binary_tree_level_order_traversal_ii.py
 108_convert_sorted_array_to_binary_search_tree.py
@@ -123,13 +123,13 @@
 123_best_time_to_buy_and_sell_stock_iii.py
 124_binary_tree_maximum_path_sum.py
 125_valid_palindrome.py
-126_word_ladder_ii.py
-127_word_ladder.py                          # BFS return
+126_word_ladder_ii.py                       # Two-end BFS. Save in DIC[xx] = set() map
+127_word_ladder.py                          # Two-end BFS. Much faster.
 128_longest_consecutive_sequence.py
 129_sum_root_to_leaf_numbers.py
 130_surrounded_regions.py                   # BFS + isVis[][] + deque. Scan all bounaries. For each DFS
-131_palindrome_partitioning.py
-132_palindrome_partitioning_ii.py
+131_palindrome_partitioning.py              # DFS + isPalindrome
+132_palindrome_partitioning_ii.py           # Two loops. i for len(s), compare i-j, i+j update. Don't use isPalindrome function. Too slow TLE 
 133_clone_graph.py                      
 134_gas_station.py                          # One loop. Record sum_gas, sum_cost and tank. if sum < sum_cost return -1. if tank < 0, start = i+1
 135_candy.py                                # L R scan.
@@ -143,9 +143,10 @@
 143_reorder_list.py                         # 1. Find Mid. 2. Reverse second. 3. build
 144_binary_tree_preorder_traversal.py
 145_binary_tree_postorder_traversal.py
+146_lru_cache.py                            # Use DlinkedList + Dic
 147_insertion_sort_list.py                  # Create new list. while cur: while cur.val < p2.next.val 
 148_sort_list.py
-149_max_points_on_a_line.py                 # For each pair. Calculate slope and b. Hash into dic and count. 4 cases. same point, Vertical, Horizontal, Others
+149_max_points_on_a_line.py                 # Dic + set to record. Calculate slop + b with float and round
 150_evaluate_reverse_polish_notation.py     # Stack. If "+-*/" pop two, else push
 151_reverse_words_in_a_string.py            # Split
 152_maximum_product_subarray.py

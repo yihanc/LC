@@ -25,6 +25,58 @@
 # 2. pop, check adjancet and push to deque()
 # 3. Rescan mid board and flip not in isVis
 
+# 12.06.2016 Rewrite.
+class Solution(object):
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: void Do not return anything, modify board in-place instead.
+        """
+        if not board: return
+        m, n = len(board), len(board[0])
+        if m <= 2 or n <= 2: return
+
+        starts = []
+        visited = [[ False for j in xrange(n)] for i in xrange(m)]
+
+        for j in xrange(n):
+            if board[0][j] == 'O':
+                visited[0][j] = True
+                starts.append([0, j])
+            if board[m-1][j] == 'O':
+                visited[m-1][j] = True
+                starts.append([m-1, j])
+
+        for i in xrange(1, m-1):
+            if board[i][0] == 'O':
+                visited[i][0] = True
+                starts.append([i, 0])
+            if board[i][n-1] == 'O':
+                visited[i][n-1] = True
+                starts.append([i, n-1])
+
+        for i, j in starts:
+            self.dfs(board, visited, i, j, m, n)
+
+        for i in xrange(1, m-1):
+            for j in xrange(1, n-1):
+                if board[i][j] == 'O' and not visited[i][j]:
+                    board[i][j] = 'X' 
+
+        return
+
+
+    def dfs(self, board, visited, i, j, m, n):
+        neighbors = []
+
+        for x, y in [[i+1, j], [i-1, j], [i, j+1], [i, j-1]]:
+            if (x >= 0 and y >= 0 and x < m and y < n and not visited[x][y] and board[x][y] == 'O'):
+                neighbors.append([x, y])
+
+        for x, y in neighbors:
+            visited[x][y] = True
+            self.dfs(board, visited, x, y, m, n)
+
 # Notes:
 # 'O' not 0
 # OJ input is list

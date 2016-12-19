@@ -9,6 +9,24 @@
 # Show Tags
 # Show Similar Problems
 # Have you met this question in a real interview? Yes  No
+
+
+# 12.3.2016
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices: return 0
+        res, buy = 0, prices[0]
+        
+        for price in prices:
+            buy = min(buy, price)
+            res = max(res, price - buy)
+        
+        return res
+
 class Solution(object):
     def maxProfit(self, prices):
         """

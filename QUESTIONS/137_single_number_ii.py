@@ -12,17 +12,25 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        A = {}
+        bits = [ 0 for x in xrange(32) ]
+
         for num in nums:
-            if num in A:
-                A[num] += 1
-            else:
-                A[num] = 1
-        print(A)
-        
-        for key in A:
-            if A[key] == 1:
-                return key
+            tmp = num
+            i = 0
+            while tmp != 0:
+                bits[i] += (tmp % 2)
+                tmp = tmp >> 1
+                i += 1
+
+        print(bits)
+        res = 0
+        for i in xrange(32):
+            if bits[i] % 3 == 1:
+                res += (1 << i)
+
+        return res
 
 if __name__ == "__main__":
-    print(Solution().singleNumber([1]))
+    nums = [-2,-2,1,1,-3,1,-3,-3,-4,-2]
+#    nums = [1,1,1,3,3,3,2,2,2,4]
+    print(Solution().singleNumber(nums))

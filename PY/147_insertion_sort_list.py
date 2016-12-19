@@ -29,8 +29,11 @@ class Solution(object):
             
         dummy = ListNode(-1)
         pre = dummy
-        
+
         cur = head
+        while cur and cur.next and cur < cur.next.val:	#For getting rid of TLE
+            cur = cur.next
+        
         while cur:
             tmp = cur.next
             while pre.next and cur.val > pre.next.val:

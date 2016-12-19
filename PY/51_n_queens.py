@@ -23,6 +23,42 @@
 #   "...Q",
 #   ".Q.."]
 # ]
+
+# 12.18.2016 Rewrite
+class Solution(object):
+    def solveNQueens(self, n):
+        """
+        :type n: int
+        :rtype: List[List[str]]
+        """
+        if n == 0: return []
+        if n == 1: return [["Q"]]
+        res = []
+        self.dfs(res, [], 0, n)
+        return res
+        
+    def dfs(self, res, board, dep, n):
+        if dep == n:
+            res.append(board)
+            return
+        
+        for i in xrange(n):
+            if self.isValid(board, dep, i, n):
+                line = "." * i + "Q" + "." * (n - i - 1)
+                self.dfs(res, board + [line], dep + 1, n)
+    
+    def isValid(self, board, dep, j, n):
+        for i in xrange(dep):
+            if ( board[i][j] == "Q" 
+                or (j - dep + i >= 0 and board[i][j - dep + i] == "Q" )
+                or (j + dep - i < n and board[i][j + dep - i] == "Q" )):
+                return False
+        
+        return True
+        
+            
+
+
 class Solution(object):
     def solveNQueens(self, n):
         """

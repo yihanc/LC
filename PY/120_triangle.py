@@ -18,6 +18,37 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.03.2016
+class Solution(object):
+    def minimumTotal(self, triangle):
+        """
+        :type triangle: List[List[int]]
+        :rtype: int
+        """
+        n = len(triangle)
+        if n == 0: return 0
+        
+        dp = [ 0 for j in xrange(n) ]
+        dp[0] = triangle[0][0]
+        
+        
+        i = 1
+        while i < n:
+            for j in xrange(i, -1, -1):
+                if j == i:
+                    dp[j] = dp[j-1] + triangle[i][j]
+                elif j == 0:
+                    dp[j] += triangle[i][j]
+                else:
+                    dp[j] = min(dp[j], dp[j-1]) + triangle[i][j]
+            i += 1
+        
+        res = dp[0]
+        for i in xrange(1, n):
+            res = min(dp[i], res)
+        
+        return res
+
 import sys
 class Solution(object):
     def minimumTotal(self, triangle):

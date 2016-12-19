@@ -10,6 +10,54 @@
 # (order does not matter).
 #
 
+# 12.17.2016 Rewrite
+# Algorithm:
+# dic and cdic, l, r, count
+# 1. if r word not dic, move r and l, update count, cdic to empty
+# 2. if r word in dic and available. dic[rword]++ and move right. update count, cdic
+# 3. if r word in dic but not available. move left one word. and update count, cdic
+
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        if not s or not words: return []
+        m, n, nw = len(s), len(words), len(words[0])
+        res = []
+
+        dic = {}
+        for word in words:
+            dic[word] = dic.get(word, 0) + 1
+        
+        for i in xrange(nw):
+            cdic = {}
+            l, r, count = i, i, 0
+            
+            while r <= m:
+                rword = s[r:r+nw]
+                
+                if count == n: res.append(l)
+                
+                if cword not in dic:
+                    l = r + nw
+                    count = 0
+                    cdic = {}
+                else:
+                    if cword not in cdic or cdic[cword] < dic[cword]:
+                        cdic[cword] = cdic.get(cword, 0) + 1
+                        count += 1
+                    else:
+                        if s[l:l+nw] in cdic:
+                            cdic[s[l:l+nw]] -= 1
+                            count -= 1
+                        l += nw
+                        continue
+                r += nw
+        return res
+
 # 11.22.2016 Rewrite
 # Idea: 
 # 1. Get occurance of each words in tdic.

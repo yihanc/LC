@@ -16,6 +16,39 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# 12.18.2016 Rewrite
+class Solution(object):
+    def generateMatrix(self, n):
+        """
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        if n == 0: return []
+        if n == 1: return [[1]]
+        
+        res = [ [ 0 for j in xrange(n) ] for i in xrange(n) ]
+        
+        lvl, count = 0, 1
+        while lvl < (n + 1) // 2:
+            for j in xrange(lvl, n - lvl):
+                res[lvl][j], count = count, count + 1
+            
+            for i in xrange(lvl + 1, n - lvl):
+                res[i][n - lvl - 1], count = count, count + 1
+            
+            if lvl == n - lvl - 1: break
+                
+            for j in xrange(n - lvl - 2, lvl - 1, -1):
+                res[n - lvl - 1][j], count = count, count + 1
+            
+            for i in xrange(n - lvl - 2, lvl, -1):
+                res[i][lvl], count = count, count + 1
+            
+            lvl += 1
+        
+        return res
+
+
 # 11.26.2016 Rewrite
 class Solution(object):
     def generateMatrix(self, n):

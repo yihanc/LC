@@ -7,6 +7,48 @@
 #     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 # Subscribe to see which companies asked this question
 
+
+# 12.16.2016 Rewrite. Better and similar to 3sum
+class Solution(object):
+    def threeSumClosest(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        nums.sort()
+        res = nums[0] + nums[1] + nums[2]
+        
+        n = len(nums)
+        for i in xrange(n-1):
+            if i > 0 and nums[i] == nums[i-1]:
+                i += 1
+                continue
+            
+            j, k = i + 1, n - 1
+            while j < k:
+                if j > i + 1 and nums[j] == nums[j-1]:
+                    j += 1
+                    continue
+                
+                if k < n - 1 and nums[k] == nums[k+1]:
+                    k -= 1
+                    continue
+                
+                summ = nums[i] + nums[j] + nums[k]
+                if abs(summ - target) < abs(res - target):
+                    res = summ
+                
+                if summ == target:
+                    return summ
+                elif summ > target:
+                    k -= 1
+                else:
+                    j += 1
+                    
+        return res
+
+
 # Same idea as 3 sum. Change 0 to target and update res everytime
 class Solution(object):
     def threeSumClosest(self, nums, target):

@@ -10,6 +10,30 @@
 # Follow up:
 # Could you do this in-place?
 
+# 12.18.2016 Rewrite.
+class Solution(object):
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        n = len(matrix)
+        if n <= 1: 
+            return
+        
+        for i in xrange(n // 2):
+            for j in xrange(n):
+                matrix[i][j], matrix[n-i-1][j] = matrix[n-i-1][j], matrix[i][j]
+                
+        for i in xrange(1, n):
+            for j in xrange(i):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        
+        return
+                
+    
+        
+
 class Solution(object):
     def rotate(self, matrix):
         """

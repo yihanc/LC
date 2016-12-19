@@ -21,6 +21,25 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# Recursive 12.08.2016
+class Solution(object):
+    def postorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        if not root: return []
+        
+        lres, rres = [], []
+        if root.left:
+            lres = self.postorderTraversal(root.left)
+        if root.right:
+            rres = self.postorderTraversal(root.right)
+        
+        return lres + rres + [root.val]
+
+
+
 # Iterative using deque
 # Use one variable to check last node visited
 

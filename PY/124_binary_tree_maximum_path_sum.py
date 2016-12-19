@@ -21,6 +21,26 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
+# 12.03.2016 Rewrite
+import sys
+class Solution(object):
+    mx = -sys.maxint-1
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.pathSum(root)
+        return self.mx
+  
+    def pathSum(self, root):
+        if not root: return 0
+        lpath = max(0, self.pathSum(root.left))
+        rpath = max(0, self.pathSum(root.right))
+        self.mx = max(self.mx, lpath + rpath + root.val)
+        return max(lpath, rpath) + root.val
+
 import sys
 
 # Recursive

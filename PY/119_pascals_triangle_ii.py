@@ -12,6 +12,24 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.3.2016 Rewrite
+class Solution(object):
+    def getRow(self, rowIndex):
+        """
+        :type rowIndex: int
+        :rtype: List[int]
+        """
+        res = []
+        
+        i = 0
+        while i <= rowIndex:
+            res.append(1)
+            for x in xrange(len(res) - 2, 0, -1):
+                res[x] += res[x-1]
+            i += 1
+            
+        return res
+
 class Solution(object):
     def getRow(self, rowIndex):
         """

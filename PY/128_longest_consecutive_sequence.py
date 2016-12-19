@@ -12,6 +12,27 @@
 # Your algorithm should run in O(n) complexity.
 # 
 # Subscribe to see which companies asked this question
+
+# 12.4.2016 Set method.
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = set(nums)
+        res = 0
+        
+        for num in nums:
+            if num - 1 not in nums:
+                i = 1
+                while num + i in nums:
+                    i += 1
+                res = max(res, i)
+                
+        return res
+        
+
 class Solution(object):
     def longestConsecutive(self, nums):
         """
@@ -37,7 +58,7 @@ class Solution(object):
                 res = max(res, boundary)
                 print(" res: ", res)
                 
-                dic[nums[i]] = boundary
+                dic[nums[i]] = boundary     # Keep missing this 
                 dic[nums[i] - left] = boundary
                 dic[nums[i] + right] = boundary
                 

@@ -6,23 +6,23 @@
 # 
 # Note:
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
 class Solution(object):
     def singleNumber(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        A = {}
+        print(nums)
+        a, b = 0, 0
         for num in nums:
-            if num in A:
-                A[num] += 1
-            else:
-                A[num] = 1
-        print(A)
+	    print(bin(a), bin(b), bin(num))
+            a, b = (a&~b&~num)|(~a&b&num), (~a&b&~num)|(~a&~b&num)
         
-        for key in A:
-            if A[key] == 1:
-                return key
+        print(bin(a), bin(b), bin(num))
+        print("res: ", a|b)
+        return a|b
+
 
 if __name__ == "__main__":
-    print(Solution().singleNumber([1]))
+    Solution().singleNumber([4,5,4,4])

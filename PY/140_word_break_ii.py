@@ -20,6 +20,42 @@
 # WB2 is backward. DP[i] means s[i:] is breakable
 # Since DFS is to check remaining string is 
 
+# 12.08.2016 Rewrite. DP + DFS
+class Solution(object):
+    dp = []
+
+    def wordBreak(self, s, wordDict):
+        """
+        :type s: str
+        :type wordDict: Set[str]
+        :rtype: List[str]
+        """
+        n = len(s)
+        self.dp = [ False for x in xrange(len(s)+1) ]
+        self.dp[0] = True
+        
+        for i in xrange(n):
+            for j in xrange(i+1):
+                tmp = s[j:i+1]
+                if tmp in wordDict and self.dp[j]:
+                    self.dp[i+1] = True
+                    break
+        
+        if not self.dp[-1]: return []
+        res = []
+        self.dfs(res, "", s, n-1, wordDict)
+        return res
+    
+    def dfs(self, res, line, s, end, wordDict):
+        if end == -1:
+            res.append(line[:-1])
+            return
+        
+        for start in xrange(end, -1, -1):
+            tmp = s[start:end+1]
+            if tmp in wordDict and self.dp[start]:
+                self.dfs(res, tmp + " " + line, s, start - 1, wordDict)
+
 # DP + DFS can get rid of TLE
 class Solution(object):
     def wordBreak(self, s, wordDict):

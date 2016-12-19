@@ -19,6 +19,38 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+# 12.08.2016 Rewrite. Better version
+class Solution(object):
+    def reorderList(self, head):
+        """
+        :type head: ListNode
+        :rtype: void Do not return anything, modify head in-place instead.
+        """
+        if not head or not head.next or not head.next.next: return
+    
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+            
+        # reverse
+        pre, cur, nex = slow, slow.next, slow.next.next
+        while nex:
+            cur.next = nex.next
+            nex.next = pre.next
+            pre.next = nex
+            nex = cur.next
+        
+        l1, l2 = head, pre.next
+        pre.next = None
+        
+        while l2:
+            cur1, cur2 = l1, l2
+            l1, l2 = l1.next, l2.next
+            cur2.next = l1
+            cur1.next = cur2
+        
+        return
+
 class Solution(object):
     def reorderList(self, head):
         """
