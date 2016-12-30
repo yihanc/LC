@@ -16,6 +16,28 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+# 12.29.2016 Rewrite.
+class Solution(object):
+    def deleteDuplicates(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(-1)
+        dummy.next = head
+        
+        cur = dummy
+        while cur.next and cur.next.next:
+            if cur.next.val == cur.next.next.val:
+                end = cur.next.next
+                while end.next and cur.next.val == end.next.val:
+                    end = end.next
+                cur.next = end.next
+            else:
+                cur = cur.next
+            
+        return dummy.next
+
 # 11.29.2016 Rewrite
 class Solution(object):
     def deleteDuplicates(self, head):

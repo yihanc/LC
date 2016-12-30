@@ -18,6 +18,31 @@
 # 
 # Could you come up with an one-pass algorithm using only constant space?
 # Subscribe to see which companies asked this question
+
+# 12.24.2016 Rewrite. Dutch Flag standard template
+
+class Solution(object):
+    def sortColors(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        if n <= 1: return
+    
+        i, l, r = 0, 0, n - 1
+        while i <= r:
+            if nums[i] == 0:
+                nums[i], nums[l] = nums[l], nums[i]
+                l, i = l + 1, i + 1
+            elif nums[i] == 2:
+                nums[i], nums[r] = nums[r], nums[i]
+                r -= 1
+            else:
+                i += 1
+        
+        return
+
 import random
 
 # Rewrite. two pointers. 

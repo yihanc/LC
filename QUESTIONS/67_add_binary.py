@@ -17,32 +17,3 @@ class Solution(object):
         :type b: str
         :rtype: str
         """
-        res = ""
-        carry = 0
-        i, j = len(a) -1, len(b) - 1
-        
-        while i >= 0 or j >= 0 or carry == 1:
-            tmp = 0
-            if i >= 0:
-                tmp += int(a[i])
-            if j >= 0:
-                tmp += int(b[j])
-            if carry == 1:
-                tmp += carry
-                
-            res = str(tmp % 2) + res
-            
-            if tmp >= 2:
-                carry = 1
-            else:
-                carry = 0
-                
-            i -= 1
-            j -= 1
-        
-        return res
-
-
-if __name__ == "__main__":
-    print(Solution().addBinary("1", "1"))
-    

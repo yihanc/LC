@@ -26,9 +26,3 @@
 #
 #  Test cases:  [-+]?(([0-9]+(.[0-9]*)?)|.[0-9]+)(e[-+]?[0-9]+)?
 
-class Solution(object):
-    def isNumber(self, s):
-        """
-        :type s: str
-        :rtype: bool
-        """

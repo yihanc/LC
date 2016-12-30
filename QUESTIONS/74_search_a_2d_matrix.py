@@ -23,28 +23,3 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        if len(matrix) == 0:
-            return False
-        
-        m, n = len(matrix), len(matrix[0])
-        start, end = 0, m * n - 1
-        while start <= end:
-            mid = start + ( end - start ) // 2
-
-            #Calculate coordinates
-            v_mid = matrix[mid // n][mid % n]
-
-            if v_mid == target:
-                return True
-            elif v_mid > target:
-                end = mid - 1
-            else:
-                start = mid + 1
-        
-        return False
-
-# Test cases:
-# [[0]] 0
-# [[0]] 1
-# [[1,2,3]] 3
-# [[1,2,3], [4,5,6]] 5

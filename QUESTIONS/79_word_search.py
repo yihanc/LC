@@ -19,63 +19,65 @@
 # word = "SEE", -> returns true,
 # word = "ABCB", -> returns false.
 class Solution(object):
+    found = False
     def exist(self, board, word):
         """
         :type board: List[List[str]]
         :type word: str
         :rtype: bool
         """
-        if not word: 
-            return True
-
-        if not board or len(board) * len(board[0]) < len(word):
-            return False
-
-        return self.dfs(board, word, 0, 0, 0, False)
+        if not word: return True
+        if not board: return False
+        m, n, nw = len(board), len(board[0]), len(word)
+        if m * n < nw: return False
         
-    def dfs(self, board, word, i, lastI, lastJ, res):
-        print(i)
-        if res or i == len(word):
-            return True
-        
-        m, n = len(board), len(board[0])
-
-        if i == 0:  # search entire board
-            for x in xrange(m):
-                for y in xrange(n):
-                    if board[x][y] == word[0]:
-                        board[x][y] = ""
-                        if self.dfs(board, word, i+1, x, y, False):
-                            return True
-                        board[x][y] = word[0]
-        else:       # search lastI+1, lastI-1, lastJ+1,lastJ-1
-            candidates = []
-            if lastI+1 < m and board[lastI+1][lastJ] == word[i]:
-                candidates.append([lastI+1, lastJ])
-            if lastI-1 >= 0 and board[lastI-1][lastJ] == word[i]:
-                candidates.append([lastI-1, lastJ])
-            if lastJ+1 < n and board[lastI][lastJ+1] == word[i]:
-                candidates.append([lastI, lastJ+1])
-            if lastJ-1 >= 0 and board[lastI][lastJ-1] == word[i]:
-                candidates.append([lastI, lastJ-1])
-
-            for x, y in candidates:
-                board[x][y] = ""
-                if self.dfs(board, word, i+1, x, y, False):
+        for i in xrange(m):
+            for j in xrange(n):
+                if board[i][j] == word[0] and nw == 1:
                     return True
-                board[x][y] = word[i]
-
+                if board[i][j] == word[0] and nw > 1:
+                    isVisited = [ [ False for y in xrange(n) ] for x in xrange(m) ]
+                    self.dfs(board, word, 1, i, j, isVisited)
+                    if self.found:
+                        return True
         return False
-                
+                    
+    def dfs(self, board, word, index, i, j, isVisited):
+        if index == len(word):
+            self.found = True
+            return
+        
+        print(word[index], board[i][j], i, j)
+        m, n = len(board), len(board[0])
+        isVisited[i][j] = True
+        
+        candidates = []
+        if i + 1 < m and not isVisited[i+1][j] and board[i+1][j] == word[index]:
+            candidates.append([i + 1, j])
+        if j + 1 < n and not isVisited[i][j+1] and board[i][j+1] == word[index]:
+            candidates.append([i, j + 1])
+        if i - 1 >= 0 and not isVisited[i-1][j] and board[i-1][j] == word[index]:
+            candidates.append([i - 1, j])
+        if j - 1 >= 0 and not isVisited[i][j-1] and board[i][j-1] == word[index]:
+            candidates.append([i, j - 1])        
+
+        for candidate in candidates:
+            self.dfs(board, word, index + 1, candidate[0], candidate[1], isVisited)
+            if self.found:
+                return
+        isVisited[i][j] = False
 
 if __name__ == "__main__":
-    board = [
-  ['A','B','C','E'],
-  ['S','F','C','S'],
-  ['A','D','E','E']
-]
+    board = ["ABCE","SFES","ADEE"]
+    word = "ABCESEEEFS"
+#    board = [
+#  ['A','B','C','E'],
+#  ['S','F','C','S'],
+#  ['A','D','E','E']
+#]
     for row in board:
         print(row)
+    print(Solution().exist(board, word))
 #    print(Solution().exist(board, "ABCCED"))
 #    print(Solution().exist(board, "SEE"))
-    print(Solution().exist(board, "ABCB"))
+#    print(Solution().exist(board, "ABCB"))

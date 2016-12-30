@@ -9,6 +9,43 @@
 # 
 # Subscribe to see which companies asked this question
 
+# Similar to Question 33
+# Only check nums[l] and nums[r]
+# Case 1: 012345678
+# Case 2: 780123456
+# When to go r = mid - 1?
+# In case 1, target >= nums[l] and target < nums[r]
+# In case 2 nums[l] > nums[mid], target > nums[l] or target < nums[mid] 
+# When to l = mid + 1? else
+
+
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: bool
+        """
+        n = len(nums)
+        
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return True
+                
+            if nums[l] == nums[mid]:
+                l += 1
+                continue
+
+            if ( ( target < nums[mid] and target >= nums[l] ) or
+                ( nums[l] > nums[mid] and ( target >= nums[l] or target < nums[mid] ))):
+                r = mid - 1
+            else:
+                l = mid + 1
+        
+        return False
+
 # Similar to 33. Handle duplicates
 class Solution(object):
     def search(self, nums, target):

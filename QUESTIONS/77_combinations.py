@@ -40,5 +40,4 @@ class Solution(object):
         return res
              
 if __name__ == "__main__":
-    print(Solution().combine(4, 2))
-    print(Solution().combine(5, 3))
+    print(Solution().combine(20, 16))

@@ -74,5 +74,5 @@ class Solution2(object):
 if __name__ == "__main__":
 #    print(Solution().combine(4, 2))
 #    print(Solution().combine(5, 3))
-    # Solution().combine(20, 16))
-    print(Solution().combine(10, 8))
+    print(Solution3().combine(20, 16))
+#    print(Solution().combine(10, 8))

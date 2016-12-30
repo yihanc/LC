@@ -11,23 +11,18 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        if x < 0:
-            return None
-    
-        start, end = 0, sys.maxint
-        while start <= end:
-            mid = start + (end - start) // 2
-            if mid * mid <= x and x < (mid + 1) * (mid +1):
-                return mid
-            elif x < mid * mid:
-                end = mid - 1
-            else:
-                start = mid + 1
+        y = x
+        while y * y > x:
+            print(y, x)
+            y = ( y + x / y ) / 2
+        
+        return y
 
 if __name__ == "__main__":
-    print(Solution().mySqrt(0))
-    print(Solution().mySqrt(1))
-    print(Solution().mySqrt(2))
     print(Solution().mySqrt(4))
     print(Solution().mySqrt(8))
     print(Solution().mySqrt(16))
+    print(Solution().mySqrt(100))
+    print(Solution().mySqrt(500))
+    print(Solution().mySqrt(1000))
+    print(Solution().mySqrt(2147483648))

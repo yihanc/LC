@@ -19,6 +19,59 @@
 # word = "SEE", -> returns true,
 # word = "ABCB", -> returns false.
 
+# 12.28.2016 Rewrite
+
+class Solution(object):
+    found = False
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        if not word: return True
+        if not board: return False
+        m, n, nw = len(board), len(board[0]), len(word)
+        if m * n < nw: return False
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                if board[i][j] == word[0] and nw == 1:
+                    return True
+                if board[i][j] == word[0] and nw > 1:
+                    isVisited = [ [ False for y in xrange(n) ] for x in xrange(m) ]
+                    self.dfs(board, word, 1, i, j, isVisited)
+                    if self.found:
+                        return True
+        return False
+                    
+    def dfs(self, board, word, index, i, j, isVisited):
+        if index == len(word):
+            self.found = True
+            return
+        
+        m, n = len(board), len(board[0])
+        isVisited[i][j] = True
+        
+        candidates = []
+        if i + 1 < m and not isVisited[i+1][j] and board[i+1][j] == word[index]:
+            candidates.append([i + 1, j])
+        if j + 1 < n and not isVisited[i][j+1] and board[i][j+1] == word[index]:
+            candidates.append([i, j + 1])
+        if i - 1 >= 0 and not isVisited[i-1][j] and board[i-1][j] == word[index]:
+            candidates.append([i - 1, j])
+        if j - 1 >= 0 and not isVisited[i][j-1] and board[i][j-1] == word[index]:
+            candidates.append([i, j - 1])        
+
+        for candidate in candidates:
+            self.dfs(board, word, index + 1, candidate[0], candidate[1], isVisited)
+            if self.found:
+                return
+        
+        isVisited[i][j] = False
+        
+        
+
 # 11.27.2016 Backtracking + candidates
 class Solution(object):
     found = False

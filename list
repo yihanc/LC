@@ -58,7 +58,7 @@
 58_length_of_last_word.py
 59_spiral_matrix_ii.py
 60_permutation_sequence.py
-61_rotate_list.py
+61_rotate_list.py               # k > length of list case
 62_unique_paths.py
 63_unique_paths_ii.py
 64_minimum_path_sum.py
@@ -74,11 +74,11 @@
 74_search_a_2d_matrix.py
 75_sort_colors.py
 76_minimum_window_substring.py
-77_combinations.py
+77_combinations.py              # DFS TLE. BFS + end
 78_subsets.py
-79_word_search.py
+79_word_search.py               # Backtracking
 80_remove_duplicates_from_sorted_array_ii.py
-81_search_in_rotated_sorted_array_ii.py
+81_search_in_rotated_sorted_array_ii.py     # Same to 33. l += 1 when nums[l] == nums[mid]
 82_remove_duplicates_from_sorted_list_ii.py
 83_remove_duplicates_from_sorted_list.py
 84_largest_rectangle_in_histogram.py
