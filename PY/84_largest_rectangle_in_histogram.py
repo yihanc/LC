@@ -16,7 +16,42 @@
 # 
 # Subscribe to see which companies asked this question
 
-# 11.29.2016, Using a list
+# 12.30.2016. Find L and R using deque.
+from collections import deque
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        n = len(heights)
+        L = [ 0 for x in xrange(n) ]    # Bug if L = R = [ 0 for x in xrange(n) ]
+        R = [ 0 for x in xrange(n) ]
+        
+        d = deque()
+        for i in xrange(n):
+            if i > 0:
+                while d and heights[i] <= heights[d[-1]]:
+                    index = d.pop()
+                    L[i] += L[index] + 1
+            d.append(i)
+        
+        d = deque()
+        for i in xrange(n-1, -1, -1):
+            if i < n - 1:
+                while d and heights[i] <= heights[d[-1]]:
+                    index = d.pop()
+                    R[i] += R[index] + 1
+            d.append(i)
+        
+        res = 0
+        for i in xrange(n):
+            res = max(res, heights[i] * (L[i] + R[i] + 1))
+        
+        return res
+        
+
+# 11.29.2016, one list solution. This is better
 class Solution(object):
     def largestRectangleArea(self, heights):
         """

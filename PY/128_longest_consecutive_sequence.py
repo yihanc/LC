@@ -13,6 +13,34 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 1.1.2017 Rewrite
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums: return 0
+        res = 0
+        dic = {}
+        n = len(nums)
+        
+        for i in xrange(n):
+            if nums[i] in dic:
+                continue
+            
+            l = dic.get(nums[i] - 1, 0)
+            r = dic.get(nums[i] + 1, 0)
+            curlen = l + r + 1
+            
+            dic[nums[i]] = curlen
+            if l != 0: dic[nums[i] - l] = curlen
+            if r != 0: dic[nums[i] + r] = curlen
+            
+            res = max(res, curlen)
+        
+        return res
+
 # 12.4.2016 Set method.
 class Solution(object):
     def longestConsecutive(self, nums):

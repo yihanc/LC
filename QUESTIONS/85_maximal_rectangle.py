@@ -12,57 +12,49 @@
 # 1 0 0 1 0
 # Return 6.
 # Subscribe to see which companies asked this question
+from collections import deque
+
 class Solution(object):
     def maximalRectangle(self, matrix):
         """
         :type matrix: List[List[str]]
         :rtype: int
         """
-        if not matrix:
-            return 0
-        res, m, n = 0, len(matrix), len(matrix[0])
+        res = 0
+        if not matrix: return 0
+        m, n = len(matrix), len(matrix[0])
         
-        # Initialize first height
-        H = list(matrix[0])     # Convert string to list of int
-        for j in xrange(n):
-            H[j] = int(H[j])
+        heights = [ [ 0 for j in xrange(n + 1) ] for i in xrange(m) ]
         
         for i in xrange(m):
-            #initiate L, R
-            L = [0 for x in xrange(n)]
-            R = [0 for x in xrange(n)]
-            
-            # Get the height and left
             for j in xrange(n):
-                if i == 0:
-                    pass
+                if i == 0 and matrix[i][j] == "1":
+                    heights[i][j] = 1
                 elif matrix[i][j] == "1":
-                    H[j] += 1
+                    heights[i][j] += heights[i-1][j] + 1
                 else:
-                    H[j] = 0
+                    pass
+        print(heights)
+        
+        for i in xrange(m):
+            d = deque()
+            for j in xrange(n + 1):
+                while d and heights[i][j] < heights[i][d[-1]]:
+                    index = d.pop()
+                    h = heights[i][index]
+                    l = -1 if not d else d[-1]
+                    side = j - l - 1
+                    res = max(res, h * side)
+                    print(i, j, h, side, res)
+                d.append(j)
                 
-                # Get the left
-                k = j - 1
-                while k >= 0 and H[k] >= H[j]:
-                    L[j] = L[j] + L[k] + 1
-                    k = k - L[k] - 1
-            
-            # Get the right
-            for j in reversed(xrange(n)):
-                k = j + 1
-                while k < n and H[j] <= H[k]:
-                    R[j] = R[j] + R[k] + 1
-                    k = k + R[k] + 1
-            
-            # Calculate area for each and update res if bigger
-            for j in xrange(n):
-                if H[j] != 0:
-                    res = max(res, H[j] * (L[j] + R[j] + 1))
-            
         return res
+        
+        
 
 if __name__ == "__main__":
     A = ["10100","10111","11111","10010"]
-    Solution().maximalRectangle(A)
+    print("A", A)
+    print(Solution().maximalRectangle(A))
 
 

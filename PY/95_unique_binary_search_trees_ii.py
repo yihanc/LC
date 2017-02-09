@@ -21,6 +21,7 @@
 #         self.left = None
 #         self.right = None
 
+# Append [None] version is better
 class Solution(object):
     def generateTrees(self, n):
         """

@@ -14,6 +14,26 @@
 #         self.left = None
 #         self.right = None
 
+# 1.1.2016 BFS Rewrite
+from collections import deque
+class Solution(object):
+    def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root: return 0
+        res = 0
+        d = deque()
+        d.append([root, 1])
+        while d:
+            cur, dep = d.pop()
+            if not cur.left and not cur.right:
+                return dep
+            
+            if cur.left: d.appendleft([cur.left, dep+1])
+            if cur.right: d.appendleft([cur.right, dep+1])
+
 class Solution(object):
     def minDepth(self, root):
         """

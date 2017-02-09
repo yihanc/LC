@@ -18,76 +18,69 @@ class TreeNode(object):
 
 # Recursive
 import sys
-
 class Solution(object):
     def isValidBST(self, root):
         """
         :type root: TreeNode
         :rtype: bool
         """
-        return self.isValidBSTHelper(root, sys.maxint, -sys.maxint-1)
-            
-    def isValidBSTHelper(self, root, ltMax, rtMin):
-        if not root:
-            return True
+        return self.validate(root, sys.maxint, -sys.maxint-1)
         
-        if root.val >= ltMax or root.val <= rtMin:
-            return False
+    def validate(self, root, maxVal, minVal):
+        if not root: return True
         
-        return self.isValidBSTHelper(root.left, root.val, rtMin) and self.isValidBSTHelper(root.right, ltMax, root.val)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Recursive. It is valid only:
-# 1. Left is valid, right is valid
-# 2. max left < val and min_right > val
-class Solution(object):
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        if not root or (not root.left and not root.right): 
-            return True
+        if root.val >= maxVal or root.val <= minVal: return False
         
-        l, r = True, True
+        lres,  rres = True, True
         if root.left: 
-            max_l = root.left
-            while max_l.right: 
-                max_l = max_l.right
-            l = ((max_l.val < root.val) and self.isValidBST(root.left))
+            lres = self.validate(root.left, root.val, minVal)
         if root.right:
-            min_r = root.right
-            while min_r.left: 
-                min_r = min_r.left
-            r = ((min_r.val > root.val) and self.isValidBST(root.right))
-            
-        return l and r
+            rres = self.validate(root.right, maxVal, root.val)
+        print(root.val, lres, rres)
+        
+        return lres and rres
+
+class Solution2(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        return self.isValidBSTHelper(root, None, None)
+        
+    def isValidBSTHelper(self, root, lmax, rmin):
+        if not root: return True
+        if not root.left and not root.right: return True
+        
+        l = True if lmax == None else False
+        r = True if rmin == None else False
+        
+        if lmax != None and root.val < lmax: l = True
+        if rmin != None and root.val > rmin: r = True
+        
+        return ( l and r and 
+                self.isValidBSTHelper(root.left, root.val, rmin) and 
+                self.isValidBSTHelper(root.right, lmax , root.val) )
 
 import unittest
 
 class TestSolution(unittest.TestCase):
     def test_0(self):
-        t1 = TreeNode(10)
-        t2 = TreeNode(5)
-        t3 = TreeNode(15)
-        t4 = TreeNode(6)
-        t5 = TreeNode(20)
+        t1 = TreeNode(4)
+        t2 = TreeNode(2)
+        t3 = TreeNode(6)
+        t4 = TreeNode(1)
+        t5 = TreeNode(7)
+        t6 = TreeNode(5)
+        t7 = TreeNode(7)
         t1.left = t2
         t1.right = t3
-        t3.left = t4
-        t3.right = t5
-        self.assertEqual(Solution().isValidBST(t1), False)
+        t2.left = t4
+        t2.right = t5
+        t3.left = t6
+        t3.right = t7
+        self.assertEqual(Solution2().isValidBST(t1), False)
 
 if __name__ == "__main__":
     unittest.main()
+

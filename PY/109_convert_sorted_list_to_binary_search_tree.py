@@ -23,6 +23,31 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 1.1.2017 Rewrite
+class Solution(object):
+    def sortedListToBST(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+        """
+
+        if not head: return None
+        dummy = ListNode(-1)
+        dummy.next = head
+        
+        slow, fast = dummy, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        mid = slow.next
+        slow.next = None
+        
+        root = TreeNode(mid.val)
+        root.left = self.sortedListToBST(dummy.next)
+        root.right = self.sortedListToBST(mid.next)
+        return root
+
 # 12.3.2016 Rewrite
 class Solution(object):
     def sortedListToBST(self, head):

@@ -18,6 +18,32 @@
 #         self.val = x
 #         self.next = None
 
+# 12.30.2016 Rewrite
+class Solution(object):
+    def partition(self, head, x):
+        """
+        :type head: ListNode
+        :type x: int
+        :rtype: ListNode
+        """
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        l2 = l2head = ListNode(-1)
+        
+        while pre.next:
+            if pre.next.val >= x:
+                l2.next = pre.next
+                pre.next = pre.next.next
+                l2 = l2.next
+                l2.next = None
+            else:
+                pre = pre.next
+                
+        pre.next = l2head.next                
+        
+        return dummy.next
+
 class Solution(object):
     def partition(self, head, x):
         """

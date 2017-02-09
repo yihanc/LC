@@ -18,40 +18,43 @@
 # 
 # Subscribe to see which companies asked this question
 
-import sys
 class Solution(object):
     def minimumTotal(self, triangle):
         """
         :type triangle: List[List[int]]
         :rtype: int
         """
-        if not triangle:
-            return 0
-            
-        row, col = len(triangle), len(triangle[-1])
-        A = [0] * col
-        A[0] = triangle[0][0]
-        res = A[0]
-
-        for i in xrange(1, row):
-            res = sys.maxint
-            for j in reversed(xrange(0, i+1)):
-                if j == i:
-                    A[j] = A[j-1] + triangle[i][j]
-                elif j != 0:
-                    A[j] = min(A[j], A[j-1]) + triangle[i][j]
-                else:
-                    A[j] += triangle[i][j]
-                    
-                res = min(res, A[j])
+        if not triangle: return 0
+        n = len(triangle)
         
-        return res
+        dp = [ 0 for i in xrange(n) ]
+        res = None
+        
+        for i in xrange(n):
+            for j in xrange(i, -1, -1):
+                if j == 0:
+                    dp[j] += triangle[i][j]
+                elif j != 0 and j == i :
+                    dp[j] = dp[j-1] + triangle[i][j]
+                else:
+                    dp[j] = min(dp[j], dp[j-1]) + triangle[i][j]
                 
+                if i == n - 1:
+                    res = min(res, dp[j]) if res != None else dp[j]
+#                    if res is None:
+#                        res = dp[j]
+#                    else:
+#                        res = min(res, dp[j])
+            print(dp)
+                    
+        return res
+            
+        
                 
 if __name__ == "__main__":
     A = [
         [-1], [2,3], [1,-1,-1]
         ]
 
-    Solution().minimumTotal(A)
+    print(Solution().minimumTotal(A))
         

@@ -81,22 +81,22 @@
 81_search_in_rotated_sorted_array_ii.py     # Same to 33. l += 1 when nums[l] == nums[mid]
 82_remove_duplicates_from_sorted_list_ii.py
 83_remove_duplicates_from_sorted_list.py
-84_largest_rectangle_in_histogram.py
+84_largest_rectangle_in_histogram.py    # One loop is better.
 85_maximal_rectangle.py
 86_partition_list.py
-87_scramble_string.py
-88_merge_sorted_array.py
+87_scramble_string.py           # Precheck use dic to speed up.
+88_merge_sorted_array.py        # Backward i, j, k
 89_gray_code.py
 90_subsets_ii.py
 91_decoded_ways.py
 92_reverse_linked_list_ii.py
 93_restore_ip_addresses.py
-94_binary_tree_inorder_traversal.py
-95_unique_binary_search_trees_ii.py
+94_binary_tree_inorder_traversal.py     # Recursive. Stack iterative. Morris
+95_unique_binary_search_trees_ii.py     # THis is better
 96_unique_binary_search_trees.py
 97_interleaving_string.py       # DP solution. Backtracking is TLE
-98_validate_binary_search_tree.py
-99_recover_binary_search_tree.py
+98_validate_binary_search_tree.py   # Buggy maxint. Recursive or inorder traversal.
+99_recover_binary_search_tree.py    # Inorder
 100_same_tree.py
 101_symmetric_tree.py
 102_binary_tree_level_order_traversal.py
@@ -125,7 +125,7 @@
 125_valid_palindrome.py
 126_word_ladder_ii.py                       # Two-end BFS. Save in DIC[xx] = set() map
 127_word_ladder.py                          # Two-end BFS. Much faster.
-128_longest_consecutive_sequence.py
+128_longest_consecutive_sequence.py         # set or dic both are good.
 129_sum_root_to_leaf_numbers.py
 130_surrounded_regions.py                   # BFS + isVis[][] + deque. Scan all bounaries. For each DFS
 131_palindrome_partitioning.py              # DFS + isPalindrome

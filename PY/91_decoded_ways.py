@@ -17,6 +17,30 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.30.2016 Rewrite. n size dp[]
+class Solution(object):
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        if n == 0: return 0
+        
+        dp = [ 0 for j in xrange(n) ]
+
+        for i in xrange(n):
+            if s[i] in "123456789":
+                dp[i] = dp[i-1] if i > 0 else 1
+            
+            if i > 0 and ( s[i-1] == "0" or int(s[i-1:i+1]) >= 27 ):
+                continue
+            
+            if i > 0 and int(s[i-1:i+1]) >= 10 and int(s[i-1:i+1]) <= 26:
+                dp[i] = dp[i] + dp[i-2] if i >= 2 else dp[i] + 1
+        
+        return dp[-1]
+
 # Careful corner cases:
 # "", return 0
 # "0", return 0
@@ -30,7 +54,7 @@
 # in [ "10", "20" ], dp[i+1] = dp[i-1]
 # else, dp[i+1] = dp[i]
 
-# 12.1.2016 Rewrite
+# 12.1.2016 Rewrite. n + 1 size dp[]
 class Solution(object):
     def numDecodings(self, s):
         """

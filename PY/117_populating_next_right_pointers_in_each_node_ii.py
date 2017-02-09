@@ -48,6 +48,26 @@
 #     4-> 5 -> 7 -> NULL
 # Subscribe to see which companies asked this question
 
+# 1.1.2017 Same solution as 116. Level Order traversal.
+from collections import deque
+class Solution:
+    # @param root, a tree link node
+    # @return nothing
+    def connect(self, root):
+        if not root: return
+        d = deque()
+        d.append([root, 1])
+        while d:
+            cur, dep = d.pop()
+            
+            if d and d[-1][1] == dep:
+                cur.next = d[-1][0]
+            
+            if cur.left: d.appendleft([cur.left, dep + 1])
+            if cur.right: d.appendleft([cur.right, dep + 1])
+        
+        return
+
 # 12.03.2016 Rewrite. less code
 # nextlvl and first pointer. If found, update
 

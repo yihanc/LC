@@ -303,3 +303,26 @@ rotate string
 225 Implement Stack using Queues        31.0%   Easy
 232 Implement Queue using Stacks        34.8%   Easy
 297 Serialize and Deserialize Binary Tree       31.0%   Hard    
+
+# Important Algorithms
+TREE:
+    Preorder, Inorder, Postorder. Recursive, One stack iterative and Morris Iterative
+    ValidateBST, RecoverBST
+LIST:
+    Reverse Template
+    Dummy, Slow, Fast
+Median of two sorted Array
+SUBSTRING:
+DP 
+    Pascal's Triangle Template
+    BUY SELL Stocks
+DFS & BFS
+    Telephone
+MATH
+    Add, Subtract, Division, 
+    
+
+
+# Python Notes
+Mutable Object is passed by reference. eg: list, dict..
+Immutable is passed by value. Only local to function. eg: string, int..

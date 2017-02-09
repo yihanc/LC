@@ -15,6 +15,32 @@ class TreeNode(object):
         self.right = None
         self.right = None
 
+# 1.1.2016 Rewrite. Cleaner
+class Solution(object):
+    def buildTree(self, preorder, inorder):
+        """
+        :type preorder: List[int]
+        :type inorder: List[int]
+        :rtype: TreeNode
+        """
+        if not preorder or not inorder or len(preorder) != len(inorder): return None
+        n = len(preorder)
+        return self.buildTreeHelper(preorder, inorder, 0, n - 1, 0, n - 1)
+    
+    def buildTreeHelper(self, preorder, inorder, prel, prer, inl, inr):
+        if prel > prer: return None
+        root = TreeNode(preorder[prel])
+        
+        i = inorder.index(root.val)
+        llen = i - inl
+        rlen = inr - i
+        
+        root.left = self.buildTreeHelper(preorder, inorder, prel+1, prel+llen, inl, inl+llen-1)
+        root.right = self.buildTreeHelper(preorder, inorder, prer-rlen+1, prer, inr-rlen+1, inr)
+        
+        return root
+
+
 # 12.03.2016 Rewrite.
 # watch out: prel > prer, inl > inr.  l move right. r move left.
 class Solution(object):

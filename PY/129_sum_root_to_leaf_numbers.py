@@ -29,6 +29,26 @@
 
 # Note. Use instance var for res. 
 
+# 1.1.2017 No static var.
+class Solution(object):
+    def sumNumbers(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root: return 0
+        res = [0]
+        self.dfs(root, res, 0)
+        return res[0]
+    
+    def dfs(self, root, res, cursum):
+        if not root.left and not root.right:
+            res[0] += 10 * cursum + root.val
+            return
+        
+        if root.left: self.dfs(root.left, res, 10 * cursum + root.val)
+        if root.right: self.dfs(root.right, res, 10 * cursum + root.val)
+
 # DFS template..
 class Solution(object):
     res = 0

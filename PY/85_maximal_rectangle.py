@@ -13,6 +13,44 @@
 # Return 6.
 # Subscribe to see which companies asked this question
 
+# 12.30.2016 rewrite
+from collections import deque
+
+class Solution(object):
+    def maximalRectangle(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        res = 0
+        if not matrix: return 0
+        m, n = len(matrix), len(matrix[0])
+        
+        heights = [ [ 0 for j in xrange(n + 1) ] for i in xrange(m) ]
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                if i == 0 and matrix[i][j] == "1":
+                    heights[i][j] = 1
+                elif matrix[i][j] == "1":
+                    heights[i][j] += heights[i-1][j] + 1
+                else:
+                    pass
+        
+        for i in xrange(m):
+            d = deque()
+            for j in xrange(n + 1):
+                while d and heights[i][j] < heights[i][d[-1]]:
+                    index = d.pop()
+                    h = heights[i][index]
+                    l = -1 if not d else d[-1]
+                    side = j - l - 1
+                    res = max(res, h * side)
+                d.append(j)
+                
+        return res
+        
+
 # 11.29.2016 Rewrite
 class Solution(object):
     def maximalRectangle(self, matrix):
@@ -37,7 +75,6 @@ class Solution(object):
                     else:
                         heights[j] = 0
             
-            print(i, heights)
             d = []
             j, l = 0, -1
             while j < len(heights):
@@ -49,7 +86,6 @@ class Solution(object):
                     else:
                         l = -1
                     res = max(res, h * (j - 1 - l))
-                    print(res, h, j-1-l, d)
                     
                 d.append(j)
                 j += 1

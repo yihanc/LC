@@ -16,6 +16,77 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 12.31.2016 Rewrite Morris
+class Solution(object):
+    def recoverTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: void Do not return anything, modify root in-place instead.
+        """
+        if not root: return
+        cur = root
+        first, second = None, None
+        last = None
+        while cur:
+            if not cur.left:
+                # do something
+                if last and cur.val <= last.val:
+                   if not first: first = last
+                   second = cur
+                last = cur
+                
+                cur = cur.right
+            else:
+                pre = cur.left
+                while pre.right and pre.right != cur:
+                    pre = pre.right
+                
+                if pre.right != cur:
+                    pre.right = cur
+                    cur = cur.left
+                else:
+                    pre.right = None
+                    # do something
+                    if last and cur.val <= last.val:
+                        if not first: first = last
+                        second = cur
+                    last = cur
+                    
+                    cur = cur.right
+
+        if first and second:
+            first.val, second.val = second.val, first.val
+        return 
+
+# 12.31.2016 Rewrite Recursive
+class Solution(object):
+#    res = [None, None]         # Why bug if res outside?? See https://leetcode.com/faq/#different-output
+    def recoverTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: void Do not return anything, modify root in-place instead.
+        """
+        res = [None, None]
+        prev = [None]           # Has to be a mutable object to be passed in function
+        self.recoverTreeHelper(root, res, prev)
+        if res[0] and res[1]:
+            res[0].val, res[1].val = res[1].val, res[0].val
+        return 
+        
+    def recoverTreeHelper(self, root, res, prev):
+        if not root: return
+    
+        self.recoverTreeHelper(root.left, res, prev)
+        
+        if prev[0] != None and root.val <= prev[0].val:
+            if res[0] == None: 
+                res[0] = prev[0]
+            res[1] = root
+                
+        prev[0] = root
+        self.recoverTreeHelper(root.right, res, prev)
+        return
+
 # inorder traversal
 # Iter O(1)
 # Note if passing first,second,last in parameters, they won't got changed
@@ -71,50 +142,6 @@ if __name__ == "__main__":
 
 exit
 
-# Iterative O(1), Morris Traversal
-class Solution(object):
-    def recoverTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: void Do not return anything, modify root in-place instead.
-        """
-        res = [None, None]
-        lastNode = None
-        cur = root
-        while cur:
-            if not cur.left:
-                # Process
-                if lastNode and lastNode.val > cur.val:
-                    if not res[0]:
-                        res[0] = lastNode
-                    res[1] = cur
-        
-                lastNode = cur
-                # Process end
-                cur = cur.right
-            else:
-                prev = cur.left
-
-                while prev.right and prev.right != cur:
-                    prev = prev.right
-
-                if not prev.right:
-                    prev.right = cur
-                    cur = cur.left
-                else:
-                    prev.right = None
-                    # Process
-                    if lastNode and lastNode.val > cur.val:
-                        if not res[0]:
-                            res[0] = lastNode
-                        res[1] = cur
-            
-                    lastNode = cur
-                    # Process end
-                    cur = cur.right
-                    
-        if res[0] and res[1]:
-            res[0].val, res[1].val = res[1].val, res[0].val
 
 # Recursive.
 class Solution2(object):

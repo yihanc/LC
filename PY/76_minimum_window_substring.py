@@ -17,6 +17,38 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 12.30.2016 Rewrite Template
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        m, n = len(s), len(t)
+        dic = {}
+        for char in t:
+            dic[char] = dic.get(char, 0) + 1
+        
+        res, l, r, counter = s + ".", 0, 0, n
+        while r < m:
+            if s[r] in dic:
+                if dic[s[r]] > 0: counter -= 1
+                dic[s[r]] -= 1
+            r += 1
+            
+            while l < m and counter == 0:
+                if r - l < len(res):
+                    res = s[l:r]
+                
+                if s[l] in dic:
+                    if dic[s[l]] == 0: counter += 1
+                    dic[s[l]] += 1
+                l += 1
+        
+        return "" if len(res) == m + 1 else res
+
+
 class Solution(object):
     def minWindow(self, s, t):
         """

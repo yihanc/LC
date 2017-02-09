@@ -83,11 +83,11 @@ class Solution(object):
                 cur = cur.left
             else:
                 cur = d.pop()
-                if d and cur.right and cur.right == d[-1]:
+                if d and cur.right and cur.right == d[-1]:  # Non-leaf
                     d.pop()
                     d.append(cur)
                     cur = cur.right
-                else:
+                else:                       # Leaf Node
                     res.append(cur.val)
                     cur = None
         return res

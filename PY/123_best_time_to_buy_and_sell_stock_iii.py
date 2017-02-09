@@ -19,6 +19,24 @@
 # DP solution more concise and easier
 # http://postimg.org/image/b0auzohv3/
 
+# 1.1.2017 DP no sys.maxint
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if len(prices) <= 1: return 0
+
+        buy1, sell1, buy2, sell2 = None, 0, None, 0
+        for i in xrange(len(prices)):
+            sell2 = max(sell2, buy2 + prices[i])  if buy2 != None else sell2
+            buy2 = max(buy2, sell1 - prices[i]) if buy2 != None else sell1 - prices[i]
+            sell1 = max(sell1, buy1 + prices[i])  if buy1 != None else sell1
+            buy1 = max(buy1, - prices[i]) if buy1 != None else - prices[i]
+
+        return sell2
+
 # 12.03.2016 Rewrite DP
 import sys
 class Solution(object):

@@ -12,6 +12,25 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 1.1.2017 Rewrite. Pascal's Template
+class Solution(object):
+    def getRow(self, rowIndex):
+        """
+        :type rowIndex: int
+        :rtype: List[int]
+        """
+        res = [ 0 for x in xrange(rowIndex + 1)]
+
+        for i in xrange(rowIndex + 1):
+            for j in xrange(i, -1, -1):
+                if j == 0 or j == i:
+                    res[j] = 1
+                else:
+                    res[j] = res[j] + res[j-1]
+        
+        return res
+                
+
 # 12.3.2016 Rewrite
 class Solution(object):
     def getRow(self, rowIndex):

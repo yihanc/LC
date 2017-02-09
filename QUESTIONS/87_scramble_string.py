@@ -40,6 +40,8 @@
 # Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
 # 
 # Subscribe to see which companies asked this question
+
+# 12.30.2016 Rewrite
 class Solution(object):
     def isScramble(self, s1, s2):
         """
@@ -47,32 +49,35 @@ class Solution(object):
         :type s2: str
         :rtype: bool
         """
-#        print(s1 + " " + s2)
-        m, n = len(s1), len(s2)
-
-        if s1 == s2:
-            return True
+        if len(s1) != len(s2): return False
+        if not s1 and not s2: return True
+        if not s1 or not s2: return False
+        if s1 == s2: return True
+        dic = {}
+        for char in s1:
+            dic[char] = dic.get(char, 0) + 1
         
-        if m != n:
-            return False
+        for char in s2:
+            if char not in dic: return False
+            dic[char] -= 1
         
-        s = [ 0 for x in xrange(256) ]
+        for key in dic:
+            if dic[key] != 0:
+                return Falsek
         
-        for i in xrange(m):
-            s[ord(s1[i])] += 1
-            s[ord(s2[i])] -= 1
-#        print(s)
-        
-        for i in xrange(256):
-            if s[i] != 0:
-                return False
-                
-        for i in xrange(1, m):      # Watch out the divide. g reat, gr eat, gre at, grea, t
-            if (( self.isScramble(s1[:i], s2[:i]) and self.isScramble(s1[i:], s2[i:]) ) or
-                (self.isScramble(s1[:i], s2[m-i:]) and self.isScramble(s1[i:], s2[:m-i]) )):
+        n = len(s1)
+        for i in xrange(1, n):
+            if self.isScramble(s1[:i], s2[:i]) and self.isScramble(s1[i:], s2[i:]):
                 return True
-
+            if self.isScramble(s1[:i], s2[n-i:]) and self.isScramble(s1[i:], s2[:n-i]):
+                return True
+        
         return False
+            
 
 if __name__ == "__main__":
-    print Solution().isScramble("great", "rgtae")
+    # s1, s2 = "great", "rgtae"
+    # s1, s2 = "abcdefghijklmn", "efghijklmncadb"
+    s1, s2 = "abcd", "cadb"
+    print(s1, s2)
+    print(Solution().isScramble(s1, s2))

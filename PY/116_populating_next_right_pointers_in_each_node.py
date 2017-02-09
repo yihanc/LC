@@ -39,6 +39,26 @@
 #         self.right = None
 #         self.next = None
 
+# 1.1.2017. Rewrite. Level Order Traversal
+from collections import deque
+class Solution:
+    # @param root, a tree link node
+    # @return nothing
+    def connect(self, root):
+        if not root: return
+        d = deque()
+        d.append([root, 1])
+        while d:
+            cur, dep = d.pop()
+            
+            if d and d[-1][1] == dep:
+                cur.next = d[-1][0]
+            
+            if cur.left: d.appendleft([cur.left, dep + 1])
+            if cur.right: d.appendleft([cur.right, dep + 1])
+        
+        return
+
 # Top to down. 
 class Solution:
     # @param root, a tree link node
