@@ -17,6 +17,27 @@
 # 
 #             Subscribe to see which companies asked this question
                     
+# Two passes solution. Two group solution
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        diff = 0
+        for num in nums:
+            diff ^= num
+        diff = diff & (-diff)   # Get the right most bit
+        
+        res = [0, 0]
+        for num in nums:
+            if num & diff == 0:
+                res[0] ^= num
+            else:
+                res[1] ^= num
+        return res
+        
+        
 
 # This is not o(n) space. dic may go up to o(n/2) space.
 class Solution(object):

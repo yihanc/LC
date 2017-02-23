@@ -13,16 +13,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        print(nums)
         a, b = 0, 0
         for num in nums:
-	    print(bin(a), bin(b), bin(num))
-            a, b = (a&~b&~num)|(~a&b&num), (~a&b&~num)|(~a&~b&num)
-        
-        print(bin(a), bin(b), bin(num))
-        print("res: ", a|b)
-        return a|b
-
+            tmp = (a & ~b & ~num) + (~a & ~b & num)
+            b = (~a & b & ~num) + (a & ~b & num)
+            a = tmp
+        return a | b
 
 if __name__ == "__main__":
     Solution().singleNumber([4,5,4,4])

@@ -18,3 +18,20 @@
 # Special thanks to @ifanchu for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question
+class Solution(object):
+    def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        if n < 1: return ""
+        
+        res = ""
+        while n > 26:
+            c = chr(ord('A') + (n - 1) % 26 )
+            res = c + res
+            n = (n - 1) // 26
+        
+        res = chr(ord('A') + (n - 1) % 26 ) + res
+        return res
+            

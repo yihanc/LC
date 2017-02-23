@@ -17,17 +17,3 @@ class Solution(object):
         :type wordDict: Set[str]
         :rtype: bool
         """
-        if not s:
-            return False
-            
-        n = len(s)
-        dp = [False for x in xrange(n+1)]
-        dp[0] = True
-        
-        for i in xrange(n):
-            for j in xrange(0, i+1):
-                if s[j:i+1] in wordDict and dp[j]:
-                    dp[i+1] = True
-                    break
-                
-        return dp[-1]

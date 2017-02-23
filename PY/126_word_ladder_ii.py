@@ -21,6 +21,77 @@
 # All words have the same length.
 # All words contain only lowercase alphabetic characters.
 
+# 2016.02.22, Two-end BFS. 
+# Note:
+# wordList is now a list. Convert to set() for fast query. if endWord not in wordList, return []
+# Remove word from wordList outside the loop. No visisted[]
+# Use line + [word] to generate line
+import string
+class Solution(object):
+    def findLadders(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: List[List[str]]
+        """
+        if endWord not in wordList: return []   # Bug 1
+        wordList = set(wordList)
+        beginSet, endSet = set([beginWord]), set([endWord])
+        if beginWord in wordList: wordList.remove(beginWord)
+        if endWord in wordList: wordList.remove(endWord)
+        
+        mp = {}
+        depFound = False
+        while beginSet and endSet:
+            if len(beginSet) < len(endSet):
+                isBeginSmall, small, big = True, beginSet, endSet
+            else:
+                isBeginSmall, small, big = False, endSet, beginSet
+                
+            nextlvl = set([])
+            
+            for word in small:
+                for i in xrange(len(word)):
+                    for char in string.ascii_lowercase:
+                        tmp = word[:i] + char + word[i+1:]
+                        
+                        if tmp in big:
+                            depFound = True
+                        
+                        if tmp in wordList or tmp in big:   # Bug 2. If missing tmp in big. Mp{} is missing entry
+                            nextlvl.add(tmp)
+                            mp[word] = mp.get(word, [])
+                            mp[tmp] = mp.get(tmp, [])
+                        
+                            if isBeginSmall:
+                                mp[word].append(tmp)
+                            else:
+                                mp[tmp].append(word)
+            
+            if depFound: break
+        
+            for word in nextlvl:                    # Bug 3. If remove word inside the loop. Missing Map entry
+                wordList.remove(word)
+        
+            if isBeginSmall: beginSet = nextlvl
+            else: endSet = nextlvl
+        
+        if not depFound: return []
+        
+        res = [[beginWord]]
+        while res[0][-1] != endWord:
+            print(res)
+            tmp = res
+            res = []
+            for line in tmp:
+                nextWords = mp[line[-1]]
+                for word in nextWords:
+                    res.append(line + [word])       # Bug 4. Use line + [word] to create new line
+        
+        return res
+                            
+                        
 
 # 12.6.2016, Two-end BFS. 
 

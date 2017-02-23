@@ -32,7 +32,6 @@ class Solution(object):
             dic[cur] = node
             cur = cur.next
         
-        dic[head]
         cur = head
         while cur:                          # Step 2. Update next and random
             if cur.next: dic[cur].next = dic[cur.next] 

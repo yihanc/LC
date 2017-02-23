@@ -30,10 +30,6 @@
 # In this case, that line should be left-justified.
 # Subscribe to see which companies asked this question
 
-# Algorithms:
-# 1. words[i j] for the line to be inserted
-# 2. Pad space for the line. 
-
 # 12.10.2016 Rewrite
 class Solution(object):
     def fullJustify(self, words, maxWidth):
@@ -42,49 +38,3 @@ class Solution(object):
         :type maxWidth: int
         :rtype: List[str]
         """
-        if not words: return []
-        res = []
-        n = len(words)
-
-        i = 0
-        while i < n:
-            L = 0
-            j = i                                         # Find words[i:j+1] for current line
-            while j < n:    
-                if L == 0 and len(words[j]) <= maxWidth:
-                    L += len(words[j])
-                elif L != 0 and L + 1 + len(words[j]) <= maxWidth:
-                    L += len(words[j]) + 1
-                else:
-                    break
-                j += 1
-                  
-            line = words[i]                               # Creating line
-            if j != n:
-                count = 0
-                for x in xrange(i+1, j):
-                    line += " " + " " * ((maxWidth - L) // (j - i - 1))
-                    if ((maxWidth - L) % (j - i - 1) - count) > 0:
-                        line += " " + words[x]
-                    else:
-                        line += words[x]
-                    count += 1
-                if j - i == 1:
-                    line += " " * (maxWidth - len(line))
-            else:
-                for x in xrange(i+1, j):
-                    line += " " + words[x]
-                line += " " * (maxWidth - len(line))
-            res.append(line)
-            i = j
-        return res
-
-                
-
-
-if __name__ == "__main__":
-    words, n = ["This", "is", "an", "example", "of", "text", "justification."], 16
-#    words, n = ["Listen","to","many,","speak","to","a","few."], 6
-#    words = [""]
-    for row in Solution().fullJustify(words, n):
-        print([row])

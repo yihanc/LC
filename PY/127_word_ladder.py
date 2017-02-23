@@ -21,7 +21,56 @@
 # All words contain only lowercase alphabetic characters.
 # Subscribe to see which companies asked this question
 
+# 2017.02.22 Rewrite 2way BFS. Changes to questions
+# wordList is now a list but not set. So "word" in wordList is very slow now
+# endWord has to be in the wordList
+# No visited. Remove from wordList outside the loop
+import string
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        if endWord not in wordList: return 0
+        wordList = set(wordList)
+        beginSet, endSet = set([beginWord]), set([endWord])
+        #wordList.remove(beginWord)
+        wordList.remove(endWord)
+
+        dep = 1        
+        while beginSet and endSet:
+            if len(beginSet) < len(endSet):
+                isBeginSmall, small, big = True, beginSet, endSet
+            else:
+                isBeginSmall, small, big = False, endSet, beginSet
+            
+            nextlvl = set([])
+            dep += 1
+            for word in small:
+                for i in xrange(len(word)):
+                    for char in string.ascii_lowercase:
+                        newWord = word[:i] + char + word[i+1:]
+                        
+                        if newWord in big:
+                            return dep
+                        
+                        if newWord in wordList:
+                            nextlvl.add(newWord)
+            
+            for word in nextlvl:
+                wordList.remove(word)
+                
+            if isBeginSmall: beginSet = nextlvl
+            else: endSet = nextlvl
+            
+        return 0
+
+
 # 12.04.2016 Rewrite. 2way BFS
+# Why set?
 
 class Solution(object):
     def ladderLength(self, beginWord, endWord, wordList):

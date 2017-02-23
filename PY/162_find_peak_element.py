@@ -44,6 +44,26 @@ class Solution(object):
 
         return -1
 
+# Non-binary search
+class Solution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n == 1: return 0
+        
+        for i in xrange(n):
+            if i == 0 and nums[i] > nums[i+1]:
+                return i
+            
+            if i != 0 and i != n - 1 and nums[i] > nums[i-1] and nums[i] > nums[i+1]:
+                return i
+        
+            if i == n - 1 and nums[i] > nums[i-1]:
+                return i
+
 if __name__ == "__main__":
     sol = Solution()
     print(sol.findPeakElement([0]))

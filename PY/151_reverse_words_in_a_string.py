@@ -24,3 +24,8 @@ class Solution(object):
             res[i], res[j] = res[j], res[i]
             i, j = i + 1, j - 1
         return " ".join(res)
+
+
+if __name__ == "__main__":
+    s = "    the sky is blue"
+    print(Solution().reverseWords(s))

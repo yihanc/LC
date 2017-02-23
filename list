@@ -123,8 +123,8 @@
 123_best_time_to_buy_and_sell_stock_iii.py
 124_binary_tree_maximum_path_sum.py
 125_valid_palindrome.py
-126_word_ladder_ii.py                       # Two-end BFS. Save in DIC[xx] = set() map
-127_word_ladder.py                          # Two-end BFS. Much faster.
+126_word_ladder_ii.py                       # Two-end BFS. No visisted[]
+127_word_ladder.py                          # Two-end BFS. No visisted[]
 128_longest_consecutive_sequence.py         # set or dic both are good.
 129_sum_root_to_leaf_numbers.py
 130_surrounded_regions.py                   # BFS + isVis[][] + deque. Scan all bounaries. For each DFS
@@ -148,22 +148,27 @@
 148_sort_list.py
 149_max_points_on_a_line.py                 # Dic + set to record. Calculate slop + b with float and round
 150_evaluate_reverse_polish_notation.py     # Stack. If "+-*/" pop two, else push
-151_reverse_words_in_a_string.py            # Split
+151_reverse_words_in_a_string.py            # Reverse the whole then reverse each word
 152_maximum_product_subarray.py
 153_find_minimum_in_rotated_sorted_array.py #If one element, return
 154_find_minimum_in_rotated_sorted_array_ii.py
-155_min_stack.py
+155_min_stack.py                            # Use deque
 162_find_peak_element.py
+165_compare_version_numbers.py              # 1. Split into Array. 2. if i < n . 3. Convert to int
 167_two_sum_ii_sorted.py
 168_excel_sheet_column_title.py
 171_excel_sheet_column_number.py
 174_dungeon_game.py
+202_happy_number.py                         # slow, fast LL cycle method
+203_remove_linked_list_elements.py          # easy. one loop
 206_reverse_linked_list.py
 216_combination_sum_iii.py
 226_invert_binary_tree.py
 237_delete_node_in_a_linked_list.py
 240_search_a_2d_matrix_ii.py
 258_add_digits.py
+263_ugly_number.py                          # Simply math
+264_ugly_number_ii.py                       # DP min(k1, k2, k3)
 283_move_zeroes.py
 283_move_zeros.py
 292_nim_game.py
