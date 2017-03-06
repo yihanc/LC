@@ -27,6 +27,8 @@
 # Remove word from wordList outside the loop. No visisted[]
 # Use line + [word] to generate line
 import string
+from collections import defaultdict
+
 class Solution(object):
     def findLadders(self, beginWord, endWord, wordList):
         """
@@ -41,7 +43,7 @@ class Solution(object):
         if beginWord in wordList: wordList.remove(beginWord)
         if endWord in wordList: wordList.remove(endWord)
         
-        mp = {}
+        mp = defaultdict(list)
         depFound = False
         while beginSet and endSet:
             if len(beginSet) < len(endSet):
@@ -61,8 +63,6 @@ class Solution(object):
                         
                         if tmp in wordList or tmp in big:   # Bug 2. If missing tmp in big. Mp{} is missing entry
                             nextlvl.add(tmp)
-                            mp[word] = mp.get(word, [])
-                            mp[tmp] = mp.get(tmp, [])
                         
                             if isBeginSmall:
                                 mp[word].append(tmp)

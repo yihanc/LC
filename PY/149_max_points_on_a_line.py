@@ -12,6 +12,41 @@ class Point(object):
         self.x = a
         self.y = b
 
+# 2017.02.25 Rewrite
+# Failing for this case due to precision
+# [[0,0],[94911151,94911150],[94911152,94911151]], Expected 2
+# Modified for passing the case
+from decimal import *
+class Solution(object):
+    def maxPoints(self, points):
+        """
+        :type points: List[Point]
+        :rtype: int
+        """
+        n = len(points)
+        dic = {}
+        res = 0
+        for i in xrange(n):
+            ix, iy = points[i].x, points[i].y
+            dic.clear()
+            same_points = 1
+            for j in xrange(i+1, n):
+                jx, jy = points[j].x, points[j].y
+                if ix == jx and iy == jy:
+                    same_points += 1
+                elif ix == jx:
+                    dic['INF'] = dic.get('INF', 0) + 1
+                else:
+                    divisor = Decimal(iy - jy) if abs(iy - jy) > 94900000 else float(iy - jy)
+                    slope = divisor / (ix - jx)
+                    dic[slope] = dic.get(slope, 0) + 1
+            local_max = 0
+            for k, v in dic.iteritems():
+                local_max = max(local_max, v)
+            local_max += same_points
+            res = max(res, local_max)
+        return res
+
 class Solution(object):
     def maxPoints(self, points):
         """

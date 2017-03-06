@@ -12,6 +12,49 @@
 # 
 # Find the minimum element.
 
+# 2017.03.04 l < r style
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        l, r = 0, len(nums) - 1
+        while l < r:
+            mid = (l + r) // 2
+            
+            if nums[mid] == nums[r]:
+                r -= 1
+            elif nums[mid] > nums[r]:
+                l = mid + 1
+            else:
+                r = mid
+        
+        return nums[l]
+
+# Better solution online.
+# Always compare with the nums[r]
+class Solution(object):
+    def findMin(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        l, r = 0, n - 1
+        while l <= r:
+            if l == r: return nums[l]
+            
+            mid = (l + r) // 2
+            
+            if nums[mid] > nums[r]:
+                l = mid + 1
+            elif nums[mid] < nums[r]:
+                r = mid
+            else:
+                r -= 1
+        
+
 # Similar to 153. Handle duplicates
 class Solution(object):
     def findMin(self, nums):

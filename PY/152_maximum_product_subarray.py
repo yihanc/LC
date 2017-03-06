@@ -7,6 +7,27 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.02.25 Rewrite
+class Solution(object):
+    def maxProduct(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n == 0: return 0
+        
+        res = cur_min = cur_max = nums[0]
+        for i in xrange(1, n):
+            if nums[i] > 0:
+                cur_max, cur_min = max(cur_max * nums[i], nums[i]), min(cur_min * nums[i], nums[i])
+            else:
+                cur_max, cur_min = max(cur_min * nums[i], nums[i]), min(cur_max * nums[i], nums[i])
+
+            res = max(res, cur_max)
+        return res
+            
+
 # 11.26.2016 Rewrite
 # Similar algorithm to Maximum Subarray.
 # Travese

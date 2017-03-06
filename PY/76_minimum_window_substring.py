@@ -17,6 +17,44 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 03.04.2016 Self write.
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        if len(s) < len(t): return ""
+        dic = {}
+        for char in t:
+            dic[char] = dic.get(char, 0) + 1
+        #print(dic)
+        n = len(s)
+        l, r, count = 0, 0, 0
+        res = s + " "
+        while r <= n:
+            if count == len(dic):
+                #print(l, r, s[l:r], count)
+                if r - l < len(res):
+                    res = s[l:r]
+            
+                if s[l] in dic:
+                    dic[s[l]] += 1
+                    if dic[s[l]] == 1: # dic[xx] 0 -> TARGET, count -=1 
+                        count -= 1
+                l += 1
+                continue
+            
+            if r < n and s[r] in dic:
+                dic[s[r]] -= 1
+                if dic[s[r]] == 0:  # dic[xx] TARGET -> 0, count += 1
+                    count += 1
+            r += 1
+            
+        return res if res != s + " " else ""
+            
+
 # 12.30.2016 Rewrite Template
 class Solution(object):
     def minWindow(self, s, t):

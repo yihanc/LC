@@ -17,6 +17,37 @@
 #         self.val = x
 #         self.next = None
 
+# 2017.02.24 Rewrite Insertion Sort List
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def insertionSortList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        if not head: return head
+        
+        dummy = ListNode(-1)
+        cur = head
+        
+        while cur:
+            cur2 = dummy 
+            while cur2.next and cur.val > cur2.next.val:
+                cur2 = cur2.next
+            
+            tmp = cur
+            cur = cur.next
+            tmp.next = cur2.next
+            cur2.next = tmp
+            
+        return dummy.next
+            
+            
 # Better and clear solution. Two loop.
 class Solution(object):
     def insertionSortList(self, head):

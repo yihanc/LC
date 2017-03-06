@@ -9,6 +9,33 @@
 #         self.val = x
 #         self.next = None
 
+# Another version. 2017.02.25
+class Solution(object):
+    def mergeTwoLists(self, l1, l2):
+        """
+        :type l1: ListNode
+        :type l2: ListNode
+        :rtype: ListNode
+        """
+        dummy = ListNode(-1)
+        l3 = dummy
+        
+        while l1 and l2:
+            if l1.val < l2.val:
+                tmp = l1
+                l1 = l1.next
+            else:
+                tmp = l2
+                l2 = l2.next
+                
+            l3.next = tmp
+            l3 = l3.next
+        
+        if l1: l3.next = l1
+        else: l3.next = l2
+            
+        return dummy.next
+
 # Better Template for Merging List. 11.19.2016
 class Solution(object):
     def mergeTwoLists(self, l1, l2):

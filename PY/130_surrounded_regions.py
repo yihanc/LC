@@ -25,7 +25,56 @@
 # 2. pop, check adjancet and push to deque()
 # 3. Rescan mid board and flip not in isVis
 
-# 12.06.2016 Rewrite.
+# 2017.02.22 BFS
+from collections import deque
+class Solution(object):
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: void Do not return anything, modify board in-place instead.
+        """
+        if not board: return
+        m, n = len(board), len(board[0])
+        if m <= 2 or n <= 2: return 
+        d = deque()
+
+        visited = [ [ False for j in xrange(n) ] for i in xrange(m) ]
+        
+        for j in xrange(n):
+            if board[0][j] == 'O' and not visited[0][j]:
+                d.appendleft([0, j])
+
+            if board[m-1][j] == 'O' and not visited[m-1][j]:
+                d.appendleft([m - 1, j])
+
+        for i in xrange(1, m-1):
+            if board[i][0] == 'O' and not visited[i][0]:
+                d.appendleft([i, 0])
+
+            if board[i][n-1] == 'O' and not visited[i][n-1]:
+                d.appendleft([i, n - 1])
+                
+        while d:
+            i, j = d.pop()
+            visited[i][j] = True
+
+            if i + 1 < m and board[i+1][j] == 'O' and not visited[i+1][j]:
+                d.appendleft([i + 1, j])
+            if j + 1 < n and board[i][j+1] == 'O' and not visited[i][j+1]:
+                d.appendleft([i, j + 1])
+            if i - 1 >= 0 and board[i-1][j] == 'O' and not visited[i-1][j]:
+                d.appendleft([i-1, j])
+            if j - 1 >= 0 and board[i][j-1] == 'O' and not visited[i][j-1]:
+                d.appendleft([i, j-1])            
+
+        for i in xrange(1, m - 1):
+            for j in xrange(1, n - 1):
+                if board[i][j] == 'O' and not visited[i][j]:
+                    board[i][j] = 'X'
+
+        return
+
+# 12.06.2016 Rewrite. DFS cannot pass the new test case. Need to review to BFS
 class Solution(object):
     def solve(self, board):
         """

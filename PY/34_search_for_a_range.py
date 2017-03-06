@@ -12,6 +12,46 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.02.25 Rerwite. Two binary search
+class Solution(object):
+    def searchRange(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        if not nums or target < nums[0] or target > nums[-1]:
+            return [-1, -1]
+        
+        res = [-1, -1]
+        n = len(nums)
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            
+            if nums[mid] == target and (mid == 0 or nums[mid] > nums[mid-1]): 
+                res[0] = mid
+                break
+            elif target > nums[mid]:
+                l = mid + 1
+            else:
+                r = mid - 1
+        
+        if res[0] == -1: return res
+        
+        r = n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target and (mid == n - 1 or nums[mid] < nums[mid+1]):
+                res[1] = mid
+                return res
+            elif target < nums[mid]:
+                r = mid - 1
+            else:
+                l = mid + 1
+                
+
+
 # 11.20.2016
 class Solution(object):
     def searchRange(self, nums, target):

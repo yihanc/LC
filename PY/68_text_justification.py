@@ -30,6 +30,48 @@
 # In this case, that line should be left-justified.
 # Subscribe to see which companies asked this question
 
+# 2017.02.25 Rewrite
+# Case maxWidth(0)
+
+class Solution(object):
+    def fullJustify(self, words, maxWidth):
+        """
+        :type words: List[str]
+        :type maxWidth: int
+        :rtype: List[str]
+        """
+        n, res = len(words), []
+        
+        i = 0
+        while i < n:
+            cur_len = len(words[i])
+            j = i + 1
+            while j < n and cur_len + len(words[j]) + 1 <= maxWidth:
+                cur_len += len(words[j]) + 1
+                j += 1
+            j -= 1
+            
+            if j == n - 1 or i == j:        # Special case. Last line or i == j line
+                line = " ".join(words[i:j+1])
+                line += " " * (maxWidth - len(line))
+                res.append(line)
+            else:
+                spaces = (maxWidth - cur_len) // (j - i) if j != i else maxWidth - cur_len
+                count = (maxWidth - cur_len) % (j - i) if j != i else 0
+                line = ""
+                for k in xrange(i, j):
+                    line += words[k] + " " * (spaces + 1)
+                    if count > 0:
+                        line += " "
+                        count -= 1
+                res.append(line + words[j])
+            i = j + 1
+            
+        return res
+                    
+                
+    
+
 # Algorithms:
 # 1. Get words in list to form the line.
 # 2. For padding 0, pad 0 except for last word.

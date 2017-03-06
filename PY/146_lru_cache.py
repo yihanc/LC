@@ -5,9 +5,108 @@
 # get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
 # set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
 # 
+# Follow up:
+# Could you do both operations in O(1) time complexity?
+# 
+# Example:
+# 
+# LRUCache cache = new LRUCache( 2 /* capacity */ );
+# 
+# cache.put(1, 1);
+# cache.put(2, 2);
+# cache.get(1);       // returns 1
+# cache.put(3, 3);    // evicts key 2
+# cache.get(2);       // returns -1 (not found)
+# cache.put(4, 4);    // evicts key 1
+# cache.get(1);       // returns -1 (not found)
+# cache.get(3);       // returns 3
+# cache.get(4);       // returns 4
 # Subscribe to see which companies asked this question
 # 
 # 
+
+# 2017.02.24 Rewrite
+# 1. Use dd for o(1). Initiate ddHead(LeastRecent), ddTail(MostRecent), mp{}, cap 
+# 2. Get(). If in map update node to Tail and not in map.
+# 3. Put().
+# 3.1 If in map update value and move tail.
+# 3.2 If not in map. If max cap, remove head.next first, add to tail
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.maxCap = capacity
+        self.mp = {}
+        self.ddHead = DoubleListNode(False, False)
+        self.ddTail = DoubleListNode(False, False)
+        self.ddHead.next = self.ddTail
+        self.ddTail.prev = self.ddHead
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key in self.mp:
+            self.ddRemove(self.mp[key])
+            self.ddAddToTail(self.mp[key])
+            return self.mp[key].value
+        else:
+            return -1
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: void
+        """
+        kv = DoubleListNode(key, value)
+        if key in self.mp:
+            self.mp[key].value = value
+            self.ddRemove(self.mp[key])
+            self.ddAddToTail(self.mp[key])
+        else:
+            if len(self.mp) == self.maxCap:
+                tbdNode = self.ddHead.next
+                self.ddRemove(tbdNode)
+                del self.mp[tbdNode.key]
+            self.ddAddToTail(kv)
+            self.mp[key] = kv
+            
+    def ddRemove(self, node):
+        """
+        :type node: DoubleListNode
+        """
+        prevNode = node.prev
+        postNode = node.next
+        prevNode.next = postNode
+        postNode.prev = prevNode
+        
+    def ddAddToTail(self, node):
+        """
+        :type node: DoubleListNode
+        """
+        tailPrev = self.ddTail.prev
+        tailPrev.next = node
+        node.next = self.ddTail
+        self.ddTail.prev = node
+        node.prev = tailPrev
+        
+
+class DoubleListNode(object):
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        self.prev = None
+        self.next = None
+
+
+
+
+#######
 class DLinkedNode(object):
     def __init__(self, key, value):
         self.key = key
@@ -157,3 +256,48 @@ class LRUCache:
         self.tail.prev = node
         node.prev = p
         node.next = self.tail
+
+# 2017.02.23
+# Not O(1) version
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        """
+        :type capacity: int
+        """
+        self.maxCapacity = capacity
+        self.mp = {}
+        self.cache = []
+
+    def get(self, key):
+        """
+        :type key: int
+        :rtype: int
+        """
+        if key in self.mp:
+            kv = self.mp[key]
+            self.cache.remove(kv)
+            self.cache.append(kv)
+            return kv[1]
+        else:
+            return -1
+
+    def put(self, key, value):
+        """
+        :type key: int
+        :type value: int
+        :rtype: void
+        """
+        kv = [key, value]
+        if key in self.mp:
+            self.mp[key][1] = value
+            self.cache.remove(self.mp[key])
+            self.cache.append(self.mp[key])
+        else:
+            if len(self.cache) == self.maxCapacity:
+                tmp = self.cache[0]
+                del self.cache[0]
+                del self.mp[tmp[0]]
+            self.cache.append(kv)
+            self.mp[key] = kv
+

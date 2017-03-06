@@ -10,6 +10,57 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.03.03 Rewrite in my style
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        if not nums: return -1
+        n = len(nums)
+        l, r = 0, n - 1
+        while l < r:
+            mid = (l + r) //2
+            if nums[mid] == target:
+                return mid
+            elif ((nums[mid] > nums[r] and (target > nums[mid] or target <= nums[r]))
+                or (nums[mid] < nums[r] and target > nums[mid] and target <= nums[r])):
+                l = mid + 1
+            else:
+                r = mid - 1
+            
+        return l if nums[l] == target else -1
+        
+        
+# 2017.02.25 Rewrite
+# Same template for 153, 154
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        if not nums: return -1
+        n = len(nums)
+        l, r = 0, n - 1
+        
+        while l <= r:
+            if l == r:
+                return l if nums[l] == target else -1
+            
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return mid
+            elif ((nums[mid] < nums[r] and target > nums[mid] and target <= nums[r])
+                or (nums[mid] > nums[r] and (target > nums[mid] or target <= nums[r]))):
+                l = mid + 1
+            else:
+                r = mid
+            
+
 # 11.20.2016. Rewrite
 # Algorithm:
 # while l <= r, 
