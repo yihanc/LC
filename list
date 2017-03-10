@@ -30,7 +30,7 @@
 30_substring_with_concatenation_of_all_words.py     # Two dic. l, r count. No deepcopy dic TLE.
 31_next_permutation.py
 32_longest_valid_parentheses.py
-33_search_in_rotated_sorted_array.py
+33_search_in_rotated_sorted_array.py    # one template
 34_search_for_a_range.py            # Binary Search left edge and right edge
 35_search_insert_position.py
 36_valid_sudoku.py
@@ -150,8 +150,8 @@
 150_evaluate_reverse_polish_notation.py     # Stack. If "+-*/" pop two, else push
 151_reverse_words_in_a_string.py            # Reverse the whole then reverse each word
 152_maximum_product_subarray.py
-153_find_minimum_in_rotated_sorted_array.py #If one element, return
-154_find_minimum_in_rotated_sorted_array_ii.py
+153_find_minimum_in_rotated_sorted_array.py # Always compare nums[mid] with nums[r]. r = mid
+154_find_minimum_in_rotated_sorted_array_ii.py  # Similar to 153
 155_min_stack.py                            # Use deque
 162_find_peak_element.py
 165_compare_version_numbers.py              # 1. Split into Array. 2. if i < n . 3. Convert to int
@@ -159,11 +159,14 @@
 168_excel_sheet_column_title.py
 171_excel_sheet_column_number.py
 174_dungeon_game.py
+187_repeated_dna_sequences.py               # simple check loop
 202_happy_number.py                         # slow, fast LL cycle method
 203_remove_linked_list_elements.py          # easy. one loop
+205_isomorphic_strings.py
 206_reverse_linked_list.py
 216_combination_sum_iii.py
 226_invert_binary_tree.py
+235_lowest_common_ancestor_of_a_binary_search_tree.py
 237_delete_node_in_a_linked_list.py
 240_search_a_2d_matrix_ii.py
 258_add_digits.py
@@ -172,6 +175,7 @@
 283_move_zeroes.py
 283_move_zeros.py
 292_nim_game.py
+337_robber_house_iii.py                     # Tree. Recursive
 344_reverse_string.py
 345_reverse_vowels_of_a_string.py
 349_intersection_of_two_arrays.py

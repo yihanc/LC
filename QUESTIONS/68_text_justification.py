@@ -30,7 +30,6 @@
 # In this case, that line should be left-justified.
 # Subscribe to see which companies asked this question
 
-# 12.10.2016 Rewrite
 class Solution(object):
     def fullJustify(self, words, maxWidth):
         """

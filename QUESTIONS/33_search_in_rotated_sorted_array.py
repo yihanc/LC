@@ -16,22 +16,6 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if len(nums) == 0:
-            return -1
-
-        start, end = 0, len(nums) - 1
-        while start <= end:
-            mid = start + (end - start) // 2
-            if nums[mid] == target:
-                return mid
-            # Key Part. Note that ">=" for nums[0]
-            elif (( target < nums[mid] and target >= nums[0] )
-                or ( nums[0] > nums[mid] and (target >= nums[0] or target < nums[mid])) ):
-                end = mid - 1
-            else:
-                start = mid + 1
-
-        return -1
 
 if __name__ == "__main__":
     sol = Solution()

@@ -17,31 +17,3 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return None
-
-        start, end = 0, len(nums) - 1
-
-        while start <= end:
-            mid = start + ( end - start ) // 2
-            #1. mid < mid -1; 2. mid == 0 and mid <=j
-            if (( mid > 0 and nums[mid - 1] > nums[mid] ) or
-                ( mid == start and nums[mid] <= nums[end] )or
-                start == end ): 
-                return nums[mid]
-            # Search left when mid < end
-            elif nums[mid] < nums[end]:
-                end = mid - 1
-            else:
-                start = mid + 1
-
-        return nums[start]
-
-# Test cases
-# 1 2
-# 2 1
-# 0 1 2 3 4 5 6 7
-# 7 0 1 2 3 4 5 6
-# 1 2 3 4 5 6 7 0
-# 2 3 4 5 6 7 0 1
-# 6 7 0 1 2 3 4 5

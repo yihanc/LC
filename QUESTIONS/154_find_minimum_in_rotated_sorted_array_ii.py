@@ -17,25 +17,3 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return None
-
-        l, r = 0, len(nums) - 1
-        while l <= r:
-            while l < r and nums[l] == nums[l + 1]:
-                l += 1
-            while l < r and nums[r] == nums[r - 1]:
-                r -= 1
-            if l < r and nums[l] == nums[r] :
-                r -= 1
-
-            if nums[l] < nums[r] or l == r:
-                return nums[l]
-
-            mid = l + (r - l) // 2
-            if mid > 0 and nums[mid] < nums[mid-1]:
-                return nums[mid]
-            elif nums[mid] < nums[r]:
-                r = mid - 1
-            else:
-                l = mid + 1

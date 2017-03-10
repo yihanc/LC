@@ -15,30 +15,6 @@ class Solution(object):
         :type target: int
         :rtype: bool
         """
-        if len(nums) == 0:
-            return False
-    
-        start, end = 0, len(nums) - 1
-        while start <= end:
-            # Remove duplicates for left end
-            while start < end and nums[end] == nums[end - 1]:
-                end -= 1
-            while start < end and nums[start] == nums[start + 1]:
-                start += 1
-            if nums[start] == nums[end] and start != end:
-                end -= 1
-
-            mid = start + (end - start) // 2
-
-            if nums[mid] == target:
-                return True
-            elif (( target < nums[mid] and target >= nums[0] ) or
-                  ( nums[mid] < nums[0] and (target >= nums[0] or target < nums[mid])) ):
-                end = mid - 1
-            else:
-                start = mid + 1
-        
-        return False
 
 # Test cases
 # [0] 1

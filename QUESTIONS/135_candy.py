@@ -22,3 +22,22 @@ class Solution(object):
         :type ratings: List[int]
         :rtype: int
         """
+        n = len(ratings)
+        res = [ 1 for x in xrange(n) ]
+        
+        for i in xrange(1, n):
+            if ratings[i] > ratings[i-1]:
+                res[i] = res[i-1] + 1
+        
+        for i in xrange(n - 2, -1, -1):
+            if ratings[i] > ratings[i+1]:
+                res[i] = res[i+1] + 1
+        
+        print(res)
+        return sum(res)
+            
+
+if __name__ == "__main__":
+    #ratings = [2, 1]
+    ratings = [4,2,3,4,1]
+    print(Solution().candy(ratings))
