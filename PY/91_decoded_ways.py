@@ -17,6 +17,31 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.03.12 Rewrite
+# Set 0 to 1
+# dp[1] = 1 if s[0] != 0
+# 1. Cur char not in 0. Add dp[i-1]
+# 1. Prev char + Cur char in ("10 - 26") add dp[i-2]
+class Solution(object):
+    def numDecodings(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if not s: return 0
+        n = len(s)
+        dp = [ 0 for x in xrange(n + 1) ]
+        dp[0] = 1
+        if s[0] != "0": dp[1] = 1
+        
+        for i in xrange(2, n + 1):
+            dp[i] = dp[i-1] if s[i-1] != "0" else 0
+            
+            if ( s[i-2] == "1" or ( s[i-2] == "2" and s[i-1] in "0123456" )):
+                dp[i] += dp[i-2]
+        
+        return dp[-1]
+
 # 12.30.2016 Rewrite. n size dp[]
 class Solution(object):
     def numDecodings(self, s):

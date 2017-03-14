@@ -18,6 +18,27 @@
 # Special thanks to @ifanchu for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question
+
+#2017.03.11 Rewrite
+import string
+class Solution(object):
+    def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        dic = []
+        for char in string.uppercase:
+            dic.append(char)
+        
+        res = ""
+        while n >= 1:
+            n = n - 1
+            res = dic[n % 26] + res
+            n = n // 26
+        return res
+
+
 class Solution(object):
     def convertToTitle(self, n):
         """

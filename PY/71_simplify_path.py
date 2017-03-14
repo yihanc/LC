@@ -15,6 +15,33 @@
 # In this case, you should return "/".
 # Another corner case is the path might contain multiple slashes '/' together, such as "/home//foo/".
 # In this case, you should ignore redundant slashes and return "/home/foo".
+
+# 2017.03.11 Rewrite
+from collections import deque
+class Solution(object):
+    def simplifyPath(self, path):
+        """
+        :type path: str
+        :rtype: str
+        """
+        d = deque()
+        pathlist = path.split("/")
+        res = ""
+        
+        for path in pathlist:
+            if path == "." or path == "" or (not d and path == ".."):
+                continue
+            elif d and path == "..":
+                d.pop()
+            else:
+                d.append(path)
+        
+        for path in d:
+            res = res + "/" + path
+        
+        return "/" if not res else res
+        
+
 from collections import deque
 class Solution(object):
     def simplifyPath(self, path):

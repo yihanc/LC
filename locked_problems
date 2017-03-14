@@ -1,0 +1,900 @@
+[1] 156 Binary Tree Upside Down¶
+
+38.7%   Medium
+Given a binary tree where all the right nodes are either leaf nodes with a sibling (a left node that shares the same parent node) or empty, flip it upside down and turn it into a tree where the original right nodes turned into left leaf nodes. Return the new root.
+
+For example:
+Given a binary tree {1,2,3,4,5},
+    1   
+   / \ 
+  2   3
+ / \
+4  5
+
+return the root of the binary tree [4,5,2,#,#,3,1].
+    4
+   / \
+  5   2
+ / \
+3   1
+
+
+[2] 157 Read N Characters Given Read4¶
+
+29.4%   Easy
+The API: int read4(char *buf) reads 4 characters at a time from a file.
+
+The return value is the actual number of characters read. For example, it returns 3 if there is only 3 characters left in the file.
+
+By using the read4 API, implement the function int read(char *buf, int n) that reads n characters from the file.
+
+Note: The read function will only be called once for each test case.
+
+
+
+[3] 158 Read N Characters Given Read4 II - Call multiple times¶
+
+[4] 159 Longest Substring with At Most Two Distinct Characters¶
+
+Given a string S, find the length of the longest substring T that contains at most two distinct characters.
+
+For example,
+Given S = “eceba”,
+T is “ece” which its length is 3.
+
+
+[5] 161 One Edit Distance¶
+
+Given two strings S and T, determine if they are both one edit distance apart.
+
+
+
+[6] 163 Missing Ranges¶
+
+Missing Ranges Total Accepted: 510 Total Submissions: 2300 Given a sorted integer array where the range of elements are [lower, upper] inclusive, return its missing ranges.
+
+For example,
+Given [0, 1, 3, 50, 75], lower = 0 and upper = 99, return ["2", "4->49", "51->74", "76->99"].
+
+
+[7] 167 Two Sum II - Input array is sorted¶
+
+Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based. You may assume that each input would have exactly one solution.
+
+Input: numbers={2, 7, 11, 15}, target=9
+Output: index1=1, index2=2
+
+
+[8] 170 Two Sum III - Data structure design¶
+
+Design and implement a TwoSum class. It should support the following operations:add and find. add - Add the number to an internal data structure. find - Find if there exists any pair of numbers which sum is equal to the value.
+
+For example,
+add(1); add(3); add(5);
+find(4) -> true
+find(7) -> false
+
+
+[9] 186 Reverse Words in a String II¶
+
+Given an input string, reverse the string word by word. A word is defined as a sequence of non-space characters. The input string does not contain leading or trailing spaces and the words are always separated by a single space.
+
+For example,
+Given s = "the sky is blue",
+return "blue is sky the".
+Could you do it in-place without allocating extra space?
+
+
+
+[10]    243 Shortest Word Distance¶
+
+47.0%   Easy
+Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+For example,
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Given word1 = "coding", word2 = "practice", return 3.
+Given word1 = "makes", word2 = "coding", return 1.
+Note: You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
+
+
+
+[11] 244    Shortest Word Distance II¶
+
+35.4%   Medium
+This is a follow up of Shortest Word Distance. The only difference is now you are given the list of words and your method will be called repeatedly many times with different parameters. How would you optimize it?
+
+Design a class which receives a list of words in the constructor, and implements a method that takes two words word1 and word2 and return the shortest distance between these two words in the list.
+
+For example,
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Given word1 = "coding”, word2 = "practice”, return 3.
+Given word1 = "makes", word2 = "coding", return 1.
+Note: You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
+
+
+
+[12] 245    Shortest Word Distance III¶
+
+46.4%   Medium
+This is a follow up of Shortest Word Distance. The only difference is now word1 could be the same as word2.
+
+Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+word1 and word2 may be the same and they represent two individual words in the list.
+
+For example,
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Given word1 = “makes”, word2 = “coding”, return 1.
+Given word1 = "makes", word2 = "makes", return 3.
+Note: You may assume word1 and word2 are both in the list.
+
+
+
+[13] 246    Strobogrammatic Number¶
+
+36.8%   Easy
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+
+Write a function to determine if a number is strobogrammatic. The number is represented as a string.
+
+For example, the numbers "69", "88", and "818" are all strobogrammatic.
+
+
+[14] 247    Strobogrammatic Number II¶
+
+34.7%   Medium
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+
+Find all strobogrammatic numbers that are of length = n.
+
+For example,
+Given n = 2, return ["11","69","88","96"].
+Hint: Try to use recursion and notice that it should recurse with n - 2 instead of n - 1.
+
+
+
+[15] 248    Strobogrammatic Number III¶
+
+27.4%   Hard
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+
+Write a function to count the total strobogrammatic numbers that exist in the range of low <= num <= high.
+
+For example,
+Given low = "50", high = "100", return 3. Because 69, 88, and 96 are three strobogrammatic numbers.
+Note: Because the range might be a large number, the low and high numbers are represented as string.
+
+
+
+[16] 249    Group Shifted Strings¶
+
+31.9%   Easy
+Given a string, we can “shift” each of its letter to its successive letter, for example: “abc” -> “bcd”. We can keep “shifting” which forms the sequence:
+
+“abc” -> “bcd” -> … -> “xyz” Given a list of strings which contains only lowercase alphabets, group all strings that belong to the same shifting sequence.
+
+For example,
+Given: ["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"], 
+Return:
+[
+    ["abc","bcd","xyz"],
+    ["az","ba"],  
+    ["acef"],  
+    ["a","z"]
+] Note: For the return value, each inner list's elements must follow the lexicographic order.
+
+
+[17] 250    Count Univalue Subtrees¶
+
+36.9%   Medium
+Count Univalue Subtrees
+
+Given a binary tree, count the number of uni-value subtrees.
+
+A Uni-value subtree means all nodes of the subtree have the same value.
+
+For example:
+Given binary tree,
+
+          5
+         / \
+        1   5
+       / \   \
+      5   5   5
+return 4.
+
+
+[18] 251    Flatten 2D Vector¶
+
+34.6%   Medium
+[19] 252    Meeting Rooms¶
+
+42.1%   Easy
+Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],…] (si < ei), determine if a person could attend all meetings.
+
+For example, Given [[0, 30],[5, 10],[15, 20]], return false.
+
+
+[20] 253    Meeting Rooms II¶
+
+35.0%   Medium
+Given an array of meeting time intervals consisting of start and end times [[s1,e1],[s2,e2],…] (si < ei), find the minimum number of conference rooms required.
+
+For example,
+Given [[0, 30],[5, 10],[15, 20]], return 2.
+
+
+[21] 254    Factor Combinations¶
+
+35.3%   Medium
+Implement an iterator to flatten a 2d vector.
+
+For example, Given 2d vector =
+[
+    [1,2],
+    [3],
+    [4,5,6]
+] 
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1,2,3,4,5,6].
+
+
+
+[22] 255    Verify Preorder Sequence in Binary Search Tree¶
+
+37.4%   Medium
+Given an array of numbers, verify whether it is the correct preorder traversal sequence of a binary search tree.
+
+You may assume each number in the sequence is unique.
+
+Follow up: Could you do it using only constant space complexity?
+
+
+
+[23] 259    3Sum Smaller¶
+
+Given an array of n integers nums and a target, find the number of index triplets i, j, k with 0 <= i < j < k < n that satisfy the condition nums[i] + nums[j] + nums[k] < target.
+
+For example, given nums = [-2, 0, 1, 3], and target = 2.
+Return 2. 
+Because there are two triplets which sums are less than 2:
+[-2, 0, 1]
+[-2, 0, 3]
+Follow up: Could you solve it in O(n2) runtime?
+
+
+
+[24] 261    Graph Valid Tree¶
+
+Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
+
+For example:
+Given n = 5 and edges = [[0, 1], [0, 2], [0, 3], [1, 4]], return true.
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [1, 3], [1, 4]], return false.
+Hint:
+
+Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], what should your return? Is this case a valid tree? Show More Hint Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
+
+
+
+[25] 256    Paint House¶
+
+There are a row of n houses, each house can be painted with one of the three colors: red, blue or green. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color.
+
+The cost of painting each house with a certain color is represented by a n x 3 cost matrix. For example, costs[0][0] is the cost of painting house 0 with color red;costs[1][2] is the cost of painting house 1 with color green, and so on… Find the minimum cost to paint all houses.
+
+Note: All costs are positive integers.
+
+
+
+[26] 265    Paint House II¶
+
+There are a row of n houses, each house can be painted with one of the k colors. The cost of painting each house with a certain color is different. You have to paint all the houses such that no two adjacent houses have the same color.
+
+The cost of painting each house with a certain color is represented by a n x k cost matrix. For example,costs[0][0] is the cost of painting house 0 with color 0; costs[1][2] is the cost of painting house 1 with color 2, and so on… Find the minimum cost to paint all houses.
+
+Note: All costs are positive integers.
+
+Follow up: Could you solve it in O(nk) runtime?
+
+
+
+[27] 266    Palindrome Permutation¶
+
+Given a string, determine if a permutation of the string could form a palindrome.
+
+For example,
+"code" -> False, "aab" -> True, "carerac" -> True.
+Hint:
+
+Consider the palindromes of odd vs even length. What difference do you notice? Count the frequency of each character. If each character occurs even number of times, then it must be a palindrome. How about character which occurs odd number of times?
+
+
+
+[28] 267    Palindrome Permutation II¶
+
+Given a string s, return all the palindromic permutations (without duplicates) of it. Return an empty list if no palindromic permutation could be form.
+
+For example:
+Given s = "aabb", return ["abba", "baab"].
+Given s = "abc", return [].
+Hint:
+
+If a palindromic permutation exists, we just need to generate the first half of the string. To generate all distinct permutations of a (half of) string, use a similar approach from: Permutations II or Next Permutation.
+
+
+
+[29] 269    Alien Dictionary¶
+
+23.4%   Hard
+There is a new alien language which uses the latin alphabet. However, the order among letters are unknown to you. You receive a list of words from the dictionary, where words are sorted lexicographically by the rules of this new language. Derive the order of letters in this language.
+
+For example, 
+Given the following words in dictionary,
+[
+    "wrt",
+    "wrf",
+    "er",
+    "ett", 
+    "rftt"
+] The correct order is: "wertf".
+
+
+[30] 271    Encode and Decode Strings¶
+
+27.2%   Medium
+[31] 270    Closest Binary Search Tree Value¶
+
+34.8%   Easy
+Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+
+Note:
+
+Given target value is a floating point. You are guaranteed to have only one unique value in the BST that is closest to the target.
+
+
+
+[32] 272    Closest Binary Search Tree Value II¶
+
+Given a non-empty binary search tree and a target value, find k values in the BST that are closest to the target.
+
+Note:
+
+Given target value is a floating point. You may assume k is always valid, that is: k ≤ total nodes. You are guaranteed to have only one unique set of k values in the BST that are closest to the target.
+
+Follow up: Assume that the BST is balanced, could you solve it in less than O(n) runtime (where n = total nodes)?
+
+Hint:
+
+Consider implement these two helper functions: getPredecessor(N), which returns the next smaller node to N. getSuccessor(N), which returns the next larger node to N. Try to assume that each node has a parent pointer, it makes the problem much easier. Without parent pointer we just need to keep track of the path from the root to the current node using a stack. You would need two stacks to track the path in finding predecessor and successor node separately.
+
+
+
+[33] 276    Paint Fence¶
+
+31.2%   Easy
+There is a fence with n posts, each post can be painted with one of the k colors.
+
+You have to paint all the posts such that no more than two adjacent fence posts have the same color.
+
+Return the total number of ways you can paint the fence.
+
+Note: n and k are non-negative integers.
+
+
+
+[34] 277    Find the Celebrity¶
+
+Suppose you are at a party with n people (labeled from 0 to n - 1) and among them, there may exist one celebrity. The definition of a celebrity is that all the other n - 1 people know him/her but he/she does not know any of them.
+
+Now you want to find out who the celebrity is or verify that there is not one. The only thing you are allowed to do is to ask questions like: “Hi, A. Do you know B?” to get information of whether A knows B. You need to find out the celebrity (or verify there is not one) by asking as few questions as possible (in the asymptotic sense).
+
+You are given a helper function bool knows(a, b) which tells you whether A knows B. Implement a function int findCelebrity(n), your function should minimize the number of calls to knows.
+
+Note: There will be exactly one celebrity if he/she is in the party. Return the celebrity’s label if there is a celebrity in the party. If there is no celebrity, return -1.
+
+
+
+[35] 280    Wiggle Sort¶
+
+49.9%   Medium
+Given an unsorted array nums, reorder it in-place such that nums[0] <= nums[1] >= nums[2] <= nums[3]….
+
+For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5, 3, 4].
+
+
+[36] 281    Zigzag Iterator¶
+
+Given two 1d vectors, implement an iterator to return their elements alternately.
+
+For example, given two 1d vectors:
+
+v1 = [1, 2]
+v2 = [3, 4, 5, 6]
+By calling next repeatedly until hasNext returns false, the order of elements returned by next should be: [1, 3, 2, 4, 5, 6].
+Follow up: What if you are given k 1d vectors? How well can your code be extended to such cases?
+
+Clarification for the follow up question - Update (2015-09-18): The “Zigzag” order is not clearly defined and is ambiguous for k > 2 cases. If “Zigzag” does not look right to you, replace “Zigzag” with “Cyclic”. For example, given the following input:
+
+[1,2,3]
+[4,5,6,7]
+[8,9]
+It should return [1,4,8,2,5,9,3,6,7].
+
+
+[37] 285    Inorder Successor in BST¶
+
+35.8%   Medium
+Inorder Successor in BST Given a binary search tree and a node in it, find the in-order successor of that node in the BST.
+
+Example
+Given tree = [2,1] and node = 1:
+
+  2
+ /
+1
+return node 2.
+
+Given tree = [2,1,3] and node = 2:
+
+  2
+ / \
+1   3
+return node 3.
+Note If the given node has no in-order successor in the tree, return null.
+
+Challenge O(h), where h is the height of the BST.
+
+
+
+[38] 286    Walls and Gates¶
+
+You are given a m x n 2D grid initialized with these three possible values.
+
+-1 - A wall or an obstacle. 0 - A gate. INF - Infinity means an empty room. We use the value 231 - 1 = 2147483647 to represent INF as you may assume that the distance to a gate is less than 2147483647. Fill each empty room with the distance to its nearest gate. If it is impossible to reach a gate, it should be filled with INF.
+
+For example, given the 2D grid:
+
+INF  -1  0  INF
+INF INF INF  -1
+INF  -1 INF  -1
+  0  -1 INF INF
+ 
+
+After running your function, the 2D grid should be:
+
+  3  -1   0   1
+  2   2   1  -1
+  1  -1   2  -1
+  0  -1   3   4
+
+
+[39] 288    Unique Word Abbreviation¶
+
+An abbreviation of a word follows the form . Below are some examples of word abbreviations:
+
+a) it                      --> it    (no abbreviation)
+ 
+ 1
+b) d|o|g                   --> d1g
+  
+          1    1  1
+ 1---5----0----5--8
+c) i|nternationalizatio|n  --> i18n
+          
+          1
+ 1---5----0
+d) l|ocalizatio|n          --> l10n
+Assume you have a dictionary and given a word, find whether its abbreviation is unique in the dictionary. A word’s abbreviation is unique if no other word from the dictionary has the same abbreviation.
+
+Example: 
+
+Given dictionary = [ "deer", "door", "cake", "card" ]
+
+isUnique("dear") -> false
+isUnique("cart") -> true
+isUnique("cane") -> false
+isUnique("make") -> true
+
+
+[40] 291    Word Pattern II¶
+
+Given a pattern and a string str, find if str follows the same pattern.
+
+Here follow means a full match, such that there is a bijection between a letter in pattern and a non-empty substring in str.
+
+Examples:
+
+pattern = "abab", str = "redblueredblue" should return true.
+pattern = "aaaa", str = "asdasdasdasd" should return true.
+pattern = "aabb", str = "xyzabcxzyabc" should return false. 
+Notes: You may assume both pattern and str contains only lowercase letters.
+
+
+
+[41] 293    Flip Game¶
+
+50.3%   Easy
+You are playing the following Flip Game with your friend: Given a string that contains only these two characters: + and -, you and your friend take turns to flip twoconsecutive “++” into “–”. The game ends when a person can no longer make a move and therefore the other person will be the winner.
+
+Write a function to compute all possible states of the string after one valid move.
+
+For example, given s = "++++", after one move, it may become one of the following states:
+
+[
+  "--++",
+  "+--+",
+  "++--"
+]
+If there is no valid move, return an empty list [].
+
+
+
+[42] 294    Flip Game II¶
+
+You are playing the following Flip Game with your friend: Given a string that contains only these two characters: + and -, you and your friend take turns to flip two consecutive “++” into “–”. The game ends when a person can no longer make a move and therefore the other person will be the winner.
+
+Write a function to determine if the starting player can guarantee a win.
+
+For example, given s = "++++", return true. The starting player can guarantee a win by flipping the middle "++" to become "+--+".
+Follow up: Derive your algorithm’s runtime complexity.
+
+
+
+[43] 296    Best Meeting Point¶
+
+A group of two or more people wants to meet and minimize the total travel distance. You are given a 2D grid of values 0 or 1, where each 1 marks the home of someone in the group. The distance is calculated using Manhattan Distance, where distance(p1, p2) =    p2.x - p1.x +   p2.y - p1.y .
+For example, given three people living at (0,0), (0,4), and (2,2):
+
+1 - 0 - 0 - 0 - 1
+|   |   |   |   |
+0 - 0 - 0 - 0 - 0
+|   |   |   |   |
+0 - 0 - 1 - 0 - 0
+The point (0,2) is an ideal meeting point, as the total travel distance of 2+2+2=6 is minimal. So return 6.
+
+Hint:
+
+Try to solve it in one dimension first. How can this solution apply to the two dimension case?
+
+
+
+[44] 298    Binary Tree Longest Consecutive Sequence¶
+
+Given a binary tree, find the length of the longest consecutive sequence path.
+
+The path refers to any sequence of nodes from some starting node to any node in the tree along the parent-child connections. The longest consecutive path need to be from parent to child (cannot be the reverse).
+
+For example,
+
+  1
+   \
+    3
+   / \
+  2   4
+       \
+        5
+Longest consecutive sequence path is 3-4-5, so return 3.
+
+  2
+   \
+    3
+   / 
+  2    
+ / 
+1
+Longest consecutive sequence path is 2-3, not 3-2-1, so return 2.
+
+
+[45] 302    Smallest Rectangle Enclosing Black Pixels¶
+
+An image is represented by a binary matrix with 0 as a white pixel and 1 as a black pixel. The black pixels are connected, i.e., there is only one black region. Pixels are connected horizontally and vertically. Given the location (x, y) of one of the black pixels, return the area of the smallest (axis-aligned) rectangle that encloses all black pixels.
+
+For example, given the following image:
+
+[
+  "0010",
+  "0110",
+  "0100"
+]
+and x = 0, y = 2,
+
+Return 6.
+
+
+[46] 305    Number of Islands II¶
+
+Given a n,m which means the row and column of the 2D matrix and an array of pair A( size k). Originally, the 2D matrix is all 0 which means there is only sea in the matrix. The list pair has k operator and each operator has two integer A[i].x, A[i].y means that you can change the grid matrix[A[i].x][A[i].y] from sea to island. Return how many island are there in the matrix after each operator.
+
+Example
+Given n = 3, m = 3, array of pair A = [(0,0),(0,1),(2,2),(2,1)].
+
+return [1,1,2,2].
+Note 0 is represented as the sea, 1 is represented as the island. If two 1 is adjacent, we consider them in the same island. We only consider up/down/left/right adjacent.
+
+
+
+[47] 308    Range Sum Query 2D - Mutable¶
+
+Given a 2D matrix matrix, find the sum of the elements inside the rectangle defined by its upper left corner (row1, col1) and lower right corner (row2, col2).
+
+The above rectangle (with the red border) is defined by (row1, col1) = (2, 1) and (row2, col2) = (4, 3), which contains sum = 8.
+
+Example:
+
+Given matrix = [
+ [3, 0, 1, 4, 2],
+ [5, 6, 3, 2, 1],
+ [1, 2, 0, 1, 5],
+ [4, 1, 0, 1, 7],
+ [1, 0, 3, 0, 5]
+]
+
+sumRegion(2, 1, 4, 3) -> 8
+update(3, 2, 2)
+sumRegion(2, 1, 4, 3) -> 10
+Note:
+
+The matrix is only modifiable by the update function.
+You may assume the number of calls to update and sumRegion function is distributed evenly.
+You may assume that row1 ≤ row2 and col1 ≤ col2.
+
+
+[48] 311    Sparse Matrix Multiplication¶
+
+Given two sparse matrices A and B, return the result of AB.
+
+You may assume that A’s column number is equal to B’s row number.
+
+Example:
+
+A = [
+      [ 1, 0, 0],
+      [-1, 0, 3]
+]
+
+B = [
+      [ 7, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 1 ]
+]
+
+
+     |  1 0 0 |   | 7 0 0 |   |  7 0 0 |
+AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
+                  | 0 0 1 |
+
+
+[49] 314    Binary Tree Vertical Order Traversal¶
+
+Given a binary tree, return the vertical order traversal of its nodes’ values. (ie, from top to bottom, column by column).
+
+If two nodes are in the same row and column, the order should be from left to right.
+
+Examples:
+Given binary tree [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+/  \
+   15   7
+ 
+return its vertical order traversal as:
+
+[
+  [9],
+  [3,15],
+  [20],
+  [7]
+]
+ 
+
+Given binary tree [3,9,20,4,5,2,7],
+
+    _3_
+   /   \
+  9    20
+ / \   / \
+4   5 2   7
+ 
+return its vertical order traversal as:
+
+[
+  [4],
+  [9],
+  [3,5,2],
+  [20],
+  [7]
+]
+
+
+[50] 317    Shortest Distance from All Buildings¶
+
+You want to build a house on an empty land which reaches all buildings in the shortest amount of distance. You can only move up, down, left and right. You are given a 2D grid of values 0, 1 or 2, where:
+
+Each 0 marks an empty land which you can pass by freely. Each 1 marks a building which you cannot pass through. Each 2 marks an obstacle which you cannot pass through. For example, given three buildings at (0,0), (0,4), (2,2), and an obstacle at (0,2):
+
+1 - 0 - 2 - 0 - 1
+|   |   |   |   |
+0 - 0 - 0 - 0 - 0
+|   |   |   |   |
+0 - 0 - 1 - 0 - 0
+
+The point (1,2) is an ideal empty land to build a house, as the total travel distance of 3+3+1=7 is minimal. So return 7.
+Note: There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
+
+
+
+[51] 320    Generalized Abbreviation¶
+
+Write a function to generate the generalized abbreviations of a word.
+
+Example:
+Given word = "word", return the following list (order does not matter):
+
+["word", "1ord", "w1rd", "wo1d", "wor1", "2rd", "w2d", "wo2", >"1o1d", "1or1", "w1r1", "1o2", "2r1", "3d", "w3", "4"]
+
+
+[52] 323    Number of Connected Components in an Undirected Graph¶
+
+Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to find the number of connected components in an undirected graph.
+
+Example 1:
+
+     0          3
+
+     |          |
+
+     1 --- 2    4
+
+Given n = 5 and edges = [[0, 1], [1, 2], [3, 4]], return 2.
+
+Example 2:
+
+     0           4
+
+     |           |
+
+     1 --- 2 --- 3
+
+Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1.
+Note:
+
+You can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
+
+
+
+[53] 325    Maximum Size Subarray Sum Equals k¶
+
+Given an array nums and a target value k, find the maximum length of a subarray that sums to k. If there isn’t one, return 0 instead.
+
+Example 1:
+Given nums = [1, -1, 5, -2, 3], k = 3,
+return 4. (because the subarray [1, -1, 5, -2] sums to 3 and is the longest)
+
+Example 2:
+Given nums = [-2, -1, 2, 1], k = 1,
+return 2. (because the subarray [-1, 2] sums to 1 and is the longest)
+Follow Up: Can you do it in O(n) time?
+
+
+
+[54] 333    Largest BST Subtree¶
+
+Largest BST Subtree
+
+Given a binary tree, find the largest subtree which is a Binary Search Tree (BST), where largest means subtree with largest number of nodes in it.
+
+Note: A subtree must include all of its descendants.
+
+Here's an example:
+
+    10
+    / \
+   5  15
+  / \   \ 
+ 1   8   7
+The Largest BST Subtree in this case is the highlighted one. The return value is the subtree’s size, which is 3.
+
+Follow up: Can you figure out ways to solve it with O(n) time complexity?
+
+
+
+[55] 339    Nested List Weight Sum¶
+
+55.3%   Easy
+Given a nested list of integers, return the sum of all integers in the list weighted by their depth.
+
+Each element is either an integer, or a list – whose elements may also be integers or other lists.
+
+Example 1:
+Given the list [[1,1],2,[1,1]], return 10. (four 1's at depth 2, one 2 at depth 1)
+
+Example 2:
+Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and one 6 at depth 3; 1 + 4*2 + 6*3 = 27)
+[56] 340    Longest Substring with At Most K Distinct Characters¶
+
+Given a string s, find the length of the longest substring T that contains at most k distinct characters.
+
+Example
+For example, Given s = "eceba", k = 3,
+
+T is "eceb" which its length is 4.
+Challenge: O(n), n is the size of the string s.
+
+
+
+[57] 346    Moving Average from Data Stream¶
+
+Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
+
+For example,
+MovingAverage m = new MovingAverage(3);
+m.next(1) = 1
+m.next(10) = (1 + 10) / 2
+m.next(3) = (1 + 10 + 3) / 3
+m.next(5) = (10 + 3 + 5) / 3
+
+
+[58] 348    Design Tic-Tac-Toe¶
+
+Design a Tic-tac-toe game that is played between two players on a n x n grid.
+
+You may assume the following rules:
+
+A move is guaranteed to be valid and is placed on an empty block. Once a winning condition is reached, no more moves is allowed. A player who succeeds in placing n of their marks in a horizontal, vertical, or diagonal row wins the game.
+
+Example:
+Given n = 3, assume that player 1 is "X" and player 2 is "O" in the board.
+
+TicTacToe toe = new TicTacToe(3);
+
+toe.move(0, 0, 1); -> Returns 0 (no one wins)
+|X| | |
+| | | | // Player 1 makes a move at (0, 0).
+| | | |
+
+toe.move(0, 2, 2); -> Returns 0 (no one wins)
+|X| |O|
+| | | | // Player 2 makes a move at (0, 2).
+| | | |
+
+toe.move(2, 2, 1); -> Returns 0 (no one wins)
+|X| |O|
+| | | | // Player 1 makes a move at (2, 2).
+| | |X|
+
+toe.move(1, 1, 2); -> Returns 0 (no one wins)
+|X| |O|
+| |O| | // Player 2 makes a move at (1, 1).
+| | |X|
+
+toe.move(2, 0, 1); -> Returns 0 (no one wins)
+|X| |O|
+| |O| | // Player 1 makes a move at (2, 0).
+|X| |X|
+
+toe.move(1, 0, 2); -> Returns 0 (no one wins)
+|X| |O|
+|O|O| | // Player 2 makes a move at (1, 0).
+|X| |X|
+
+toe.move(2, 1, 1); -> Returns 1 (player 1 wins)
+|X| |O|
+|O|O| | // Player 1 makes a move at (2, 1).
+|X|X|X|
+Follow up: Could you do better than O(n2) per move() operation?
+
+Hint: Could you trade extra space such that move() operation can be done in O(1)? You need two arrays: int rows[n], int cols[n], plus two variables: diagonal, anti_diagonal.
+
+
+
+[59] 351    Android Unlock Patterns¶
+
+[60] 353    Design Snake Game¶
+
+

@@ -20,6 +20,25 @@
 # Special thanks to @ts for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question
+
+# 2017.03.11 Rewrite
+import string
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        dic = { x: y for x, y in zip(string.uppercase, xrange(1, 27))}
+        
+        res = 0
+        
+        for char in s:
+            res = 26 * res + dic[char]
+        return res
+        
+        
+
 class Solution(object):
     def titleToNumber(self, s):
         """

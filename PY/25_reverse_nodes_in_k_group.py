@@ -22,6 +22,41 @@ class ListNode(object):
         self.val = x
         self.next = None
 
+# 2017.03.01 While True break loop
+class Solution(object):
+    def reverseKGroup(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if not head or not head.next or k == 1: return head
+        
+        dummy = ListNode(-1)
+        pre = dummy
+        dummy.next = head
+        
+        while True:
+            checker = k
+            cur = pre
+            while checker > 0 and cur.next:
+                cur, checker = cur.next, checker - 1
+            
+            if checker > 0: return dummy.next
+            checker = k
+            
+            cur = pre.next
+            post = cur.next
+            
+            while checker > 1:
+                cur.next = post.next
+                post.next = pre.next
+                pre.next = post
+                post = cur.next
+                checker -= 1
+                
+            pre = cur
+
 # 12.16.2016 Rewrite
 class Solution(object):
     def reverseKGroup(self, head, k):

@@ -16,6 +16,24 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 2017.03.12 Rewrite
+import sys
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root: return True
+        return self.isValidBSTHelper(root, sys.maxint, -sys.maxint-1)
+        
+    def isValidBSTHelper(self, root, maxx, minn):
+        if not root: return True
+        lres = self.isValidBSTHelper(root.left, root.val, minn)
+        rres = self.isValidBSTHelper(root.right, maxx, root.val)
+        return root.val < maxx and root.val > minn and lres and rres
+        
+
 # 12.31.2016 Rewrite. Inorder Traversal Solution
 class Solution(object):
     prev = None
