@@ -13,6 +13,19 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# Rewrite shorter version
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        a, b = 0, 0
+        for i in xrange(n):
+            a, b = b, max(nums[i] + a, b) 
+        return b
+
 # DP 2017.03.04
 class Solution(object):
     def rob(self, nums):

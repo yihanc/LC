@@ -10,6 +10,23 @@
 # Show Similar Problems
 # Have you met this question in a real interview? Yes  No
 
+# 2017.03.23 Stock questions Rewrite
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices: return 0
+        res = 0
+        buy = prices[0]
+        profit = 0
+        
+        for i in xrange(1, len(prices)):
+            profit = max(profit, prices[i] - buy)
+            buy = min(buy, prices[i])
+
+        return profit
 
 # 12.3.2016
 class Solution(object):

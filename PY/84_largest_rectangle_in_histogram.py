@@ -16,6 +16,31 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.03.18 One deque solution
+# algorithm: Use a deque
+# if cur < dp[-1], d.append(i) (Pushing left side to queue)
+# else (Finding right side): keep pop and update
+from collections import deque
+class Solution(object):
+    def largestRectangleArea(self, heights):
+        """
+        :type heights: List[int]
+        :rtype: int
+        """
+        res = 0
+        d = deque()
+        heights.append(0)
+        
+        for i in xrange(len(heights)):
+            while d and heights[d[-1]] >= heights[i]:    # Right side
+                h = heights[d.pop()]
+                side = d[-1] if d else -1
+                res = max(res, h * (i - side - 1))
+            d.append(i)     # Left side
+        
+        return res
+        
+
 # 12.30.2016. Find L and R using deque.
 from collections import deque
 class Solution(object):

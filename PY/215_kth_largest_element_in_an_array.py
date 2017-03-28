@@ -17,7 +17,18 @@
 # 
 # Subscribe to see which companies asked this question.
 
-# 2017.03.12 Priority queue. O(N) + k
+# 2017.03.25 sort and index. nlogn + 1
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        nums.sort()     # nlogn
+        return nums[-k]     # 1
+
+# 2017.03.12 Priority queue. O(N) + k. heappush is log(n), so it is nlogn + k
 from heapq import *
 class Solution(object):
     def findKthLargest(self, nums, k):

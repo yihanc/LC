@@ -14,6 +14,26 @@
 # Special thanks to @Freezen for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question.
+
+# 2017.03.14 Rewrite rob range function
+class Solution(object):
+    def rob(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n == 1: return nums[0]
+        return max(self.robRange(nums, 0, n - 1), self.robRange(nums, 1, n))
+        
+    def robRange(self, nums, l, r):
+        n = r - l
+        a, b = 0, 0
+        for i in xrange(l, r):
+            a, b = b, max(nums[i] + a, b)
+        return b
+        
+
 class Solution(object):
     def rob(self, nums):
         """

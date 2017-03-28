@@ -13,6 +13,41 @@
 # Return 6.
 # Subscribe to see which companies asked this question
 
+# 2017.03.18 One stack solution
+from collections import deque
+class Solution(object):
+    def maximalRectangle(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        if not matrix: return 0
+        m, n = len(matrix), len(matrix[0])
+        
+        heights = [ 0 for y in xrange(n + 1) ]
+        
+        res = 0
+        for i in xrange(m):
+            for j in xrange(n):
+                heights[j] = 0 if matrix[i][j] == "0" else heights[j] + int(matrix[i][j])
+            
+            res = max(res, self.maxArea(heights))
+
+        return res
+        
+    def maxArea(self, heights):
+        res = 0
+        d = deque()
+        
+        for i in xrange(len(heights)):
+            while d and heights[d[-1]] >= heights[i]:
+                h = heights[d.pop()]
+                side = d[-1] if d else -1
+                res = max(res, h * (i - side - 1))
+            d.append(i)
+
+        return res
+
 # 12.30.2016 rewrite
 from collections import deque
 

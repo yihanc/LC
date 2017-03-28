@@ -24,3 +24,71 @@
 # The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
 # You may assume that there are no duplicate edges in the input prerequisites
 
+# 2017.03.25 Rewrite
+from collections import *
+class Solution(object):
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        n = numCourses
+        inlines = [ 0 for x in xrange(n) ]
+        outlines = defaultdict(list)
+        d = deque()
+        res = []
+        count = 0
+        
+        for cur, pre in prerequisites:
+            inlines[cur] += 1
+            outlines[pre].append(cur)
+        
+        for i in xrange(len(inlines)):
+            if inlines[i] == 0: d.append(i)
+        
+        while d:
+            cur = d.pop()
+            count += 1
+            res.append(cur)
+            for nextlvl in outlines[cur]:
+                inlines[nextlvl] -= 1
+                if inlines[nextlvl] == 0:
+                    d.appendleft(nextlvl)
+        return res if count == n else [] 
+            
+        
+
+from collections import deque
+class Solution(object):
+    def findOrder(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: List[int]
+        """
+        res = []
+        matrix = [ [] for _ in xrange(numCourses) ]
+        indegree = [ 0 for _ in xrange(numCourses) ]
+        
+        for i in xrange(len(prerequisites)):
+            cur, pre = prerequisites[i]
+            matrix[pre].append(cur)
+            indegree[cur] += 1
+        
+        d = deque()
+        for i in xrange(numCourses):
+            if indegree[i] == 0:
+                d.appendleft(i)
+                
+        while d:
+            cur = d.pop()
+            res.append(cur)
+            for neighbor in matrix[cur]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    d.appendleft(neighbor)
+        
+        return res if len(res) == numCourses else []
+        
+        

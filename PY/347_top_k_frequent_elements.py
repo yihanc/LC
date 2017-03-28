@@ -16,6 +16,28 @@
 # Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
 # Subscribe to see which companies asked this question.
 
+# 2017.03.25 Heapq
+from heapq import *
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        dic = {}
+        for num in nums:        # O(N)
+            dic[num] = dic.get(num, 0) + 1
+        
+        hq = []
+        for key, value in dic.iteritems():  # heappush worst n logn
+            heappush(hq, [-value, key])
+        
+        res = []
+        for i in xrange(k):     
+            res.append(heappop(hq)[1])
+        return res
+
 class Solution(object):
     def topKFrequent(self, nums, k):
         """

@@ -20,6 +20,31 @@
 # Special thanks to @mithmatt for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question
+
+# 2017.03.24 Rewrite
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        def dfs(line, A, tgt):
+            if tgt < 0: return
+            if tgt == 0 and len(line) == k:
+                res.append(line)
+                return
+            
+            if len(line) < k:
+                for i in xrange(len(A)):
+                    dfs(line + [A[i]], A[i+1:], tgt - A[i])
+            
+        nums = [ x for x in xrange(1, 10) ]
+        res = []
+        dfs([], nums, n)
+        return res
+
+#
 class Solution(object):
     def combinationSum3(self, k, n):
         """

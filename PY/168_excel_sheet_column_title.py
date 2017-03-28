@@ -19,6 +19,19 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.03.25 Easier
+class Solution(object):
+    def convertToTitle(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        res = ""
+        while n > 0:
+            res = chr(ord('A') + (n - 1) % 26) + res
+            n = (n - 1) // 26
+        return res
+
 #2017.03.11 Rewrite
 import string
 class Solution(object):

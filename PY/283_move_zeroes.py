@@ -17,6 +17,28 @@
 
 import random
 
+# 2017.03.24 Cleaner and shorter code
+# Find nums[i] == 0 and nums[j] != 0, swap and move i, j
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        j = -1
+        for i in xrange(n):     # nums[i] == 0
+            if nums[i] != 0: continue
+            if j <= i: j = i + 1
+                
+            while j < n:        # nums[j] != 0
+                if nums[j] != 0:
+                    nums[i], nums[j] = nums[j], nums[i]
+                    break
+                j += 1
+                
+        return
+
 # 2017.03.12 Swap solution (Much less operations than Sol2)
 class Solution(object):
     def moveZeroes(self, nums):

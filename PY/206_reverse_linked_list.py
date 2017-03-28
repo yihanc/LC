@@ -17,6 +17,26 @@
 #         self.val = x
 #         self.next = None
 
+# 2017.03.25 Recursive
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        return self.reverseListHelper(head)[0]
+    
+    def reverseListHelper(self, head):
+        if not head or not head.next:
+            return [head, head]
+        
+        postHead, postEnd = self.reverseListHelper(head.next)
+        head.next = None
+        postEnd.next = head
+        
+        return [postHead, head]
+        
+
 class Solution(object):
     def reverseList(self, head):
         """

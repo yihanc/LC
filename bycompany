@@ -226,6 +226,7 @@ Facebook(79)
 78 Subsets 31.3% Medium
 79 Word Search 22.9% Medium
 80 Remove Duplicates from Sorted Array II 32.7% Medium
+83 Remove Duplicates from Sorted List
 85 Maximal Rectangle 23.4% Hard
 88 Merge Sorted Array 30.0% Easy
 90 Subsets II 30.5% Medium
@@ -245,6 +246,7 @@ L 158 Read N Characters Given Read4 II – Call multiple times 23.4% Hard
 L 161 One Edit Distance 28.4% Medium
 168 Excel Sheet Column Title 21.6% Easy
 173 Binary Search Tree Iterator 34.5% Medium
+L 186 Reverse Words in a String II
 200 Number of Islands 27.6% Medium
 206 Reverse Linked List 39.4% Easy
 208 Implement Trie (Prefix Tree) 25.3% Medium
@@ -279,6 +281,9 @@ L 311 Sparse Matrix Multiplication 47.2% Medium
 L 314 Binary Tree Vertical Order Traversal 30.3% Medium
 L 325 Maximum Size Subarray Sum Equals k 39.9% Easy
 334 Increasing Triplet Subsequence 33.2% Medium
+backpack (Combination) http://www.lintcode.com/zh-cn/problem/backpack/
+backpack-ii http://www.lintcode.com/zh-cn/problem/backpack-ii/
+http://www.lintcode.com/zh-cn/problem/minimum-adjustment-cost/
 
 Twitter(21)
 10 Regular Expression Matching 22.0% Hard

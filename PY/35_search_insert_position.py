@@ -10,6 +10,27 @@
 # [1,3,5,6], 7 → 4
 # [1,3,5,6], 0 → 0
 
+# 2017.03.24 Binary search
+class Solution(object):
+    def searchInsert(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        n = len(nums)
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if ( (mid == 0 and target <= nums[mid])
+                or (mid != 0 and nums[mid - 1] < target <= nums[mid]) ):
+                return mid
+            elif target > nums[mid]:
+                l = mid + 1
+            else:
+                r = mid - 1
+        return l
+
 # 11.20.2016
 class Solution(object):
     def searchInsert(self, nums, target):

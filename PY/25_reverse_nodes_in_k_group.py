@@ -22,7 +22,13 @@ class ListNode(object):
         self.val = x
         self.next = None
 
-# 2017.03.01 While True break loop
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# 2017.03.24 Rewrite
 class Solution(object):
     def reverseKGroup(self, head, k):
         """
@@ -31,31 +37,34 @@ class Solution(object):
         :rtype: ListNode
         """
         if not head or not head.next or k == 1: return head
-        
+        n = self.getListLength(head)
+        rounds = n // k
+
         dummy = ListNode(-1)
-        pre = dummy
-        dummy.next = head
+        dummy.next, cur = head, dummy
         
-        while True:
-            checker = k
-            cur = pre
-            while checker > 0 and cur.next:
-                cur, checker = cur.next, checker - 1
-            
-            if checker > 0: return dummy.next
-            checker = k
-            
-            cur = pre.next
-            post = cur.next
-            
-            while checker > 1:
+        while rounds > 0:
+            pre, cur, post = cur, cur.next, cur.next.next
+
+            count = k
+            while count > 1:
                 cur.next = post.next
                 post.next = pre.next
                 pre.next = post
                 post = cur.next
-                checker -= 1
-                
-            pre = cur
+                count -= 1
+            rounds -= 1
+        
+        return dummy.next        
+    
+    def getListLength(self, head):
+        if not head: return 0
+        cur = head
+        count = 0
+        while cur:
+            cur, count = cur.next, count + 1
+        
+        return count
 
 # 12.16.2016 Rewrite
 class Solution(object):

@@ -49,35 +49,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: bool
         """
-        n = len(nums)
+        if sorted(nums, reverse=True) == nums: return False  #(O(nLOGn)
         
-        hasRes = False
-        for i in xrange(1, n):
-            if nums[i] > nums[i-1]:
-                hasRes = True
-                break
-        
-        if not hasRes: return False
-        
-        for i in xrange(n - 2):
-            if i > 0 and nums[i] == nums[i-1]:
-                continue
-            
-            for j in xrange(i + 1, n - 1):
-                if j > i + 1 and nums[j] == nums[j - 1]:
-                    continue
-                
-                if nums[i] >= nums[j]:
-                    continue
-                
-                for k in xrange(j + 1, n):
-                    if k > j + 1 and nums[k] == nums[k - 1]:
-                        continue
-                    
+        for i in xrange(len(nums) - 2):             # O(N**3)
+            if i != 0 and nums[i] == nums[i-1]: continue
+            for j in xrange(i + 1, len(nums) - 1):
+                if j != i + 1 and nums[j] == nums[j-1]: continue
+                for k in xrange(j + 1, len(nums)):
+                    if k != j + 1 and nums[k] == nums[k-1]: continue
                     if nums[i] < nums[j] and nums[j] < nums[k]:
                         return True
         return False
-        
 
 
 

@@ -26,6 +26,37 @@
 # Special thanks to @mithmatt for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question.
+
+# 2017.03.25 Rewrite. DFS
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid: return 0
+        m, n = len(grid), len(grid[0])
+        
+        res = 0
+        vis = [[ False for y in xrange(n) ] for x in xrange(m) ]
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                if not vis[i][j] and grid[i][j] == "1":
+                    res += 1
+                    self.dfs(grid, i, j, vis, m, n)
+        return res
+    
+    def dfs(self, grid, i, j, vis, m, n):
+        vis[i][j] = True
+        pairs = [ [0, 1], [0, -1], [1, 0], [-1, 0] ]
+        
+        for pair in pairs:
+            x, y = i + pair[0], j + pair[1]
+            if x >= 0 and y >= 0 and x < m and y < n and not vis[x][y] and grid[x][y] == "1":
+                self.dfs(grid, x, y, vis, m, n)
+
+
 class Solution(object):
     def numIslands(self, grid):
         """

@@ -15,6 +15,25 @@
 #         self.val = x
 #         self.next = None
 
+# 2017.03.25 Better way
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        if not head or not head.next: return True
+        rev = None
+        slow = fast = head
+        while fast and fast.next:
+            fast = fast.next.next
+            rev, rev.next, slow = slow, rev, slow.next
+        if fast:
+            slow = slow.next
+        while rev and rev.val == slow.val:
+            rev, slow = rev.next, slow.next
+        return not rev
+
 class Solution(object):
     def isPalindrome(self, head):
         """

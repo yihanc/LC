@@ -9,6 +9,25 @@
 # Show Hint 
 # Subscribe to see which companies asked this question.
 
+# 2017.03.25 Rewrite
+class Solution(object):
+    def hIndex(self, citations):
+        """
+        :type citations: List[int]
+        :rtype: int
+        """
+        n = len(citations)
+        l, r = 0, n - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if citations[mid] >= n - mid and (mid == 0 or citations[mid-1] < n - mid + 1):
+                return n - mid
+            elif citations[mid] >= n - mid:
+                r = mid - 1
+            else:
+                l = mid + 1
+        return 0
+
 # 2017.03.12 Binary search
 class Solution(object):
     def hIndex(self, citations):

@@ -19,6 +19,26 @@
 # DP solution more concise and easier
 # http://postimg.org/image/b0auzohv3/
 
+# 2017.03.24 Rewrite. From index 1
+class Solution(object):
+    def maxProfit(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices: return 0
+        res = 0
+        buy1, sell1, buy2, sell2 = prices[0], 0, prices[0], 0
+        
+        for i in xrange(1, len(prices)):
+            sell2 = max(sell2, prices[i] - buy2)
+            buy2 = min(buy2, prices[i] - sell1)
+            sell1 = max(sell1, prices[i] - buy1)
+            buy1 = min(buy1, prices[i])
+        
+        return sell2
+            
+
 # 1.1.2017 DP no sys.maxint
 class Solution(object):
     def maxProfit(self, prices):

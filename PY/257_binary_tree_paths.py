@@ -24,6 +24,25 @@
 #         self.left = None
 #         self.right = None
 
+# 2017.03.25 Rewrite
+class Solution(object):
+    def binaryTreePaths(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+        def dfs(line, node):
+            line = line + "->" + str(node.val) if line else str(node.val)
+            if not node.left and not node.right:
+                res.append(line)
+                return
+            if node.left: dfs(line, node.left)
+            if node.right: dfs(line, node.right)
+        if not root: return
+        res = []
+        dfs("", root)
+        return res
+
 class Solution(object):
     def binaryTreePaths(self, root):
         """

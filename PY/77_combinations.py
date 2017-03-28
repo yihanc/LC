@@ -15,6 +15,52 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# 2017.03.24 BFS
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        if k == 0 or n == 0: return []
+        end = n - k + 2 # Tricky part
+        res = [ [x] for x in xrange(1, end) ]
+        
+        while k > 1:
+            tmp = res
+            res = []
+            end += 1
+            for line in tmp:
+                for digit in xrange(line[-1] + 1, end):
+                    res.append(line + [digit])
+            k -= 1
+                    
+        return res
+
+# 2017.03.24 TLE for DFS
+# 20
+# 16
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            if len(line) == k:
+                res.append(line)
+                return
+            
+            for i in xrange(len(nums)):
+                dfs(line + [nums[i]], nums[i+1:])
+        
+        nums = [ x for x in xrange(1, n + 1) ]
+        res = []
+        dfs([], nums)
+        return res
+
 # BFS. Iterative. Similar to phone number combination
 class Solution(object):
     def combine(self, n, k):
