@@ -27,10 +27,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-        n = len(nums)
-        if n <= 1: return
-    
-        i, l, r = 0, 0, n - 1
+        i, l, r = 0, 0, len(nums) - 1
         while i <= r:
             if nums[i] == 0:
                 nums[i], nums[l] = nums[l], nums[i]
@@ -40,8 +37,6 @@ class Solution(object):
                 r -= 1
             else:
                 i += 1
-        
-        return
 
 import random
 

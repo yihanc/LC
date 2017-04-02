@@ -17,6 +17,22 @@
 
 import random
 
+# 2017.03.27 Rewrite
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        i, n, j = 0, len(nums), 0
+        while i < n and j < n:
+            while i < n and nums[i] != 0: i += 1
+            if j <= i: j = i + 1
+            while j < n and nums[j] == 0: j += 1
+            if i < n and j < n:
+                nums[i], nums[j] = nums[j], nums[i]
+                i, j = i + 1, j + 1
+
 # 2017.03.24 Cleaner and shorter code
 # Find nums[i] == 0 and nums[j] != 0, swap and move i, j
 class Solution(object):
