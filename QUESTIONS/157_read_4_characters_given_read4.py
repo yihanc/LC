@@ -31,7 +31,15 @@ class Solution(object):
         :rtype: The number of characters read (int)
         """
         buff4 = [ 0 for x in xrange(4) ]
-
+        i = 0
+        while i < n:
+            bytesread = read4(buff4)
+            if bytesread == 0: break
+            j = 0
+            while i < n and j < bytesread:
+                buf[i] = buff4[j]
+                i, j = i + 1, j + 1
+        return i
                 
 
 if __name__ == "__main__":

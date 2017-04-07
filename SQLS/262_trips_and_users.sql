@@ -1,4 +1,4 @@
-# 262. Trips and Users Add to List
+/*# 262. Trips and Users Add to List
 # Description
 # Submissions
 # Solutions
@@ -43,6 +43,7 @@
 # | 2013-10-02 |       0.00        |
 # | 2013-10-03 |       0.50        |
 # +------------+-------------------+
+*/
 
 
 
@@ -52,10 +53,26 @@
 
 
 
+-- 2017.04.01
+select request_at as Day,
+     round( ifnull((select count(*) cn1 
+                    from trips t1 
+                    join users u1 on u1.users_id = t1.client_id and u1.banned = 'No' 
+                    where t1.request_at = t.request_at and left(status, 2) = 'ca' 
+                    group by request_at), 0) / 
+                    ( select count(*) cn2 
+                    from trips t2 
+                    join users u2 on u2.users_id = t2.client_id and u2.banned = 'No'
+                    where t2.request_at = t.request_at group by request_at)
+            , 2) as 'Cancellation Rate'
+from trips t
+where request_at between '2013-10-01' and '2013-10-03'
+group by request_at
+order by request_at
 
 
 
-#2017.03.31
+-- 2017.03.31
 SELECT 
     t.request_at Day,
     ROUND(COUNT(IF(t.status != 'completed', TRUE, NULL))/count(*), 2) 'Cancellation Rate'

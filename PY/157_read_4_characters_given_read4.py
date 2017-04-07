@@ -35,15 +35,11 @@ class Solution(object):
         i = 0
         while i < n:
             buff4_cnt = read4(buff4)
-
             if buff4_cnt == 0: break
-
             j = 0
             while i < n and j < buff4_cnt:
                 buf[i] = buff4[j]
                 i, j = i + 1, j + 1
-
-            if j >= buff4_cnt: j = 0
         return i
         
 # From others

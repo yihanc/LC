@@ -15,6 +15,24 @@
 #         self.next = None
 #         self.random = None
 
+# 2017.04.04 Rewrite and shorter
+class Solution(object):
+    def copyRandomList(self, head):
+        """
+        :type head: RandomListNode
+        :rtype: RandomListNode
+        """
+        if not head: return
+        dic = {}
+        cur = head
+        while cur:
+            dic[cur] = RandomListNode(cur.label)
+            cur = cur.next
+        for k, v in dic.iteritems():
+            if k.random: v.random = dic[k.random]
+            if k.next: v.next = dic[k.next]
+        return dic[head]
+
 # Create node and mapping first
 class Solution(object):
     def copyRandomList(self, head):

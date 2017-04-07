@@ -34,12 +34,27 @@ def read4(buf):
     return i
         
 class Solution(object):
+    def __init__(self):
+        self.buf4 = [ 0 for x in xrange(4) ]
+        self.buf4_ptr = 0
+        self.buf4_cnt = 0
+
     def read(self, buf, n):
         """
         :type buf: Destination buffer (List[str])
         :type n: Maximum number of characters to read (int)
         :rtype: The number of characters read (int)
         """
+        i = 0
+        while i < n:
+            if self.buf4_ptr == 0: self.buf4_cnt = read4(self.buf4)
+            if self.buf4_cnt == 0: break
+            #self.buff4_ptr = 0
+            while i < n and self.buf4_ptr < self.buf4_cnt:
+                buf[i] = self.buf4[self.buf4_ptr]
+                i, self.buf4_ptr = i + 1, self.buf4_ptr + 1
+            if self.buf4_ptr >= self.buf4_cnt: self.buf4_ptr = 0
+        return i
 
 
 

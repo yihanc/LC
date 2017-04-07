@@ -5,6 +5,22 @@
 # Implement pow(x, n).
 # 
 # Subscribe to see which companies asked this question
+
+# 2017.04.05
+class Solution(object):
+    def myPow(self, x, n):
+        """
+        :type x: float
+        :type n: int
+        :rtype: float
+        """
+        if n < 0: return self.myPow(1/x, -n)
+        if n == 0: return 1
+        if n == 1: return x
+        if n & 1: return self.myPow(x**2, n // 2) * x
+        else: return self.myPow(x**2, n // 2)
+
+
 class Solution(object):
     def myPow(self, x, n):
         """

@@ -32,6 +32,7 @@
 #         self.val = x
 #         self.next = None
 
+# Better concise solution. gc.collect() can be commented.
 import gc
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
@@ -48,4 +49,21 @@ class Solution(object):
             a = a.next if a else headB
             b = b.next if b else headA
         return a
+
+
+# 2017.04.07 Self wrote Tedious
+class Solution(object):
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        p1, p2, f1, f2 = headA, headB, False, False
+        while p1 and p2 and p1 != p2:
+            p1, p2 = p1.next, p2.next
+            if not p1 and not f1: 
+                p1, f1 = headB, True
+            if not p2 and not f2: 
+                p2, f2 = headA, True
+        return None if p1 != p2 or not p1 or not p2 else p1
 

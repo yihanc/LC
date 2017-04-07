@@ -9,13 +9,32 @@
 #         self.val = x
 #         self.next = Nonsa
 
-# 11.19.2016
-# Definition for singly-linked list.
-# class ListNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+# 2017.04.04 Rewrite. Shorter and cleaner version
+class Solution(object):
+    def mergeKLists(self, lists):
+        """
+        :type lists: List[ListNode]
+        :rtype: ListNode
+        """
+        n = len(lists)
+        if n == 0: return None
+        if n == 1: return lists[0]
+        if n >= 2: return self.mergeTwoLists(self.mergeKLists(lists[:n//2]), self.mergeKLists(lists[n//2:]))
+        
+    def mergeTwoLists(self, l1, l2):
+        dummy = ListNode(-1)
+        l3 = dummy
+        while l1 or l2:
+            if not l2 or (l1 and l1.val < l2.val):
+                l3.next = l1
+                l1 = l1.next
+            else:
+                l3.next = l2
+                l2 = l2.next
+            l3 = l3.next
+        return dummy.next
 
+# 11.19.2016
 class Solution(object):
     def mergeKLists(self, lists):
         """

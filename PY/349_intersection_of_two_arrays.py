@@ -13,6 +13,25 @@
 # The result can be in any order.
 # Subscribe to see which companies asked this question
 
+# 2017.04.04 Use dic to record
+# O(n1 + n2)
+class Solution(object):
+    def intersection(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        dic = {}
+        res = []
+        for num in nums2:
+            if num not in dic: dic[num] = True
+        for num in nums1:
+            if num in dic and dic[num]:
+                res.append(num)
+                dic[num] = False
+        return res
+
 class Solution(object):
     def intersection(self, nums1, nums2):
         """

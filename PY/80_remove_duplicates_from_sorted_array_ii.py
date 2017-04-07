@@ -12,6 +12,25 @@
 # Your function should return length = 5, with the first five elements of nums being 1, 1, 2, 2 and 3. It doesn't matter what you leave beyond the new length.
 # 
 # Subscribe to see which companies asked this question
+
+# 2017.04.05 Shorter version. No char and count..
+class Solution(object):
+    def removeDuplicates(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        if n <= 2: return n
+        i = 1
+        while i < n:
+            if i + 1 < n and nums[i] == nums[i-1] and nums[i] == nums[i+1]:
+                del nums[i]
+                n -= 1
+            else:
+                i += 1
+        return n
+
 class Solution(object):
     def removeDuplicates(self, nums):
         """

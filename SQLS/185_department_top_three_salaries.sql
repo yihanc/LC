@@ -1,4 +1,4 @@
-# 185. Department Top Three Salaries Add to List
+/*# 185. Department Top Three Salaries Add to List
 # Description
 # Submissions
 # Solutions
@@ -35,6 +35,7 @@
 # | Sales      | Henry    | 80000  |
 # | Sales      | Sam      | 60000  |
 # +------------+----------+--------+
+*/
 
 
 
@@ -51,10 +52,16 @@
 
 
 
+-- 2017.04.01
+select d.name as Department, e.Name as Employee, e.Salary
+from employee e
+join department d on d.id = e.departmentid
+where e.salary >= ifnull((select distinct salary from employee e1 where e1.departmentid = e.departmentid order by salary desc limit 2, 1), 0)
+order by d.name, e.salary
 
 
 
-# 2017.03.31 SQL
+-- 2017.03.31 SQL
 SELECT D.Name as Department, E.Name as Employee, Salary
 FROM 
     Employee E,

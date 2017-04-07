@@ -17,10 +17,25 @@
 #   5   2
 #  / \
 # 3   1
+from collectionsi import deque
+
 class TreeNode(object):
     def __init__(self, val):
         self.val = val
         self.left = None
         self.right = None
 
+class Soltuion(object):
+    def bstUpSideDown(self, root):
+        if not root: return root
+        d = deque()
+        cur = root
+        while cur.left:
+            d.append(cur)
+            cur = cur.left
+        newroot = cur
+        while d:
+            parent = d.pop()
+            cur.left = parent.right
+            
 

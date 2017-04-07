@@ -1,4 +1,4 @@
-# 184. Department Highest Salary Add to List
+/*# 184. Department Highest Salary Add to List
 # Description
 # Submissions
 # Solutions
@@ -30,7 +30,7 @@
 # | IT         | Max      | 90000  |
 # | Sales      | Henry    | 80000  |
 # +------------+----------+--------+
-# Subscribe to see which companies asked this question.
+# Subscribe to see which companies asked this question. */
 
 
 
@@ -65,9 +65,15 @@
 
 
 
+-- 2017.04.01
+select d.name as Department, e1.Name as Employee, e1.Salary
+from employee e1
+join ( select departmentid, max(salary) salary from employee e group by departmentid ) tmp 
+    on e1.departmentid = tmp.departmentid and tmp.salary = e1.salary
+join department d on d.id = e1.departmentid
 
 
-# 2017.03.31
+-- 2017.03.3
 SELECT D.Name as Department, E.Name as Employee, Salary
 FROM 
     Employee E,
