@@ -39,9 +39,18 @@
 
 
 
+-- Another good short solution
+SELECT
+  Score,
+  (SELECT count(*) FROM (SELECT distinct Score s FROM Scores) tmp WHERE s >= Score) Rank
+FROM Scores
+ORDER BY Score desc
 
 
-
+-- Another simple solution. But got TLE for large case
+select Score, (1+ (Select count(distinct B.Score) from Scores as B where B.score > A.score)) as Rank
+from Scores as A
+order by Rank;
 
 
 select s.Score, tmp.rank as Rank

@@ -69,8 +69,8 @@ def lcm2(n1, n2):
 
 import random
 if __name__ == "__main__":
-    # nums = [random.randrange(12, 13) for _ in xrange(0, 4)]
-    nums = [12, 12, 12, 12, 12, 24, 12, 6, 12, 24]
+    nums = [random.randrange(12, 50) for _ in xrange(0, 4)]
+    #nums = [12, 12, 12, 12, 12, 24, 12, 6, 12, 24]
     print(nums)
     print("MAX : " , mx(nums))
     print("FREQUENCY : ", fre(nums))

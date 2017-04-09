@@ -30,10 +30,17 @@
 
 
 
+-- 2017.04.07
+select Email
+from Person
+group by Email
+having count(email) > 1
 
 
-
-
+-- 2017.04.07
+select distinct p1.email as Email
+from person p1, person p2
+where p1.email = p2.email and p1.id > p2.id
 
 
 -- 2017.04.01
