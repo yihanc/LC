@@ -9,7 +9,9 @@ def tail(path_to_file, n=10):
 
     lines = int(sys.argv[1])
     fname = sys.argv[2]
+    print(os.stat(fname))
     fsize = os.stat(fname).st_size
+    print(fsize)
 
     iter = 0
     with open(sys.argv[2]) as f:
@@ -18,10 +20,11 @@ def tail(path_to_file, n=10):
         data = []
         while True:
             iter +=1
+            print(fsize - bufsize *iter)
             f.seek(fsize-bufsize*iter)
             data.extend(f.readlines())
             if len(data) >= lines or f.tell() == 0:
-                print(''.join(data[-lines:]))
+#                print(''.join(data[-lines:]))
                 break
 
 if __name__ == "__main__":

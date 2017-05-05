@@ -9,6 +9,32 @@
 # Show Hint 
 # 
 
+# 2017.05.01 voting algorithms
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        
+        can1, can2, count1, count2 = None, None, 0, 0
+        
+        for num in nums:
+            #print(can1, can2, count1, count2)
+            if num == can1:
+                count1 += 1
+            elif num == can2:
+                count2 += 1
+            elif count1 == 0:
+                can1, count1 = num, 1
+            elif count2 == 0:
+                can2, count2 = num, 1
+            else:
+                count1, count2 = count1 - 1, count2 - 1
+        
+        return [ x for x in [can1, can2] if nums.count(x) > len(nums) / 3]
+        
+
 # O(1) Space?
 class Solution(object):
     def majorityElement(self, nums):

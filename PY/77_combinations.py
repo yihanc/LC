@@ -15,6 +15,27 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# 2017.04.10 Rewrite. BFS
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        res = [[]]
+        end = n - k + 2
+        while k > 0:
+            tmp = res
+            res = []
+            for line in tmp:
+                start = 1 if not line else line[-1] + 1
+                for i in xrange(start, end):
+                    res.append(line + [i])
+            k -= 1
+            end += 1
+        return res
+
 # 2017.03.24 BFS
 class Solution(object):
     def combine(self, n, k):

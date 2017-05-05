@@ -14,6 +14,31 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2017.04.20 noloop
+class Solution(object):
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        return n >= 1 and (3 ** 19) % n == 0
+
+
+# 2017.04.20 rewrite
+class Solution(object):
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        if n <= 0: return False
+        while n > 1:
+            if n % 3 != 0:
+                return False
+            n = n / 3
+        return n == 1
+                
+
 class Solution(object):
     def isPowerOfThree(self, n):
         """

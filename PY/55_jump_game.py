@@ -15,6 +15,23 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.04.06 DP
+class Solution(object):
+    def canJump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        maxreach = 0
+        i = 0
+        while i < maxreach + 1:
+            maxreach = max(maxreach, i + nums[i])
+            if maxreach >= len(nums) - 1: return True
+            i += 1
+        return False
+        
+            
+
 # 11.26.2016, DP
 # DP. 
 class Solution(object):

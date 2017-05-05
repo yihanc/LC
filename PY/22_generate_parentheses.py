@@ -8,6 +8,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.04.23 Rewrite
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        res = []
+        self.dfs(res, "", 0, 0, n)
+        return res
+    
+    def dfs(self, res, line, lc, rc, n):
+        if lc + rc == 2 * n:
+            res.append(line)
+            return
+        
+        if lc < n:
+            self.dfs(res, line + "(", lc + 1, rc, n)
+        
+        if rc < lc:
+            self.dfs(res, line + ")", lc, rc + 1, n)
+
 # 11.19.2016. Rewrite DFS. Clear
 class Solution(object):
     def generateParenthesis(self, n):

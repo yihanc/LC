@@ -23,6 +23,26 @@
 # # not in dic: move r, dic[r] = 0
 # # update res
 
+# 2017.04.08
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        dic = {}
+        res = 0
+        l, r, n = 0, 0, len(s)
+        while r < n:
+            if s[r] in dic:
+                del dic[s[l]]
+                l += 1    
+            else:    
+                dic[s[r]] = 1
+                r += 1
+            res = max(res, r - l)
+        return res
+
 # 12.11.2016 
 class Solution(object):
     def lengthOfLongestSubstring(self, s):

@@ -7,6 +7,18 @@
 # Note:
 # Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
+# 2017.04.23 General Method
+class Solution(object):
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        a, b = 0, 0
+        for c in nums:
+            a, b = (a&~b&~c)|(~a&~b&c), (~a&b&~c)|(a&~b&c)        
+        return a | b
+
 class Solution(object):
     def singleNumber(self, nums):
         """

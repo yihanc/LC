@@ -106,6 +106,7 @@ Google(90)
 295 Find Median from Data Stream 22.0% Hard
 297 Serialize and Deserialize Binary Tree 27.8% Hard
 298 Binary Tree Longest Consecutive Sequence 36.9% Medium
+301 Remove Invalid Parenthesis
 302 Smallest Rectangle Enclosing Black Pixels 39.0% Hard
 305 Number of Islands II 34.0% Hard
 308 Range Sum Query 2D – Mutable 21.6% Hard
@@ -131,6 +132,8 @@ Google(90)
 336 Palindrome Pairs 19.5% Hard
 340 Longest Substring with At Most K Distinct Characters 37.2% Hard
 341 Flatten Nested List Iterator 19.8% Medium
+L 359 Logger Rate Limter Easy
+363 Max Sum Of Rectangle No Larger Than K
 
 Uber(42)
 1 Two Sum 23.0% Easy
@@ -616,3 +619,6 @@ Adobe(12)
 237 Delete Node in a Linked List 43.7% Easy
 258 Add Digits 48.4% Easy
 292 Nim Game 52.7% Easy
+
+TwoSigma
+547 Friend Circles

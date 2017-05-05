@@ -10,6 +10,44 @@
 # (order does not matter).
 #
 
+
+# 2017.04.08 Rewrite Same Template
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        if not words or not s: return []
+        n, nw = len(s), len(words[0])
+        res = []
+        for start in xrange(nw):
+            dic = {}
+            for word in words:
+                dic[word] = dic.get(word, 0) + 1
+                
+            l, r, count = start, start, 0
+            while r <= n:
+                #print(l, r, count, dic)
+                if count == len(words):
+                    if r - l == len(words) * nw: res.append(l)
+                    if l + nw <= n:
+                        lword = s[l:l+nw]
+                        if lword in dic:
+                            dic[lword] += 1
+                            if dic[lword] > 0: count -= 1
+                    l += nw
+                    continue
+                
+                if r + nw <= n:
+                    rword = s[r:r+nw]
+                    if rword in dic:
+                        dic[rword] -= 1
+                        if dic[rword] >= 0: count += 1
+                r += nw
+        return res
+
 # 12.17.2016 Rewrite
 # Algorithm:
 # dic and cdic, l, r, count

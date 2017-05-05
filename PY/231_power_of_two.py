@@ -10,6 +10,17 @@
 # Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
 # 
 # 
+
+# 2017.04.20
+class Solution(object):
+    def isPowerOfTwo(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        return n >= 1 and n & ( n - 1) == 0
+
+
 class Solution(object):
     def isPowerOfTwo(self, n):
         """
