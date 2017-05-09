@@ -34,6 +34,7 @@ class Solution(object):
         l, r, count = 0, 0, 0
         res = s + " "
         while r <= n:
+            if r == n and count < len(dic): break   #Newly added to optimize
             if count == len(dic):
                 #print(l, r, s[l:r], count)
                 if r - l < len(res):

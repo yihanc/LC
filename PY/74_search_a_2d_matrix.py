@@ -16,6 +16,27 @@
 #   [23, 30, 34, 50]
 # ]
 # Given target = 3, return true.
+
+# 2017.05.06 same idea as Search ii
+class Solution(object):
+    def searchMatrix(self, matrix, target):
+        """
+        :type matrix: List[List[int]]
+        :type target: int
+        :rtype: bool
+        """
+        if not matrix or len(matrix[0]) == 0: return False
+        m, n = len(matrix), len(matrix[0])
+        i, j = 0, n - 1
+        while i < m and j >= 0:
+            if target == matrix[i][j]:
+                return True
+            elif target < matrix[i][j]:
+                j -= 1
+            else:
+                i += 1
+        return False
+
 class Solution(object):
     def searchMatrix(self, matrix, target):
         """

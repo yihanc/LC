@@ -18,6 +18,27 @@
 # Special thanks to @ts for adding this problem and creating all test cases.
 # 
 # Subscribe to see which companies asked this question
+
+# 2017.05.05 Binary search
+class Solution(object):
+    def findPeakElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums: return 0
+        n = len(nums)
+        i, j = 0, n - 1
+        while i < j:
+            mid1 = (i + j) // 2
+            mid2 = mid1 + 1
+            if nums[mid1] > nums[mid2]:
+                j = mid1
+            else:
+                i = mid2
+        return i
+
+
 class Solution(object):
     def findPeakElement(self, nums):
         """

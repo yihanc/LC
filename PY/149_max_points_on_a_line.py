@@ -24,11 +24,10 @@ class Solution(object):
         :rtype: int
         """
         n = len(points)
-        dic = {}
         res = 0
         for i in xrange(n):
             ix, iy = points[i].x, points[i].y
-            dic.clear()
+            dic = {}
             same_points = 1
             for j in xrange(i+1, n):
                 jx, jy = points[j].x, points[j].y
