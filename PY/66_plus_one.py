@@ -6,6 +6,26 @@
 # 
 # The digits are stored such that the most significant digit is at the head of the list.
 
+# 2017.05.11
+class Solution(object):
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        carry = 1
+        for i in xrange(len(digits) - 1, -1, -1):
+            csum = digits[i] + carry
+            digits[i] = csum % 10
+            if csum >= 10: 
+                carry = 1
+            else:
+                carry = 0
+                break
+        return digits if carry == 0 else [1] + digits
+        
+            
+
 # 11.26.2016 Rewrite. Better and clearer
 class Solution(object):
     def plusOne(self, digits):

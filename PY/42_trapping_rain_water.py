@@ -10,6 +10,32 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2017.05.11 rewrite
+# Use last h to calcuate size. 
+# Get last h = max(h, min(h[l], h[r]))
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        if len(height) < 3: return 0
+        l, r = 0, len(height) - 1
+        res = 0
+        h = min(height[l], height[r])
+        while l < r:
+            if height[l] <= height[r]:
+                res += max(0, h - height[l])
+                h = max(h, min(height[l], height[r]))
+                l += 1
+            else:
+                res += max(0, h - height[r])
+                h = max(h, min(height[l], height[r]))
+                r -= 1
+        return res
+            
+        
+
 # 11.25.2016 Rewrite
 class Solution(object):
     def trap(self, height):
