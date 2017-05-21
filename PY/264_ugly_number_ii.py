@@ -14,6 +14,26 @@
 # Credits:
 # Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
 
+# 2017.05.14 Super ugly number
+class Solution(object):
+    def nthUglyNumber(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        primes = [2, 3, 5]
+        idx = [ 0 for x in xrange(3) ]
+        dp = [ float('inf') for x in xrange(n)]
+        dp[0] = 1
+        for i in xrange(1, n):
+            for j in xrange(3):
+                if primes[j] * dp[idx[j]] == dp[i-1]:
+                    idx[j] += 1
+                dp[i] = min(dp[i], primes[j] * dp[idx[j]])
+        return dp[n-1]
+        
+
+
 class Solution(object):
     def nthUglyNumber(self, n):
         """

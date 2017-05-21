@@ -10,28 +10,22 @@
 # 
 # Subscribe to see which companies asked this question
 
+
+# 2017.05.20
 class Solution(object):
     def reverseVowels(self, s):
         """
         :type s: str
         :rtype: str
         """
-        if len(s) <= 1:
-            return s
-
-        l = list(s)
-        j = len(l) - 1
-        vowels = [ 'a', 'e', 'i', 'o', 'u' ]
-        for i, char in enumerate(l):
-            if c in vowels:
-                while (j > i):
-                    if  
-
-
-1. Move i forward until it hit a vowel
-
-2. Then move j backward until it hit a vowel
-
-if i == j, program ends
-swap if they are different.
-
+        i, j = 0, len(s) - 1
+        sl = list(s)
+        while i < j:
+            if s[i] not in "aeiouAEIOU":
+                i += 1
+            elif s[j] not in "aeiouAEIOU":
+                j -= 1
+            else:
+                sl[i], sl[j] = sl[j], sl[i]
+                i, j = i + 1, j - 1
+        return "".join(sl)

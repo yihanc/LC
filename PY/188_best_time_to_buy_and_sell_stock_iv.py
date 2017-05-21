@@ -13,6 +13,35 @@
 # 
 # Credits:
 
+# 2017.05.14 
+# Rewrite
+class Solution(object):
+    def maxProfit(self, k, prices):
+        """
+        :type k: int
+        :type prices: List[int]
+        :rtype: int
+        """
+        if not prices or k == 0: return 0
+        n = len(prices)
+        
+        if k > n // 2:  # Quick solve
+            res = 0
+            for i in xrange(1, n):
+                if prices[i] > prices[i-1]:
+                    res += prices[i] - prices[i-1]
+            return res
+        
+        buy = [ prices[0] for x in xrange(k) ]  #DP
+        sell = [ 0 for x in xrange(k) ]
+        for i in xrange(1, n):
+            for j in xrange(k):
+                buy[j] = min(buy[j], prices[i] - sell[j-1]) if j != 0 else min(buy[j], prices[i])
+                sell[j] = max(sell[j], prices[i] - buy[j])
+        return sell[k-1]
+    
+
+
 # 2017.03.24 Rewrite
 # 1. Quick solve for large K cases
 # 2. 

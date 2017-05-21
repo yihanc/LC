@@ -32,3 +32,37 @@
 # Example 3:
 # "9,#,#,1"
 # Return false
+
+# 2017.05.13
+# dietpepsi in out 
+class Solution(object):
+    def isValidSerialization(self, preorder):
+        """
+        :type preorder: str
+        :rtype: bool
+        """
+        diff = 1
+        nodes = preorder.split(',')
+        for node in nodes:
+            diff -= 1
+            if diff < 0: return False
+            if node != '#': diff += 2
+        return diff == 0
+
+# Another stack 
+from collections import deque
+class Solution(object):
+    def isValidSerialization(self, preorder):
+        """
+        :type preorder: str
+        :rtype: bool
+        """
+        d = deque()
+        for node in preorder.split(','):
+            while node == '#' and d and d[-1] == '#':
+                #print(d)
+                d.pop()
+                if not d: return False
+                d.pop()
+            d.append(node)
+        return d and d[-1] == '#'
