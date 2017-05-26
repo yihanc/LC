@@ -17,3 +17,31 @@
 # Output:
 # [5,6]
 # Subscribe to see which companies asked this question
+
+# 2017.05.24
+# online version o(1) space
+class Solution(object):
+    def findDisappearedNumbers(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        for i in xrange(len(nums)):
+            index = abs(nums[i]) - 1
+            nums[index] = -abs(nums[index])
+        return [ i+1 for i in xrange(len(nums)) if nums[i] > 0 ]
+
+# 2017.05.24
+# Convert to a set. o(n) space. o(n) time
+class Solution(object):
+    def findDisappearedNumbers(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        s = set(nums)
+        res = []
+        for i in xrange(1, len(nums) + 1):
+            if i not in s: res.append(i)
+        return res
+

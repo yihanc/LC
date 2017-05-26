@@ -6,6 +6,19 @@
 # For example, given nums = [3, 5, 2, 1, 6, 4], one possible answer is [1, 6, 2, 5, 3, 4].
 # 
 
+# 2017.05.21
+# wiggle sort ii solution
+class Solution(object):
+    def wiggleSort(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        nums.sort()
+        mid = (len(nums) + 1) // 2
+        #print(nums[mid:], nums[:mid])
+        nums[::2], nums[1::2] = nums[:mid], nums[mid:]
+
 class Solution(object):
     def wiggleSort(self, nums):
         for i in xrange(len(nums) - 1):

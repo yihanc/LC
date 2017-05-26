@@ -27,6 +27,30 @@
 # String S is non-empty.
 # 
 
+# 2017.05.21 
+# One loop
+from collections import deque
+class Solution(object):
+    def licenseKeyFormatting(self, S, K):
+        """
+        :type S: str
+        :type K: int
+        :rtype: str
+        """
+        n = len(S)
+        res = deque()
+        cnt = 0
+        tmp = ""
+        for i in xrange(n - 1, -1, -1):
+            if S[i] == "-": continue
+            cnt += 1
+            tmp = S[i].upper() + tmp
+            if cnt == K:
+                res.appendleft(tmp)
+                tmp, cnt = "", 0
+        if tmp: res.appendleft(tmp)
+        return "-".join(res)
+
 # One Pass.
 class Solution(object):
     def licenseKeyFormatting(self, S, K):

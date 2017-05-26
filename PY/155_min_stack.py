@@ -21,6 +21,49 @@
 # minStack.getMin();   --> Returns -2.
 # Subscribe to see which companies asked this question.
 
+
+# 2017.05.16 Two stacks easier solution
+from collections import deque
+class MinStack(object):
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.d = deque()
+        self.cmin = deque()
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: void
+        """
+        self.d.append(x)
+        if not self.cmin or x < self.cmin[-1]:
+            self.cmin.append(x)
+        else:
+            self.cmin.append(self.cmin[-1])
+            
+
+    def pop(self):
+        """
+        :rtype: void
+        """
+        self.d.pop()
+        self.cmin.pop()
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        return self.d[-1]
+
+    def getMin(self):
+        """
+        :rtype: int
+        """
+        return self.cmin[-1]
+
 # 2017.03.06 Self write
 # Use a self.min to keep track
 # Pushing:
@@ -32,58 +75,6 @@
 # Top:
 # If  stack[-1] >= 0, return min + stack[-1]
 # else: return min
-
-import sys
-from collections import deque
-class MinStack(object):
-
-    def __init__(self):
-        """
-        initialize your data structure here.
-        """
-        self.curMin = sys.maxint 
-        self.stack = deque()
-
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: void
-        """
-        if not self.stack:
-            self.curMin = x
-            self.stack.append(0)
-        elif x >= self.curMin:
-            self.stack.append(x - self.curMin)
-        else:
-            self.stack.append(x - self.curMin)
-            self.curMin = x
-            
-        
-    def pop(self):
-        """
-        :rtype: void
-        """
-        if not self.stack:  return
-        if self.stack[-1] < 0:
-            self.curMin -= self.stack[-1]
-        self.stack.pop()
-
-    def top(self):
-        """
-        :rtype: int
-        """
-        if not self.stack: return sys.maxint
-        if self.stack[-1] < 0: 
-            return self.curMin
-        else:
-            return self.curMin + self.stack[-1]
-        
-
-    def getMin(self):
-        """
-        :rtype: int
-        """
-        return self.curMin
 
 import sys
 from collections import deque

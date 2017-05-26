@@ -8,6 +8,7 @@
 # 
 # For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 
+
 # 2017.05.05, i for start, j for end
 # if j - i == 1, just one element
 # else, insert range
