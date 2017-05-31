@@ -15,4 +15,26 @@
 # Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 
 
-
+# 2017.05.26
+# Union find 
+class Solution(object):
+    def validTree(self, n, edges):
+        """
+        :type n: int
+        :type edges: List[List[int]]
+        :rtype: bool
+        """
+        nums = [ -1 for _ in xrange(n)]
+        
+        for i in xrange(len(edges)):
+            x = self.find(nums, edges[i][0])    #find the parent
+            y = self.find(nums, edges[i][1])
+            
+            if x == y: return False
+            
+            nums[x] = y
+        return len(edges) == n -1
+    
+    def find(self, nums, i):
+        if nums[i] == -1: return i
+        return self.find(nums, nums[i])

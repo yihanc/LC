@@ -27,6 +27,46 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2017.05.27 
+# Union find
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid or not len(grid[0]): return 0
+        m, n = len(grid), len(grid[0])
+        print("m, n, : ", m, n)
+        
+        roots = [ x for x in xrange(m * n)]
+        count = 0
+        pairs = [[0, 1], [1, 0]]        # only searching right and down.
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                if grid[i][j] == "0": continue
+            
+                x = self.find(roots, i * n + j) # i,j 's parent
+                
+                count += 1
+                for pair in pairs:
+                    ii, jj = i + pair[0], j + pair[1]
+                    if ii >= 0 and ii < m and jj >= 0 and jj < n and grid[ii][jj] == "1":
+                        y = self.find(roots, ii * n + jj)
+
+                        if x != y:              # isolated. union them
+                            roots[y] = x        # not roots[x] = y
+                            count -= 1
+        return count
+    
+    def find(self, roots, id):
+        while roots[id] != id:
+            roots[id] =  roots[roots[id]]
+            id = roots[id]
+        return id
+                
+
 # 2017.03.25 Rewrite. DFS
 class Solution(object):
     def numIslands(self, grid):

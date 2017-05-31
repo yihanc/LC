@@ -30,7 +30,7 @@
 # 
 
 # 2017.05.21
-# BI Tree
+# Immutable. prefix 2d matrix
 
 class NumMatrix(object):
 
@@ -40,18 +40,10 @@ class NumMatrix(object):
         """
         if not matrix or not matrix[0]: return
         self.m, self.n = len(matrix), len(matrix[0])
-        self.tree = [[ 0 for y in xrange(self.n + 1)] for x in xrange(self.m + 1) ]
-        i = 1
-        
-        for i in xrange(self.m):
-            for j in xrange(self.n):
-                row = i + 1
-                while row <= self.m:
-                    col = j + 1
-                    while col <= self.n:
-                        self.tree[row][col] += matrix[i][j]
-                        col += col & -col
-                    row += row & -row
+        self.sums = [ [ 0 for y in xrange(self.n + 1)] for x in xrange(self.m + 1)]
+        for i in xrange(1, self.m + 1):
+            for j in xrange(1, self.n + 1):
+                self.sums[i][j] = self.sums[i-1][j] + self.sums[i][j-1] - self.sums[i-1][j-1] + matrix[i-1][j-1]
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -61,20 +53,7 @@ class NumMatrix(object):
         :type col2: int
         :rtype: int
         """
-        def _sum(row, col):
-            res = 0
-            i = row + 1
-            while i > 0:
-                j = col + 1
-                while j > 0:
-                    res += self.tree[i][j]
-                    j -= j & -j
-                i -= i & -i
-
-            return res
-        
-        return _sum(row2, col2) - _sum(row2, col1 - 1) - _sum(row1-1, col2) + _sum(row1-1, col1-1)
-        
+        return self.sums[row2+1][col2+1] - self.sums[row1][col2+1] - self.sums[row2+1][col1] + self.sums[row1][col1]
 
 
 # Your NumMatrix object will be instantiated and called as such:
