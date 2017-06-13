@@ -25,6 +25,8 @@
 # Two-end BFS. Use visited, nextlvl to record . build pathmap dic[word] = set([]).
 # Then loop through pathMap to get result
 
+from collections import defaultdict
+import string
 class Solution(object):
 
     def findLadders(self, beginWord, endWord, wordList):
@@ -34,3 +36,9 @@ class Solution(object):
         :type wordList: List[str]
         :rtype: List[List[str]]
         """
+
+
+if __name__ == "__main__":
+    beginWord, endWord = "hit", "cog"
+    wordList = ["hot","dot","dog","lot","log"]
+    print(Solution().findLadders(beginWord, endWord, wordList))

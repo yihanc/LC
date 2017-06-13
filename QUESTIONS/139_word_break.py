@@ -17,3 +17,20 @@ class Solution(object):
         :type wordDict: Set[str]
         :rtype: bool
         """
+        n = len(s) 
+        dp = [ False for x in xrange(n + 1) ]
+        dp[0] = True
+        for i in xrange(n):
+            for j in xrange(i+1, n+1):
+                cur = s[i:j]
+                if cur in wordDict and dp[i]:
+                    dp[j] = True
+        print(dp)
+        return dp[-1]
+                
+
+if __name__ == "__main__":
+    s = "leetcode"
+    wordDict = ["leet", "code"]
+    print(Solution().wordBreak(s, wordDict))
+            

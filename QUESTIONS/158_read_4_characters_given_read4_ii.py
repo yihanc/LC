@@ -35,9 +35,9 @@ def read4(buf):
         
 class Solution(object):
     def __init__(self):
-        self.buf4 = [ 0 for x in xrange(4) ]
-        self.buf4_ptr = 0
-        self.buf4_cnt = 0
+        self.buff4 = [ 0 for x in xrange(4) ]
+        self.buff4_ptr = 0
+        self.buff4_read = 0
 
     def read(self, buf, n):
         """
@@ -47,16 +47,13 @@ class Solution(object):
         """
         i = 0
         while i < n:
-            if self.buf4_ptr == 0: self.buf4_cnt = read4(self.buf4)
-            if self.buf4_cnt == 0: break
-            #self.buff4_ptr = 0
-            while i < n and self.buf4_ptr < self.buf4_cnt:
-                buf[i] = self.buf4[self.buf4_ptr]
-                i, self.buf4_ptr = i + 1, self.buf4_ptr + 1
-            if self.buf4_ptr >= self.buf4_cnt: self.buf4_ptr = 0
+            if self.buff4_ptr == 0: self.buff4_read = read4(self.buff4)
+            if self.buff4_read == 0: break
+            while i < n and self.buff4_ptr < self.buff4_read:
+                buf[i] = self.buff4[self.buff4_ptr]
+                i, self.buff4_ptr = i + 1, self.buff4_ptr + 1
+            if self.buff4_ptr == 4: self.buff4_ptr = 0
         return i
-
-
 
 if __name__ == "__main__":
     global file_content

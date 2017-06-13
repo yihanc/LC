@@ -25,33 +25,25 @@
 # 
 # 
 
-# 2017.06.01 
-# Doublelist + Dictionary
+# 2017.02.24 Rewrite
+# 1. Use dd for o(1). Initiate ddHead(LeastRecent), ddTail(MostRecent), mp{}, cap 
+# 2. Get(). If in map update node to Tail and not in map.
+# 3. Put().
+# 3.1 If in map update value and move tail.
+# 3.2 If not in map. If max cap, remove head.next first, add to tail
+
 class LRUCache(object):
 
     def __init__(self, capacity):
         """
         :type capacity: int
         """
-        self.maxcap = capacity
-        self.dic = {}   #Holds key -> DD node
-        self.ddHead = DoubleListNode(-1, -1)
-        self.ddTail = DoubleListNode(-1, -1)
-        self.ddHead.next = self.ddTail
-        self.ddTail.prev = self.ddHead
 
     def get(self, key):
         """
         :type key: int
         :rtype: int
         """
-        if key in self.dic:
-            node = self.dic[key]
-            self.ddRemove(node)
-            self.ddAppend(node)
-            return node.val
-        else:
-            return -1
 
     def put(self, key, value):
         """
@@ -59,39 +51,6 @@ class LRUCache(object):
         :type value: int
         :rtype: void
         """
-        if key not in self.dic:
-            node = DoubleListNode(key, value)
-            if self.maxcap == len(self.dic) # remoe old
-                del self.dic[self.ddHead.next.key]
-                self.ddRemove(self.ddHead.next)
-            self.dic[key] = node
-            self.ddAppend(node)
-        else:
-            node = self.dic[key]
-            node.value = value
-            self.ddRemove(node)
-            self.ddAppend(node)
-
-    def ddRemove(self, node):
-        n1, n2 = node.prev, node.next
-        n1.next, n2.prev = n2, n1
-        node.prev, node.next = None, None
-    
-    def ddAppend(self, node):
-        n1, n2 = self.ddTail.prev, self.ddTail
-        n1.next, n2.prev = node, node
-        node,prev, node.next = n1, n2
-
-        
-class DoubleListNode(object):
-    def __init__(self, key, value):
-        self.prev = None
-        self.next = None
-        self.key = key
-        self.value = value
-
-
-            
 
 if __name__ == "__main__":
     node1 = DLinkedNode("A", "A")
@@ -116,5 +75,3 @@ if __name__ == "__main__":
     while cur:
         print(cur.key, cur.value, cur, cur.pre, cur.post)
         cur = cur.post
-
-

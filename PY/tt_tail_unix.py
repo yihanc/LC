@@ -23,6 +23,7 @@ def tail(path_to_file, n=10):
             print(fsize - bufsize *iter)
             f.seek(fsize-bufsize*iter)
             data.extend(f.readlines())
+            print(data)
             if len(data) >= lines or f.tell() == 0:
 #                print(''.join(data[-lines:]))
                 break

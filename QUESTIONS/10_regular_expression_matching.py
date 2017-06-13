@@ -26,3 +26,12 @@ class Solution(object):
         :type p: str
         :rtype: bool
         """
+
+
+if __name__ == "__main__":
+    print(Solution().isMatch("aa", "a"))
+    print(Solution().isMatch("aa", "aa"))
+    print(Solution().isMatch("aa", "a*"))
+    print(Solution().isMatch("ab", ".*"))
+    print(Solution().isMatch("aab", "c*a*b"))
+

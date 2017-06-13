@@ -10,86 +10,19 @@
 # 
 # Subscribe to see which companies asked this question
 
-
-# Better. Two pointers
 class Solution(object):
     def trap(self, height):
         """
         :type height: List[int]
         :rtype: int
         """
-        n = len(height)
-        l, r  = 0, n - 1
-        leftMax, rightMax = 0, 0
-        res = 0
-
-        print(height)
-        while l < r:
-            leftMax = max(leftMax, height[l])
-            rightMax = max(rightMax, height[r])
-            print(" l: ", l, " r: ", r, " leftMax : ", leftMax, " rightMax : ", rightMax)
-            if leftMax < rightMax:
-                res += leftMax - height[l]
-                l += 1
-            else:
-                res += rightMax - height[r]
-                r -= 1
-
-        return res
 
 if __name__ == "__main__":
-    b = [5,4,1,2]
+#    height = [5,4,1,2]
 #    print(Solution().trap(b))
-#    a = [5,2,1,2,1,5]      # Top [5, 2, 5]
-#    c = [5,5,1,7,1,1,5,2,7,6]
-    d = [6,4,2,0,3,2,0,3,1,4,5,3,2,7,5,3,0,1,2,1,3,4,6,8,1,3]
-#    e = [8,8,1,5,6,2,5,3,3,9]
+    height = [5,2,1,2,1,5]      # Top [5, 2, 5]
+#    height = [5,5,1,7,1,1,5,2,7,6]
+#    height = [6,4,2,0,3,2,0,3,1,4,5,3,2,7,5,3,0,1,2,1,3,4,6,8,1,3]
+#    height = [8,8,1,5,6,2,5,3,3,9]
 
-    print(Solution().trap(d))
-
-
-### Bad Solution. Too complicated
-class Solution2(object):
-    def trap(self, height):
-        """
-        :type height: List[int]
-        :rtype: int
-        """
-        print(height)
-        n = len(height)
-        if n < 3:               # Bug 1
-            return 0
-        res = 0
-        
-        # Scan once to find top
-        top = []
-        for i in xrange(n):
-            if ((i > 0 and i < n-1 and height[i] >= height[i-1] and height[i] >= height[i+1])
-                or (i == 0 and height[i] >= height[i+1])
-                or (i == n - 1 and height[i] >= height[i-1])):
-                top.append(i)
-        print(top)
-        
-        # 2. Scan again to filter some tops like [5, 2, 5]
-        i = 1
-        while i < len(top):
-            if (i+1 < len(top) and height[top[i]] <= height[top[i-1]] 
-                and height[top[i]] <= height[top[i+1]]):
-                del top[i]
-                continue
-            i += 1
-        print(top)
-            
-        # 3. Calculate water from founds tops
-        for i in xrange(1, len(top)):
-            lastTopI = top[i-1]
-            curTopI = top[i]
-            h = min(height[lastTopI], height[curTopI])
-            res += h * (curTopI - lastTopI - 1)
-            # minus shadow
-            for j in xrange(lastTopI + 1, curTopI):
-                res -= min(height[j], h)        # Bug 2, min
-        
-        return res
-        
-
+    print(Solution().trap(height))

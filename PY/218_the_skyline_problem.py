@@ -25,6 +25,41 @@
 # 
 # Subscribe to see which companies asked this question.
 
+
+# 2017.05.31
+# Another clearer version
+# However, hq.remove is too slow. It will get TLE for large case
+from heapq import *
+class Solution(object):
+    def getSkyline(self, buildings):
+        """
+        :type buildings: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        res = []
+        height = []
+        for a,b,c in buildings:
+            height.append([a, -c])  # LEFT HEIGHT to negative so that it appears first than right HEIGHT
+            height.append([b, c])
+            
+        s_height = sorted(height, key = lambda x: [x[0], x[1]]) # Sort by left side, rigth side
+        
+        hq = [0]
+        prev = 0
+        for h in s_height:
+            if h[1] < 0:        # A left side
+                heappush(hq, h[1])
+            else:               # Right side
+                hq.remove(-h[1])
+                heapify(hq)
+            cur = -hq[0]
+            if prev != cur:
+                res.append([h[0], cur])
+                prev = cur
+            
+        return res
+
+
 class Solution(object):
     def getSkyline(self, buildings):
         """

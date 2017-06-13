@@ -23,6 +23,21 @@
 # Eulerian path From Stefan Pochmann
 # First keep going forward until you get stuck. That's a good main path already. Remaining tickets form cycles which are found on the way back and get merged into that main path. By writing down the path backwards when retreating from recursion, merging the cycles into the main path is easy - the end part of the path has already been written, the start part of the path hasn't been written yet, so just write down the cycle now and then keep backwards-writing the path.
 
+# Explained
+# [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+# 
+# ATL: SFO -> JFK
+# JFK: SFO -> ATL
+# SFO: ATL
+# 
+# visit('JFK'), pop(ATL) + JFK
+#    ->  visit('ATL') pop(JFK)  + ATL
+#      ->  visit('JFK') pop(SFO)  + JFK
+#        -> visit('SFO') pop(ATL)  + SFO
+#          -> visit(ATL) pop(SFO)  + ATL
+#               -> visit(SFO) , + SFO
+#              
+
 from collections import defaultdict
 class Solution(object):
     def findItinerary(self, tickets):
@@ -42,3 +57,5 @@ class Solution(object):
         route = []
         visit('JFK')
         return route[::-1]
+
+

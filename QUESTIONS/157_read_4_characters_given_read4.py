@@ -33,14 +33,13 @@ class Solution(object):
         buff4 = [ 0 for x in xrange(4) ]
         i = 0
         while i < n:
-            bytesread = read4(buff4)
-            if bytesread == 0: break
+            words_read = read4(buff4)
+            if words_read == 0: break
             j = 0
-            while i < n and j < bytesread:
+            while i < n and j < words_read:
                 buf[i] = buff4[j]
                 i, j = i + 1, j + 1
         return i
-                
 
 if __name__ == "__main__":
     global file_content

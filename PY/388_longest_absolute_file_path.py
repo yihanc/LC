@@ -38,6 +38,34 @@
 # 
 # Subscribe to see which companies asked this question.
 
+
+# 2017.06.1
+# Self rewrite
+from collections import deque
+class Solution(object):
+    def lengthLongestPath(self, input):
+        """
+        :type input: str
+        :rtype: int
+        """
+        A = input.split('\n')
+        #print(A)
+        d = deque()
+        res = 0
+        for i in xrange(len(A)):
+            index = A[i].rfind('\t')
+            #print(A[i], index)
+            while d and index - d[-1][0]  < 1:    # pop
+                d.pop()
+            lastlen = 0 if not d else d[-1][1]
+            d.append([index, lastlen + len(A[i]) - index - 1])
+            #print(d)
+            if "." in A[i]: 
+                res = max(res, d[-1][1] + index + 1)    # RES has index + 1 "/"
+        return res
+            
+                
+
 # 2017.05.11 online resolution
 from collections import deque
 class Solution(object):

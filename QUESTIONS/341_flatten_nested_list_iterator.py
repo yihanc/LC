@@ -44,16 +44,14 @@
 #        :rtype List[NestedInteger]
 #        """
 
-# 2017.05.13 Stack
 from collections import deque
 class NestedIterator(object):
-
     def __init__(self, nestedList):
         """
         Initialize your data structure here.
         :type nestedList: List[NestedInteger]
         """
-        self.s = [nestedList, 0]
+        self.s = [[nestedList, 0]]
 
     def next(self):
         """
@@ -61,24 +59,26 @@ class NestedIterator(object):
         """
         if not self.hasNext(): return "ERROR"
         nestedList, i = self.s[-1]
-        self.s[-1][1] += 1
+        s[-1][1] += 1
         return nestedList[i].getInteger()
-        
+
     def hasNext(self):
         """
         :rtype: bool
         """
         s = self.s
         while s:
-            nestedList, i = s[-1]
+            nestedList, i = self.s[-1]
             if i == len(nestedList):
                 s.pop()
             else:
                 x = nestedList[i]
-                if x.getInterger(): return True
-                s[-1][1] += 1
+                if x.isInteger(): return True
+                s[-1][1] +== 1
                 s.append([x.getList(), 0])
         return False
+            
+        
 
 # Your NestedIterator object will be instantiated and called as such:
 # i, v = NestedIterator(nestedList), []

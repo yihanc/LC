@@ -46,7 +46,7 @@
 
 # 2017.05.27
 # topologic sort
-
+# 05.30 some optimization. Remove lines for handling duplicate. use "".join instead string catenation.
 from collections import defaultdict, deque
 class Solution(object):
     def alienOrder(self, words):
@@ -54,41 +54,42 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
         """
-        # idea. scan and build DAG then topological sort
-        if len(words) == 0: return ""
+        if not words: return ""
         
-        ins = defaultdict(int)
-        outs = defaultdict(list)
+        indegrees = defaultdict(int)
+        outdegrees = defaultdict(list)
         
         for word in words:
             for char in word:
-                ins[char]; outs[char]
+                if char not in indegrees:
+                    indegrees[char]
+                    outdegrees[char]
         
         for i in xrange(1, len(words)):
-            n = min(len(words[i]), len(words[i-1]))
+            w1, w2 = words[i-1], words[i]
+            n = min(len(w1), len(w2))
             for j in xrange(n):
-                c1, c2 = words[i-1][j], words[i][j]
-                if c1 == c2: continue     # If same char, skip.
-                if c2 in outs[c1]: break    # if already in map. no update and break
-                outs[c1].append(c2)
-                ins[c2] += 1
-                break
+                if w1[j] != w2[j]:
+                    indegrees[w2[j]] += 1           # No need to handle duplicate. it is just two lines 
+                    outdegrees[w1[j]].append(w2[j])
+                    break
         
         d = deque()
-        for k, v in ins.iteritems():
-            if v == 0: 
+        for k, v in indegrees.iteritems():
+            if v == 0:
                 d.appendleft(k)
-                
-        res = ""        
-        while d:
-            char = d.pop()
-            res += char
-            for nextchar in outs[char]:
-                ins[nextchar] -= 1
-                if ins[nextchar] == 0:
-                    d.appendleft(nextchar)
-        return res if len(res) == len(ins) else ""
         
+        res = []
+        while d:
+            cur = d.pop()
+            res.append(cur)
+            for out in outdegrees[cur]:
+                indegrees[out] -= 1
+                if indegrees[out] == 0: d.appendleft(out)
+        return "".join(res) if len(res) == len(indegrees) else ""
+            
+
+
         
 
 

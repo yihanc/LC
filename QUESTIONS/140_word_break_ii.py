@@ -27,36 +27,7 @@ class Solution(object):
         :type wordDict: Set[str]
         :rtype: List[str]
         """
-        n = len(s)
-
-        # Generate Map
-        dp = [ False for x in xrange(n+1) ]
-        dp[0] = True
-        for i in xrange(1, n+1):
-            for j in xrange(i+1):
-                if dp[j] and s[j:i] in wordDict:
-                    dp[i] = True
-                    break
-
-        res = []
-        if dp[-1]: 
-            self.dfs(res, "", s, wordDict, dp)
-        return res
-        
-    def dfs(self, res, line, s, wordDict, dp):
-        if not s:
-            res.append(line)
-            return
-
-        n = len(s)
-        for i in xrange(n-1, -1, -1):
-            if dp[i] and s[i:] in wordDict:
-                if not line:
-                    self.dfs(res, s[i:] + line, s[:i], wordDict, dp)
-                else:
-                    self.dfs(res, s[i:] + " " + line, s[:i], wordDict, dp)
-
-
+            
 if __name__ == "__main__":
     s = "catsanddog"
     wordDict = ["cat", "cats", "and", "sand", "dog"]

@@ -29,8 +29,15 @@ class Solution(object):
         return res[0] if (m + n) & 1 else sum(res) / 2.0
 
 
+# 2017.06.01 Rewrite
 # Standard best solution but hard to implement and understand. O(min(
 # Time complexity O(log(min(m, n)))
+# Find i, so that nums1[: i] + nums2[:j] = nums1[i:] , nums2[j:]
+# 0 1 2 3 4 5  6 7
+# m + n = 8, i + j = 4, i = 0 j = 4 return max(nums1[i-1], nums2[j-1]) + min(nums1[i], nums2[j])
+# 0 1 2 3 4 5 6
+# m + n = 7, i + j = 4, i = 0, j = 4, return max(nums1[i-1], nums2[j-1])
+
 class Solution(object):
     def findMedianSortedArrays(self, nums1, nums2):
         """
