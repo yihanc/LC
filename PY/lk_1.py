@@ -125,14 +125,3 @@ def getData(eid):
     resp = requests.get(url=url)
     return json.loads(resp.text)
     
-
-                                           
-                                           
-    
-    
-    
-    
-    
-    
-    
-    

@@ -1,9 +1,3 @@
-# Thumbtack
-# Implement unix tail command. Assuming the file is really large
-#
-
-
-# 2017.06.18
 # Algorithm
 # read fixed buffer size into data from end of file,
 # count "\n", if > 10 or reaching the start, start output
@@ -12,7 +6,7 @@
 import os, sys
 
 def tail(lines, filename):
-    BUF_SIZE = 8192 # can be adjusted
+    buf = 3000
     fsize = os.stat(filename).st_size
     print(fsize)
 
