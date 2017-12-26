@@ -6,7 +6,7 @@
 import os, sys
 
 def tail(lines, filename):
-    buf = 3000
+    BUF_SIZE = 8192 # can be adjusted
     fsize = os.stat(filename).st_size
     print(fsize)
 

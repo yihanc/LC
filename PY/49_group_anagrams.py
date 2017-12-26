@@ -15,6 +15,25 @@
 # ]
 # Note: All inputs will be in lower-case.
 
+# 12.11.2017 Rewrite
+from collections import defaultdict
+class Solution:
+    """
+    @param: strs: A list of strings
+    @return: A list of strings
+    """
+    def anagrams(self, strs):
+        # write your code here
+        dic = defaultdict(list)
+        res = []
+        for str in strs:
+            key = "".join(sorted(str))
+            dic[key].append(str)
+
+        for k, v in dic.iteritems():
+            if len(v) >= 2: res += v
+        return res
+
 # 11.26.2016 Rewrite.
 class Solution(object):
     def groupAnagrams(self, strs):
