@@ -1,0 +1,14 @@
+
+BFS, DFS, Union Find,
+
+
+Topological Sort:  A sorting in UAG
+
+Valid Graph Tree of UAG:
+- DFS, save UAG
+- Union Find (preferred), detect visited
+- BFS (not preferred)
+
+Valid Graph Tree of DAG:
+- DFS
+- Union Find

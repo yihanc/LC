@@ -26,6 +26,57 @@
 # Subscribe to see which companies asked this question.
 
 
+# 2018.01.06 SweepLine
+# Sort critical point
+# scan critical points from left to right
+# For each critical points, maintain a heap of height set
+# 
+
+
+# Sort critical point
+# scan critical points from left to right
+# For each critical points, maintain a heap of height set
+# 
+
+from collections import defaultdict
+from heapq import *
+class Solution(object):
+    def getSkyline(self, buildings):
+        """
+        :type buildings: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        cps = set()  # All critical points
+        l_dic = defaultdict(set)    # Left edges
+        r_dic = defaultdict(set)    # Right edges
+        
+        for i in xrange(len(buildings)):
+            l, r, h = buildings[i]
+            cps.add(l)
+            cps.add(r)
+            l_dic[l].add(h)
+            r_dic[r].add(h)   
+            
+        res = []
+        hq = [0] 
+        to_delete = defaultdict(int)    # Use a counter to record red edges to remove. 
+        for cp in sorted(cps):
+            for height in r_dic[cp]:    # If right edges, record how many to delete
+                to_delete[height] += 1  
+            
+            while hq and -hq[0] in to_delete and to_delete[-hq[0]] > 0:
+                to_delete[-hq[0]] -= 1
+                heappop(hq)
+                    
+            for height in l_dic[cp]:    # Adding height if left edges
+                heappush(hq, -height)
+
+            if res and res[-1][1] == -hq[0]:    # Skip same height
+                continue
+            res.append([cp, -hq[0]])
+        return res
+    
+
 # 2017.05.31
 # Another clearer version
 # However, hq.remove is too slow. It will get TLE for large case

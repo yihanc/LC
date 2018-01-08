@@ -13,6 +13,51 @@
 # To the right of 1 there is 0 smaller element.
 # Return the array [2, 1, 1, 0].
 
+# 2017.01.07 BST Insert solution. Easy
+# Each node has
+# 1. left sum for total number of nodes to its left
+# 2. dup for how many for the current node
+# When inserting, if == node.val, dup + 1
+# If less, insert left, node.sum ++
+# If more, insert right, update pre_sum += node.sum, node.dup
+
+class Solution(object):
+    def countSmaller(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        res = [ 0 for x in xrange(len(nums))]
+        root = None
+        for i in xrange(len(nums)-1, -1, -1):
+            root = self.insert(nums[i], root, res, i, 0)
+        return res
+
+    def insert(self, num, node, res, i, pre_sum):
+        if not node:
+            node = Node(num, 0)
+            res[i] = pre_sum
+        elif node.val == num:
+            node.dup += 1
+            res[i] = pre_sum + node.sum
+        elif node.val > num:
+            node.sum += 1
+            node.left = self.insert(num, node.left, res, i, pre_sum)
+        else:
+            node.right = self.insert(num, node.right, res, i, pre_sum + node.dup + node.sum)
+        return node
+
+class Node:
+    def __init__(self, v, s):
+        self.val = v
+        self.sum = s
+        self.dup = 1
+        self.left = None
+        self.right = None
+
+        
+        
+
 # 2017.05.20
 # Merge Sort cleaner version
 class Solution(object):

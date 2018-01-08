@@ -21,6 +21,51 @@
 # All words have the same length.
 # All words contain only lowercase alphabetic characters.
 
+
+
+
+# 2017.12.28 Build Map for parents + BFS from [END]
+# Step 1, calculate parents map from start to end
+# Step 2, based on parents map build results from end to start
+# Optimizatino, Using list comprehension for step 2 is much faster
+
+from collections import defaultdict
+import string
+
+class Solution(object):
+    def findLadders(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: List[List[str]]
+        """
+        if len(beginWord) != len(endWord): return []
+        dict = set(wordList)
+        if endWord not in dict: return []
+        
+        parents = defaultdict(set)
+        level = {beginWord}
+        
+        while level and endWord not in parents:
+            next_level = defaultdict(set)
+            
+            for word in level:
+                for i in xrange(len(word)):
+                    for char in string.ascii_lowercase:
+                        next_word = word[:i] + char + word[i+1:]
+                        if next_word in dict and next_word not in parents:
+                            next_level[next_word].add(word)
+            
+            parents.update(next_level)
+            level = next_level
+        
+        res = [[endWord]]
+        while res and res[0][0] != beginWord:
+            res = [ [p] + line for line in res for p in parents[line[0]]]
+        return res
+        
+        
 # 2016.02.22, Two-end BFS. 
 # Note:
 # wordList is now a list. Convert to set() for fast query. if endWord not in wordList, return []

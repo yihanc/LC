@@ -13,6 +13,25 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.1.6 Set solution
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = set(nums)
+        res = 0
+        for num in nums:
+            if num - 1 not in nums:
+                count = 0
+                while num in nums:
+                    count, num = count + 1, num + 1
+                res = max(res, count)
+        return res
+                    
+                
+
 # 1.1.2017 Rewrite
 class Solution(object):
     def longestConsecutive(self, nums):
