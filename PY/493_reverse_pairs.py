@@ -23,6 +23,52 @@
 # Subscribe to see which companies asked this question.
 
 
+# 2018.01.09 Binary Index Tree Solution
+# T(i) = T(i - 1) + C, C is the case that first element from nums[i-1], second is nums[i]
+# Using BIT to store makes update and search log(n) for each operation
+# The index() function returns index from sorted array + 1
+
+class Solution(object):
+    def reversePairs(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)
+        copy = sorted(nums)
+        bits = [ 0 for x in xrange(n + 1)]
+        res = 0
+        for num in nums:
+            #print(num, self.getIndex(copy, 2 * num + 1),  self.getIndex(copy, num))
+            res += self.search(bits, self.getIndex(copy, 2 * num + 1))
+            self.insert(bits, self.getIndex(copy, num))
+            #print(res, bits)
+        return res
+
+    def getIndex(self, nums, val):  # This index function need to return the left most ele that is >= val.
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r) >> 1
+            if val > nums[m]:
+                l = m + 1
+            else:                   # Also handles duplicates
+                r = m - 1
+        return l + 1
+
+    def search(self, bits, i):
+        res = 0
+        while i < len(bits):
+            res += bits[i]
+            i += i & -i
+        return res
+        
+    
+    def insert(self, bits, i):
+        while i > 0:
+            bits[i] += 1
+            i -= i & -i
+        
+    
 
 # 2017.05.19 Merge sort + cache
 class Solution(object):

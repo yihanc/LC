@@ -1,0 +1,13 @@
+Binary Indexed Tree
+
+- For array nums with length n, tree = [ 0 for i in xrange(n + 1)]
+- i & -i is the right most bit of i
+- Updating i += i & -i, Up for Update, towards root and parent Eg: Update(1) = bits["1"] + bits["10"] + bits["100"] ...
+- Search, i -= i & -i, Down for search, EG: getSum[7] = Bits["111"] + bits["110"] + bits["10"]
+
+
+# When saving elements for nums[0:n]
+# Conventionally, if update up (i += i & -i), search(down) will give # of elements smaller than val.
+# if update down (i -= i & -i), search(up) will give # of elements bigger than val.
+
+# 493, Reverse Pairs

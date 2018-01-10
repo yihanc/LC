@@ -13,6 +13,54 @@
 # To the right of 1 there is 0 smaller element.
 # Return the array [2, 1, 1, 0].
 
+# 2017.01.10 BIT Solution similar to LC 493, Faster than BST
+# Notice that, we cannot go forward traversing the numbers due to the result recording method
+# Using Sequential recurrence solution: T(i) = T(i+1:n) + C, 
+# C is finding the number of XX in nums[i+1:n] that is smaller than nums[i]
+# Use BIT to update(i+=i&-i ),  and query (i-=i&-i), value of BI Tree Node is # of ele smaller than input i.
+# The index() function is to search the right most index that is <= input VAL.
+
+class Solution(object):
+    def countSmaller(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        n = len(nums)
+        copy = sorted(nums)
+        bits = [ 0 for i in xrange(n + 1) ]
+        res = [ 0 ] * n
+        for i in xrange(n - 1, -1, -1):
+            #print(i, nums[i], self.index(copy, nums[i] - 1), self.index(copy, nums[i]))
+            res[i] = self.search(bits, self.index(copy, nums[i] - 1))
+            self.insert(bits, self.index(copy, nums[i]), i)
+        return res
+    
+    
+    def index(self, nums, val): # Searching the right most index <= val.
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            m = (l + r) >> 1
+            if nums[m] > val:
+                r = m - 1
+            else:
+                l = m + 1
+        return r + 1            # NOTE: r + 1 not l + 1
+    
+    
+    def search(self, bits, i):
+        res = 0
+        while i > 0:
+            res += bits[i]
+            i -= i & -i
+        return res
+        
+        
+    def insert(self, bits, i, index):
+        while i < len(bits):
+            bits[i] += 1
+            i += i & -i
+
 # 2017.01.07 BST Insert solution. Easy
 # Each node has
 # 1. left sum for total number of nodes to its left
