@@ -28,6 +28,75 @@
 # If the current candidate does not exist in all words' prefix, you could stop backtracking immediately. What kind of data structure could answer such query efficiently? Does a hash table work? Why or why not? How about a Trie? If you would like to learn how to implement a basic trie, please work on this problem: Implement Trie (Prefix Tree) first.
 
 
+# 2018.01.11 BackTracking + Trie
+from collections import deque
+class Solution(object):
+    def findWords(self, board, words):
+        """
+        :type board: List[List[str]]
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        m, n = len(board), len(board[0])
+        tr = Trie()
+        for word in words:
+            tr.insert(word)
+
+        res = []
+        for i in xrange(m):
+            for j in xrange(n):
+                char = board[i][j]
+                index = ord(char) - ord('a')
+                if tr.root.children[index]:
+                    board[i][j] = "#"
+                    self.helper(board, tr.root.children[index], res, char, i, j)
+                    board[i][j] = char 
+        return res
+    
+    def helper(self, board, node, res, line, i, j):
+        if node.word == line:
+            res.append(line)
+            node.word = ""
+
+        m, n = len(board), len(board[0])
+        pairs = [[0, 1], [0,-1], [1,0],[-1,0]]
+        for pair in pairs:
+            ii, jj = i + pair[0], j + pair[1]
+            if ii < 0 or ii >= m or jj < 0 or jj >= n or board[ii][jj] == "#":
+                continue
+
+            char = board[ii][jj]
+            index = ord(char) - ord('a')
+            if not node.children[index]:
+                continue
+                
+            board[ii][jj] = "#"
+            self.helper(board, node.children[index], res, line + char, ii, jj)
+            board[ii][jj] = char
+        
+        
+class TrieNode(object):
+    def __init__(self):
+        self.children = [ None for x in xrange(26) ]
+        self.word = ""
+        
+        
+class Trie(object):
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word):
+        node = self.root
+        for char in word:
+            i = ord(char) - ord('a')
+            if not node.children[i]:    # BIG Bug if forgetting this line
+                node.children[i] = TrieNode()
+            node = node.children[i]
+        node.word = word
+
+
+        
+
 # 2017.05.04
 # Build Trie from words. 
 # DFS boards and compare with words

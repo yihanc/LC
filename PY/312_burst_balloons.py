@@ -23,6 +23,28 @@
 # Credits:
 # Special thanks to @dietpepsi for adding this problem and creating all test cases.
 
+# 20180113
+# Use DP 
+# Let i be the last balloon to burst between l, r (exclusive),
+# Then dp[l][r] = max(dp[l][r], nums[l]*nums[i]*nums[r] +dp[l][i]+dp[i][r])
+class Solution(object):
+    def maxCoins(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = [1] + nums + [1]
+        n = len(nums)
+        dp = [[0 for j in xrange(n) ]for i in xrange(n) ]
+        
+        for size in xrange(2, n):
+            for l in xrange(n - size):
+                r = l + size
+                for i in xrange(l + 1, r):
+                    dp[l][r] = max(dp[l][r], nums[i]*nums[l]*nums[r] + dp[l][i] + dp[i][r])
+        return dp[0][n-1]
+
+
 class Solution(object):
     def maxCoins(self, iNums):
         nums = [1] + [i for i in iNums if i > 0] + [1]

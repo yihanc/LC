@@ -30,6 +30,47 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 2018.01.11
+class Codec:
+
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        def _dfs(root):
+            if not root:
+                res.append("#")
+                return
+            res.append(str(root.val))
+            _dfs(root.left)
+            _dfs(root.right)
+            
+        res = []
+        _dfs(root)
+        return " ".join(res)
+        
+
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        def _dfs():
+            if self.i >= len(D): return None
+            self.i += 1
+            if D[self.i] == "#": return None
+            node = TreeNode(int(D[self.i]))
+            node.left = _dfs()
+            node.right = _dfs()
+            return node
+                
+        D = data.split()
+        self.i = -1
+        return _dfs()
+
 # One clean solution
 class Codec:
 

@@ -32,6 +32,42 @@
 # Special thanks to @dietpepsi for adding this problem and creating all test cases.
 
 
+# 2018.01.13
+# DFS + cache
+class Solution(object):
+    def longestIncreasingPath(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: int
+        """
+        if not matrix: return 0
+        m, n = len(matrix), len(matrix[0])
+        dp = [ [0 for j in xrange(n) ] for i in xrange(m)]
+        res = [1]
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                self.helper(res, matrix, dp, i, j, 1)
+        return res[0]
+                
+    def helper(self, res, matrix, dp, i, j, cnt):
+        m, n = len(matrix), len(matrix[0])
+        if cnt <= dp[i][j]: return
+        dp[i][j] = cnt
+        cur = matrix[i][j]
+        matrix[i][j] = "#"
+        
+        pairs = [[0, 1], [0,-1], [1,0],[-1,0]]
+        for pair in pairs:
+            ii, jj = i + pair[0], j + pair[1]
+            if ii < 0 or ii >= m or jj < 0 or jj >= n or matrix[ii][jj] == "#" or matrix[ii][jj] <= cur:
+                continue
+            self.helper(res, matrix, dp, ii, jj, cnt + 1)
+        
+        matrix[i][j] = cur
+        res[0] = max(res[0], cnt)
+        
+
 
 # 2017.05.28
 # DFS + Cache

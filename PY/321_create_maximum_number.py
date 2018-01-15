@@ -24,6 +24,63 @@
 # k = 3
 # return [9, 8, 9]
 
+# 2018.01.13 
+# maxArray(nums, k), fetching i items from nums to create the MAX
+# merge(nums1, nums2), Merge two arrays to get the MAX
+# greater(nums1, i, nums2, j), Compare nums1[i:] and nums2[j:]
+# NOTE: We can subsitute "greater()" with ">". Python default list comparison is the same algo
+# Traverse and keep updating res if greater
+
+class Solution(object):
+    def maxNumber(self, nums1, nums2, k):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :type k: int
+        :rtype: List[int]
+        """
+        m, n = len(nums1), len(nums2)
+        res = [0] * k
+        for i in xrange(max(0, k - n), min(m, k) + 1):  # From res1,  0 <= i <= m; From res2, k - n <= i <= k
+            res1 = self.maxArray(nums1, i)      # i >= 0, i <= m
+            res2 = self.maxArray(nums2, k - i)  # k - i >= 0, k - i <= n  => i <= k, i >= k - n
+            cand = self.merge(res1, res2)
+            # res = cand if self.greater(cand, 0, res, 0) else res
+            res = cand if cand > res else res
+        return res
+
+    def maxArray(self, nums, k):    # Fetch k max from nums
+        res = [0] * k
+        n, j = len(nums), 0
+        for i in xrange(n):
+            while n - i > k - j and j > 0 and res[j-1] < nums[i]:   # Only reducing j, when n - i (items left in nums) > k - j (items need to fetch)
+                j -= 1
+            if j < k:   # Why j < k
+                res[j] = nums[i]
+                j += 1
+        return res
+            
+            
+    def merge(self, nums1, nums2):
+        res = [0] * (len(nums1) + len(nums2))
+        i, j = 0, 0
+        for r in xrange(len(res)):
+            if self.greater(nums1, i, nums2, j):
+                res[r] = nums1[i]
+                i += 1
+            else:
+                res[r] = nums2[j]
+                j += 1
+        return res
+        
+    
+    def greater(self, nums1, i, nums2, j):  # This function is the same as "A[i:] > B[j:]"
+        m, n = len(nums1), len(nums2)
+        while i < m and j < n and nums1[i] == nums2[j]:
+            i, j = i + 1, j + 1
+        return j == n or (i < m and nums1[i] > nums2[j])
+        
+
 
 # 2017.05.15
 # https://www.hrwhisper.me/leetcode-create-maximum-number/

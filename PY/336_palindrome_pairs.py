@@ -16,6 +16,45 @@
 # The palindromes are ["dcbaabcd", "abcddcba", "slls", "llssssll"]
 # 
 
+# 2018.01.14
+# 1. First input words into dictionary
+# 2.
+class Solution(object):
+    def palindromePairs(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[List[int]]
+        """
+        n = len(words)
+        dic = {}
+        empty = {}
+        for i, word in enumerate(words):
+            if word == "": empty[word] = i
+            dic[word] = i
+        res = []
+        for i in xrange(n):
+            word = words[i]
+            for size in xrange(len(word) + 1):  # Cover n for empty string. Eg: ["a", ""]
+                s1 = word[:size]
+                s2 = word[size:]
+                if self.isPal(s1):
+                    if s2[::-1] in dic and dic[s2[::-1]] != i:
+                        res.append([dic[s2[::-1]], i])
+                if self.isPal(s2) and len(s2) != 0:     # Skip len(s2) is 0 for duplicate, think about case ["abcd", "dcba"]
+                    if s1[::-1] in dic and dic[s1[::-1]] != i:
+                        res.append([i, dic[s1[::-1]]])
+        
+        return res
+
+    
+    def isPal(self, s):
+        if not s: return True
+        l, r = 0, len(s) - 1
+        while l < r and s[l] == s[r]:
+            l, r = l + 1, r - 1    
+        return l > r if len(s) % 2 == 0 else l == r
+    
+
 # 2017.05.18
 # Map + prefix
 class Solution(object):

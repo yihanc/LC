@@ -1,0 +1,34 @@
+
+
+# Some Implementation
+
+class TrieNode(object):
+    def __init__(self):
+        self.children = [ None for x in xrange(26) ]
+        self.word = ""
+        
+        
+class Trie(object):
+    def __init__(self):
+        self.root = TrieNode()
+    
+    def insert(self, word):
+        node = self.root
+        for char in word:
+            i = ord(char) - ord('a')
+            if not node.children[i]:    # BIG Bug if forgetting this line
+                node.children[i] = TrieNode()
+            node = node.children[i]
+        node.word = word
+
+    def _print(self):
+        node = self.root
+        d = deque()
+        d.append((0, node, None))
+
+        while d:
+            dep, node, x = d.pop()
+            for i in xrange(26):
+                if node.children[i]:
+                    d.appendleft((dep + 1, node.children[i], i))
+        
