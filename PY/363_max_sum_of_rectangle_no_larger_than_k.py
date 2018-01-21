@@ -18,6 +18,15 @@
 # The rectangle inside the matrix must have an area > 0.
 # What if the number of rows is much larger than the number of columns?
 
+# 2018.01.14
+# Use l, r. Scan every columns matrix from col L to col R
+# Use a nums of size m to record psums scanned from l to r
+# To find out the max sum that is smaller than k
+# So, it is to find,  psum (current psum) - psums[i](find i from past index) <= k
+# Rewrite into psum - k <= psums[i]. To satisfy this, we search the maximum psum - k
+# Use bisect.bisect_left(psums, psum -k ) to find out the index
+#
+
 # 2017.05.20
 # Bisect list solution. Accepted
 

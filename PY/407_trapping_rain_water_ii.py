@@ -27,6 +27,12 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2018.01.15 Heapq + BFS
+# 1. Add all sides into heapq and mark visited before pushing into heapq
+# 2. Pop one from hq, and process its neighbor
+# 3. Update vis, update res, push into hq (with original value so that it can be processed early), update value to the parent
+
+
 # 2017.05.11 DFS
 # 1. First scan sides and push them into heapq
 # 2. while hq, pop and check his side cells, if unvisited. 

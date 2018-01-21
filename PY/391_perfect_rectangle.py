@@ -54,6 +54,53 @@
 # 
 # Return false. Because two of the rectangles overlap with each other.
 
+# 2018.01.15
+# 1. Keep updating, left, bot, right, top
+# 2. Keep adding size of the rectangle, total size should equal to the size of rec of 4 points
+# 3. Also keep updating points in a dictionary, it should have only 4 points and those 4 points should be equal to the points keep updated
+
+class Solution(object):
+    def isRectangleCover(self, rectangles):
+        """
+        :type rectangles: List[List[int]]
+        :rtype: bool
+        """
+        bot, left, top, right = float('inf'), float('inf'), float('-inf'), float('-inf')
+        dic = set([])
+        size = 0
+        for c_bot, c_left, c_top, c_right in rectangles:
+            size += (c_right - c_left ) * (c_top  - c_bot)
+            bot = min(bot, c_bot)
+            left = min(left, c_left)
+            top = max(top, c_top)
+            right = max(right, c_right)
+            
+            bot_left = str(c_bot) + " " + str(c_left)
+            bot_right = str(c_bot) + " " + str(c_right)
+            top_left = str(c_top) + " " + str(c_left)
+            top_right = str(c_top) + " " + str(c_right)
+            
+            for point in (bot_left, bot_right, top_left, top_right):
+                if point in dic:
+                    dic.remove(point)
+                else:
+                    dic.add(point)
+            
+
+        bot_left = str(bot) + " " + str(left)
+        bot_right = str(bot) + " " + str(right)
+        top_left = str(top) + " " + str(left)
+        top_right = str(top) + " " + str(right)
+        
+        if len(dic) != 4: return False
+        
+        for point in (bot_left, bot_right, top_left, top_right):
+            if point not in dic:
+                return False
+            
+        return size == (right - left) * (top - bot)
+
+
 
 # 2017.05.28
 # Algorithms
