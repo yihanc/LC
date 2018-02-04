@@ -21,6 +21,25 @@
 # Input: "PPALLL"
 # Output: False
 
+# 2018.01.21
+# Rewrite
+class Solution(object):
+    def checkRecord(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        seenA = False
+        
+        for i in xrange(len(s)):
+            char = s[i]
+            if seenA and char == "A": return False
+            if i >= 2 and s[i-2:i+1] == "LLL": return False
+            seenA = True if char == "A" else seenA
+        return True
+                
+            
+
 # 2017.05.25
 class Solution(object):
     def checkRecord(self, s):
