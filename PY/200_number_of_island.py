@@ -27,6 +27,39 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2018.02.22
+# Union Find
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid: return 0
+        m, n = len(grid), len(grid[0])
+        roots = [ x for x in xrange(m * n)]
+        cnt = 0
+        for i in xrange(m):
+            for j in xrange(n):
+                if grid[i][j] == "0": continue
+                r1 = self.find(roots, i * n + j)
+                cnt += 1
+                for pair in ((0, -1), (-1, 0)):
+                    ii, jj = i + pair[0], j + pair[1]
+                    if ii >= 0 and jj >= 0 and grid[ii][jj] == "1":
+                        r2 = self.find(roots, ii * n + jj)
+                        if r1 != r2:
+                            roots[r2] = r1
+                            cnt -= 1
+        return cnt
+                
+    
+    def find(self, roots, i):
+        while roots[i] != i:
+            roots[i] = roots[roots[i]]
+            i = roots[i]
+        return roots[i]
+
 # 2017.05.27 
 # Union find
 class Solution(object):

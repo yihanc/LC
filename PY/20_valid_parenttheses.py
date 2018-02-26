@@ -6,6 +6,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.22
+from collections import deque
+class Solution(object):
+    def isValid(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        if len(s) % 2 == 1: return False
+        d = deque()
+        dic = { ")": "(", "}": "{", "]": "[" }
+        for char in s:
+            if char in "([{":
+                d.append(char)
+            else:
+                if not d or d[-1] != dic[char]:
+                    return False
+                d.pop()
+        return len(d) == 0
+            
+        
+
 from collections import deque
 
 class Solution(object):

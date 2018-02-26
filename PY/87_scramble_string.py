@@ -41,6 +41,38 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.23 Rewrite
+from collections import Counter
+class Solution(object):
+    def isScramble(self, s1, s2):
+        """
+        :type s1: str
+        :type s2: str
+        :rtype: bool
+        """
+        n = len(s1)
+        if n == 0 or s1 == s2: return True
+        
+        dic1 = Counter(s1)
+        dic2 = Counter(s2)
+        if len(dic1) != len(dic2): return False
+        for k, v in dic1.iteritems():
+            if k not in dic2 or v != dic2[k]:
+                return False
+        
+        # Split and recursive check
+        for l in xrange(1, len(s1)):
+            s11, s12, s21, s22 = s1[:l], s1[l:], s2[:l], s2[l:]
+            if self.isScramble(s11, s21) and self.isScramble(s12, s22):
+                return True
+            
+            s21, s22 = s2[:n-l], s2[n-l:]
+            if self.isScramble(s11, s22) and self.isScramble(s12, s21):
+                return True
+        return False
+            
+            
+
 # 2017.04.09 Rewrite
 class Solution(object):
     def isScramble(self, s1, s2):

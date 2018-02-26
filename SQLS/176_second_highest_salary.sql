@@ -17,3 +17,9 @@
 # 
 # Subscribe to see which companies asked this question.
 */
+
+/* 2018.02.23
+*/
+select max(salary) as SecondHighestSalary
+from employee
+where salary < (select max(salary) from employee)

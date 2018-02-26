@@ -15,6 +15,35 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# 2018.02.23 DFS
+class Solution(object):
+    def partition(self, s):
+        """
+        :type s: str
+        :rtype: List[List[str]]
+        """
+        res = []
+        self.solve(res, [], s, 0)
+        return res
+
+    def solve(self, res, line, s, start):
+        if start == len(s):
+            res.append(line)
+            return
+        
+        for end in xrange(start + 1, len(s) + 1):
+            cur = s[start:end]
+            if self.isPalindrome(cur):
+                self.solve(res, line + [cur], s, end)
+    
+    def isPalindrome(self, s):
+        if not s or len(s) == 1: return True
+        l, r = 0, len(s) - 1
+        while l < r and s[l] == s[r]:
+            l, r = l + 1, r - 1
+        return True if l >= r else False
+            
+
 # 12.7.2016 Rewrite
 class Solution(object):
     def partition(self, s):

@@ -44,6 +44,44 @@
 #        :rtype List[NestedInteger]
 #        """
 
+# 2018.02.25 One stack solution
+# First reversely push to stack
+# hasNext() to find next available element
+
+from collections import deque
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        """
+        Initialize your data structure here.
+        :type nestedList: List[NestedInteger]
+        """
+        self.d = deque()
+        for i in xrange(len(nestedList) - 1, -1, -1):
+            self.d.append(nestedList[i])
+        
+    def next(self):
+        """
+        :rtype: int
+        """
+        return self.d.pop().getInteger()
+        
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        d = self.d
+        #print("hasNext", self.d)
+        while d:
+            if d[-1].isInteger(): 
+                return True
+            cur = d.pop().getList()
+            for i in xrange(len(cur) - 1, -1, -1):
+                d.append(cur[i])
+        return False
+            
+
 # 2017.05.13 Stack
 from collections import deque
 class NestedIterator(object):

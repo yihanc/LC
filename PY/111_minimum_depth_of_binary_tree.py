@@ -14,6 +14,24 @@
 #         self.left = None
 #         self.right = None
 
+# 2018.02.21
+class Solution(object):
+    def minDepth(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root: return 0
+        
+        if root.left: minl = self.minDepth(root.left)
+        if root.right: minr = self.minDepth(root.right)
+            
+        if not root.left and not root.right: return 1
+        if not root.left and root.right: return minr + 1
+        if not root.right and root.left: return minl + 1
+        return min(minl, minr) + 1
+        
+
 # 1.1.2016 BFS Rewrite
 from collections import deque
 class Solution(object):

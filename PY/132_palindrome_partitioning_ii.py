@@ -9,6 +9,36 @@
 # For example, given s = "aab",
 # Return 1 since the palindrome partitioning ["aa","b"] could be produced using 1 cut.
 
+# 2018.02.24
+# Use dp[i] to record the mincut for dp[i-1], iniiate to m + 1 each
+# for center i, and length j
+# If Range[i-j, i+j] is palindrome, then dp[i+j] = min(dp[i+j], dp[i-j-1] + 1) 
+# Edge case, if i - j - 1 < 0, which means i-j is the start of the s, so no cut is needed.
+# For Range[i-j-1, i+j] is palindrome, update [i+j] = min(dp[i+j], dp[i-j-2] + 1)
+
+
+class Solution(object):
+    def minCut(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        dp = [ n + 1 for x in xrange(n)]
+        
+        for i in xrange(n):
+            j = 0
+            while i - j >= 0 and i + j < n and s[i-j] == s[i+j]:
+                dp[i+j] = min(dp[i+j], dp[i-j-1] + 1) if i-j-1 >= 0 else 0
+                j += 1
+            j = 0
+            while i - j - 1 >= 0 and i + j < n and s[i-j-1] == s[i+j]:
+                dp[i+j] = min(dp[i+j], dp[i-j-2] + 1) if i-j-2 >= 0 else 0
+                j += 1
+        return dp[n-1]
+
+
+
 # Better solution. Combine check and update cut at the same time.
 # note:
 # 1. Initiate dp with [-1, 0, 1, 2 ...]

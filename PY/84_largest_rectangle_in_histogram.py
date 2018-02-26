@@ -16,6 +16,10 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.24
+# Always append, even it is equal to the last element
+# Because, for next height higher, you need the latest same height to calculate left side
+
 # 2017.03.18 One deque solution
 # algorithm: Use a deque
 # if cur < dp[-1], d.append(i) (Pushing left side to queue)

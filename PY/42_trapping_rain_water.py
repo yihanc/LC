@@ -10,6 +10,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.22
+
+class Solution(object):
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        if len(height) < 3: return 0
+        l, r = 0, len(height) - 1
+        min_height = min(height[l], height[r])
+        res = 0
+        while l < r:
+            min_height = max(min_height, min(height[l], height[r]))
+            if height[l] <= height[r]:
+                l += 1
+                res += max(0, min_height - height[l])
+            else:
+                r -= 1
+                res += max(0, min_height - height[r])
+        return res
+
 # 2017.05.11 rewrite
 # Use last h to calcuate size. 
 # Get last h = max(h, min(h[l], h[r]))

@@ -23,6 +23,37 @@
 #         self.start = s
 #         self.end = e
 
+# 2018.02.23 
+# One pass no insert version
+# Assuming intervals were sorted
+# If not sorted, insert newInterval and then sort is easier
+# 69ms
+
+class Solution(object):
+    def insert(self, intervals, newInterval):
+        """
+        :type intervals: List[Interval]
+        :type newInterval: Interval
+        :rtype: List[Interval]
+        """
+        res = []
+        inserted = False
+        i = 0
+        while i < len(intervals) or not inserted:                # Need "or not inserted" to handle finished but newInterval has not been inserted case
+            if (i == n) or (not inserted and intervals[i].start > newInterval.start):
+                cur, inserted = newInterval, True   # Not changing i
+            else:
+                cur, i = intervals[i], i + 1
+                
+            if not res or res[-1].end < cur.start:  # No overlap with res[-1]
+                res.append(cur)
+            else:                                   # Overlap. Update res[-1] only
+                res[-1].end = max(res[-1].end, cur.end)
+        return res
+
+
+
+# o(n) solution slower
 class Solution(object):
     def insert(self, intervals, newInterval):
         """

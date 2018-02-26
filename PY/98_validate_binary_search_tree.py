@@ -16,6 +16,23 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+# 2018.02.21
+class Solution(object):
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root: return True
+        return self.isValidBSTHelper(root, float('inf'), float('-inf'))
+    
+    def isValidBSTHelper(self, root, mx, mi):
+        if not root: return True
+        left = self.isValidBSTHelper(root.left, root.val, mi)
+        right = self.isValidBSTHelper(root.right, mx, root.val)
+        return root.val < mx and root.val > mi and left and right
+        
+
 # 2017.03.12 Rewrite
 import sys
 class Solution(object):

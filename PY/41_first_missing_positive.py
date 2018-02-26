@@ -7,6 +7,21 @@
 # and [3,4,-1,1] return 2.
 # 
 # Your algorithm should run in O(n) time and uses constant space.
+
+# 2018.02.19
+class Solution(object):
+    def firstMissingPositive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        S = set(nums)
+        i = 1
+        while i in S:
+            i += 1
+        return i
+
+
 class Solution(object):
     def firstMissingPositive(self, nums):
         """

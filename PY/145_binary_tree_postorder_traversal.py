@@ -14,6 +14,43 @@
 # Note: Recursive solution is trivial, could you do it iteratively?
 # 
 # Subscribe to see which companies asked this question
+
+
+# 2018.02.24 Iterative Stack from GeekForGeeks
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+from collections import deque
+
+class Solution(object):
+    def postorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        d = deque()
+        cur = root
+        res = []
+        while cur or d:
+            if cur:
+                if cur.right: d.append(cur.right)
+                d.append(cur)
+                cur = cur.left
+            else:
+                tmp = d.pop()           
+                if d and tmp.right == d[-1]:       # Right not visited, push parent back
+                    cur = d.pop()
+                    d.append(tmp)
+                else:                       # Right visited
+                    res.append(tmp.val)
+        return res
+                
+
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):

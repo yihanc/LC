@@ -10,6 +10,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.24
+class Solution(object):
+    def search(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        l, r = 0, len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] == target:
+                return mid
+            elif (nums[mid] > nums[r] and (target > nums[mid] or target <= nums[r])
+                or (nums[mid] < nums[r] and target > nums[mid] and target <= nums[r])):
+                l = mid + 1
+            else:
+                r = mid - 1
+        return -1
+                
+        
+
 # 2017.03.03 Rewrite in my style
 class Solution(object):
     def search(self, nums, target):

@@ -19,6 +19,34 @@
 #   ["a","z"]
 # ]
 
+# 2018.02.24
+from collections import defaultdict
+class Solution(object):
+    def groupStrings(self, strings):
+        """
+        :type strings: List[str]
+        :rtype: List[List[str]]
+        """
+        dic = defaultdict(list)
+        res = []
+        for s in strings:
+            if len(s) == 1: 
+                dic["a"].append(s)
+                continue
+            key = self.getKey(s)
+            dic[key].append(s)
+        return [ v for k, v in dic.iteritems() ]
+    
+    def getKey(self, s):
+        diff = ord(s[0]) - ord('a')
+        key = "a"
+        for i in xrange(1, len(s)):
+            x = ord(s[i]) - diff
+            if x < ord('a'): x += 26
+            key += chr(x)
+        return key
+
+
 # 2017.05.26
 # Similar to anagram
 from collections import defaultdict

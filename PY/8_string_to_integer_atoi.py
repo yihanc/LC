@@ -12,6 +12,9 @@
 # spoilers alert... click to show requirements for atoi.
 # 
 # Subscribe to see which companies asked this question
+
+# 2018.02.25
+
 # Analysis
 # 1. leading space
 # 2. sign

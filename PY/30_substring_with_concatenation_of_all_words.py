@@ -10,6 +10,95 @@
 # (order does not matter).
 #
 
+# 2018.02.22 
+# Faster Approach
+# Since len of word is fixed, maintain a Counter by advancing word length
+# Also, use compare helper to compare the Counter of words and current words.
+from collections import defaultdict
+from collections import Counter
+
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        total_char = sum(map(lambda t:len(t), words))
+        word_len = len(words[0])
+        dic, to_check = Counter(words), None
+        res = []
+        
+        for start in xrange(word_len):
+            while start + total_char <= len(s):
+                if to_check is None:    # Initialize Counter dic by splitting and counting
+                    L = [ s[i:i+word_len] for i in xrange(start, start + total_char, word_len) ]
+                    to_check = Counter(L)
+                else:                   # Update Counter by removing left_most word and adding right_most
+                    first_word, last_word = s[start-word_len:start], s[start+total_char-word_len : start+total_char]
+                    to_check[first_word] -= 1
+                    to_check[last_word] += 1
+                    if to_check[first_word] == 0: 
+                        del to_check[first_word]        # Remove from dic if count is 0
+
+                if self.compare(dic, to_check) is True:
+                    res.append(start)
+                start += word_len
+            to_check = None
+        return res
+    
+        
+    def compare(self, dic, to_check):
+        if len(dic) != len(to_check): return False
+        for word, cnt in dic.iteritems():
+            if word not in to_check:
+                return False
+        for word, cnt in to_check.iteritems():
+            if word not in dic or dic[word] < cnt:
+                return False
+        return True
+
+
+# 2018.02.22 Self rewrite
+# TLE for the last case
+
+from collections import defaultdict
+class Solution(object):
+    def findSubstring(self, s, words):
+        """
+        :type s: str
+        :type words: List[str]
+        :rtype: List[int]
+        """
+        total_char = sum(map(lambda x:len(x), words))
+        dic = defaultdict(int)
+        for word in words:
+            dic[word] += 1
+
+        res = []
+        start = 0
+        while start + total_char <= len(s):
+            to_check = s[start:start+total_char]
+            if self.verify(to_check, dic, len(words[0])) is True:
+                res.append(start)
+            start += 1
+        return res
+        
+    def verify(self, s, dic, len_word):
+        start = 0
+        while start + len_word <= len(s):
+            word = s[start: start + len_word]
+            if word not in dic or dic[word] <= 0:
+                return False
+            else:
+                dic[word] -= 1
+            start += len_word
+        return True
+
+
+
+
+
 
 # 2017.04.08 Rewrite Same Template
 class Solution(object):

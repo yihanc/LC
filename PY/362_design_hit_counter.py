@@ -37,6 +37,51 @@
 # What if the number of hits per second could be very large? Does your design scale?
 
 
+# 2018.02.24
+from collections import deque
+class HitCounter(object):
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.d = deque()
+        self.count = 0
+        
+
+    def hit(self, timestamp):
+        """
+        Record a hit.
+        @param timestamp - The current timestamp (in seconds granularity).
+        :type timestamp: int
+        :rtype: void
+        """
+        if self.d and timestamp == self.d[-1][0]:
+            self.d[-1][1] += 1
+        else:
+            self.d.append([timestamp, 1])
+        self.count += 1
+        
+        
+
+    def getHits(self, timestamp):
+        """
+        Return the number of hits in the past 5 minutes.
+        @param timestamp - The current timestamp (in seconds granularity).
+        :type timestamp: int
+        :rtype: int
+        """
+        while self.d and timestamp - self.d[0][0] >= 300:
+            self.count -= self.d.popleft()[1]
+        return self.count
+        
+
+
+# Your HitCounter object will be instantiated and called as such:
+# obj = HitCounter()
+# obj.hit(timestamp)
+# param_2 = obj.getHits(timestamp)
+
 # 2017.05.27
 # times and hits bucket
 class HitCounter(object):

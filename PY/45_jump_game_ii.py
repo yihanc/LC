@@ -18,6 +18,25 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.23
+class Solution(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if len(nums) <= 1: return 0
+        res, i = 1, 1
+        cur_level, nex_level = nums[0], 0
+        while cur_level < len(nums) - 1:
+            res += 1
+            while i <= cur_level and nex_level < len(nums) - 1:
+                nex_level = max(nex_level, i + nums[i])
+                i += 1
+            cur_level = nex_level
+        return res
+            
+
 # 11.26.2016, DP solution.
 # Using marked to skip
 

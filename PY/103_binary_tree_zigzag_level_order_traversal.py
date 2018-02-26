@@ -32,6 +32,32 @@
 #         self.left = None
 #         self.right = None
 
+# 2018.02.21
+from collections import deque
+class Solution(object):
+    def zigzagLevelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root: return []
+        res = []
+        d = deque()
+        d.append((0, root))
+        while d:
+            dep, cur = d.pop()         
+            if cur.left: d.appendleft((dep + 1, cur.left))
+            if cur.right: d.appendleft((dep + 1, cur.right))
+            while len(res) <= dep:
+                res.append([])
+            res[dep].append(cur.val)
+        
+        for level in xrange(len(res)):
+            if level % 2 == 1:
+                res[level].reverse()
+        return res
+        
+
 # 12.31.2016 Reverse list better
 
 from collections import deque

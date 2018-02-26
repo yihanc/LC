@@ -21,6 +21,18 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.25
+class Solution(object):
+    def titleToNumber(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        res = 0
+        for char in s:
+            res = res * 26 + ord(char) - ord('A') + 1
+        return res
+
 # 2017.03.11 Rewrite
 import string
 class Solution(object):

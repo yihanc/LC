@@ -16,6 +16,50 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+
+# 2018.02.24
+# In-order Traversal. 
+# Only change update to below
+# if not n1 and last.val >= cur.val: n1 = last
+# if n1 and last.val >= cur.val: n2 = cur
+# last = cur
+
+
+class Solution(object):
+    def recoverTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: void Do not return anything, modify root in-place instead.
+        """
+        n1, n2, last = None, None, TreeNode(float('-inf'))
+        
+        cur = root
+        while cur:
+            if not cur.left:
+                if not n1 and last.val >= cur.val: n1 = last
+                if n1 and last.val >= cur.val: n2 = cur
+                last = cur
+                cur = cur.right
+            else:
+                prev = cur.left
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+                if prev.right != cur:
+                    prev.right = cur
+                    cur = cur.left
+                else:
+                    if not n1 and last.val >= cur.val: n1 = last
+                    if n1 and last.val >= cur.val: n2 = cur
+                    last = cur
+                    cur = cur.right
+                    prev.right = None
+        
+        n1.val, n2.val = n2.val, n1.val
+        return
+        
+        
+        
+
 # 12.31.2016 Rewrite Morris
 class Solution(object):
     def recoverTree(self, root):

@@ -19,6 +19,35 @@
 # isMatch("ab", "?*")  true
 # isMatch("aab", "c*a*b")  false
 
+# 2018.02.22
+class Solution(object):
+    def isMatch(self, s, p):
+        """
+        :type s: str
+        :type p: str
+        :rtype: bool
+        """
+        m, n = len(s), len(p)
+        dp = [ [False for j in xrange(n + 1)] for i in xrange(m + 1) ] 
+        dp[0][0] = True
+        
+        for j in xrange(1, n+1):
+            if p[j-1] == "*" and dp[0][j-1] is True:
+                dp[0][j] = True
+        
+        for i in xrange(1, m+1):
+            for j in xrange(1, n+1):
+                if (s[i-1] == p[j-1] or p[j-1] == "?") and dp[i-1][j-1] is True:
+                    dp[i][j] = True
+                    continue
+                
+                if p[j-1] == "*":
+                    if dp[i][j-1] is True or dp[i-1][j] is True:
+                        dp[i][j] = True
+        
+        return dp[m][n]
+        
+
 # 11.19.2016 Same template
 # 1. Initialize dp
 # 2. Handle non "*" case

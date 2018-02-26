@@ -21,6 +21,32 @@
 # All words contain only lowercase alphabetic characters.
 # Subscribe to see which companies asked this question
 
+# 2018.02.25
+from collections import deque
+class Solution(object):
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        dic = set(wordList)
+        if endWord not in dic: return 0
+        d = deque()
+        d.append([1, beginWord])
+        while d:
+            dep, word = d.pop()
+            for i in xrange(len(word)):
+                for char in string.lowercase:
+                    new_word = word[:i] + char + word[i+1:]
+                    if new_word == endWord:
+                        return dep + 1
+                    if new_word in dic:
+                        d.appendleft([dep + 1, new_word])
+                        dic.remove(new_word)
+        return 0
+
 # 2017.02.22 Rewrite 2way BFS. Changes to questions
 # wordList is now a list but not set. So "word" in wordList is very slow now
 # endWord has to be in the wordList

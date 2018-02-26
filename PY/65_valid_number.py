@@ -18,6 +18,41 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.23 Rewrite
+class Solution(object):
+    def isNumber(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        i, n = 0, len(s)
+        while i < n and s[i] == " ":  i += 1
+        if i < n and s[i] in "+-": i += 1
+        n_nm, n_pt = 0, 0
+        while i < n and s[i] in "0123456789.":
+            if s[i] in "0123456789": n_nm += 1
+            else: n_pt += 1
+            i += 1
+        
+        if n_nm == 0 or n_pt > 1: return False
+        
+        if i < n and s[i] == "e": 
+            i += 1
+            if i < n and s[i] in "+-": i += 1
+            
+            n_nm, n_pt = 0, 0
+            while i < n and s[i] in "0123456789.":
+                if s[i] in "0123456789": n_nm += 1
+                else: n_pt += 1
+                i += 1
+            
+            if n_nm == 0 or n_pt > 0: return False
+        
+        while i < n and s[i] == " ": i += 1
+        
+        return i == n
+            
+
 # Solving in 4 steps
 # 1. skip the leading whitespaces;
 # 2. check if the significand is valid. To do so, simply skip the leading sign and count the number of digits and the number of points. A valid significand has no more than one point and at least one digit.

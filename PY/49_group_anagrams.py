@@ -15,6 +15,22 @@
 # ]
 # Note: All inputs will be in lower-case.
 
+# 2018.02.24
+# Return list comprehension
+from collections import defaultdict
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        dic = defaultdict(list)
+        for s in strs:
+            key = "".join(sorted(s))
+            dic[key].append(s)
+        return [ v for k,v in dic.iteritems() ]
+            
+
 # 12.11.2017 Rewrite
 from collections import defaultdict
 class Solution:

@@ -17,6 +17,46 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.23 Minimum Window Substring
+# Use dic and cnt to maintain states
+# s[l:r] = Window
+# For Each Loop :
+# 1) First check if cnt == len(t), if yes, maintain state of s[l] and r += 1
+# 2) if not, maintain state of s[r] and l += 1
+
+
+from collections import Counter, defaultdict
+class Solution(object):
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        if len(s) < len(t): return ""
+        dic = Counter(t)
+        
+        res = s + "."
+        cnt, l, r = 0, 0, 0
+        while r <= len(s):
+            if cnt == len(t):
+                res = s[l:r] if r - l < len(res) else res
+                if s[l] in dic:
+                    if dic[s[l]] >= 0: cnt -= 1
+                    dic[s[l]] += 1
+                l += 1
+                continue
+            
+            if r < len(s):
+                if s[r] in dic:
+                    if dic[s[r]] > 0: cnt += 1
+                    dic[s[r]] -= 1
+            r += 1
+        return res if len(res) < len(s) + 1 else ""
+                    
+        
+        
+
 # 03.04.2016 Self write.
 class Solution(object):
     def minWindow(self, s, t):

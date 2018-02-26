@@ -14,6 +14,35 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.02.24
+# Use 2D DP to record state of whether s3[i+j] can match s1[i] , s2[j]
+# if s3[i+j] = s1[i], and dp[i-1][j], then dp[i][j] = True
+# if s3[i+j] = s2[j],  and dp[i][j-1], then dp[i][j] = True
+
+class Solution(object):
+    def isInterleave(self, s1, s2, s3):
+        """
+        :type s1: str
+        :type s2: str
+        :type s3: str
+        :rtype: bool
+        """
+        if len(s3) != len(s1) + len(s2): return False
+        m , n = len(s1), len(s2)
+        dp = [ [False for j in xrange(n+1) ] for i in xrange(m+1) ]
+        dp[0][0] = True
+
+        for i in xrange(m + 1):
+            for j in xrange(n + 1):                
+                if i != 0 and s3[i+j-1] == s1[i-1] and dp[i-1][j]:
+                    dp[i][j] = True
+                    continue
+                
+                if j != 0 and s3[i+j-1] == s2[j-1] and dp[i][j-1]:
+                    dp[i][j] = True
+        return dp[m][n]
+                
+
 # 12.3.2016 
 
 class Solution(object):

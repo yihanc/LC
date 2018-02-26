@@ -13,6 +13,37 @@
 # Return 6.
 # Subscribe to see which companies asked this question
 
+# 2018.02.24 Used a list comprehension
+from collections import deque
+class Solution(object):
+    def maximalRectangle(self, matrix):
+        """
+        :type matrix: List[List[str]]
+        :rtype: int
+        """
+        if not matrix: return 0
+        m, n = len(matrix), len(matrix[0])
+        res = 0
+        heights = [0] * n
+        for i in xrange(m):
+            heights = [ x + int(y) if y != "0" else 0 for x,y in zip(heights, matrix[i])]
+            res = max(res, self.getMaxHeight(heights))
+        return res
+        
+    
+    def getMaxHeight(self, heights):
+        res = 0
+        heights = heights + [0]
+        d = deque()
+        for i in xrange(len(heights)):
+            while d and heights[i] < heights[d[-1]]:
+                h = heights[d.pop()]
+                left = d[-1] if d else -1
+                res = max(res, h * (i - left - 1))
+            d.append(i)
+        return res
+            
+
 # 2017.03.18 One stack solution
 from collections import deque
 class Solution(object):
