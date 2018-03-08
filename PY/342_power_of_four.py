@@ -16,6 +16,24 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2018.02.26 Use a dictionary
+# 
+class Solution(object):
+    def __init__(self):
+        self.dic = set()
+        for i in xrange(0, 100):
+            cur = 4 ** i
+            if cur > 2 ** 32: break
+            self.dic.add(cur)
+
+    def isPowerOfFour(self, num):
+        """
+        :type num: int
+        :rtype: bool
+        """
+        return num in self.dic
+        
+
 class Solution(object):
     def isPowerOfFour(self, num):
         """

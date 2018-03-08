@@ -18,6 +18,14 @@
 # Subscribe to see which companies asked this question.
 */
 
+-- 2018.03.06
+# Write your MySQL query statement below
+SELECT DISTINCT Salary AS SecondHighestSalary
+FROM Employee e
+UNION SELECT null
+ORDER BY SecondHighestSalary DESC
+LIMIT 1, 1
+
 /* 2018.02.23
 */
 select max(salary) as SecondHighestSalary

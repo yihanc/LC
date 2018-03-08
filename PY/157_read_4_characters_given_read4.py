@@ -7,6 +7,32 @@
 # Note:
 # The read function will only be called once for each test case.
 
+# 2018.02.26
+# i for buf counter
+# j for buf4 counter
+# for i < n: Read from buf4 and copy 
+# if wordRead < 4, break and return i
+
+class Solution(object):
+    def read(self, buf, n):
+        """
+        :type buf: Destination buffer (List[str])
+        :type n: Maximum number of characters to read (int)
+        :rtype: The number of characters read (int)
+        """
+        buf4 = [ None ] * 4
+        i = 0
+        while i < n:
+            wordRead = read4(buf4)
+            j = 0
+            while j < wordRead and i < n:
+                buf[i] = buf4[j]
+                i, j = i + 1, j + 1
+            if wordRead < 4: break
+        return i
+            
+            
+
 # The read4 API is already defined for you.
 # @param buf, a list of characters
 # @return an integer

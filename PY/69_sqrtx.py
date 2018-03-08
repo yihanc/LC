@@ -4,6 +4,8 @@
 # Difficulty: Medium
 # Implement int sqrt(int x).
 
+# 2018.02.26 Newton's method to find out result.
+
 #11.27.2016 Newton's
 class Solution(object):
     def mySqrt(self, x):

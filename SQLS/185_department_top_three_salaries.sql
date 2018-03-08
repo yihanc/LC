@@ -38,6 +38,31 @@
 */
 
 
+-- 2018.03.07
+# Write your MySQL query statement below
+
+SELECT
+  d.Name AS Department,
+  sub.Name AS Employee,
+  sub.Salary
+FROM (
+    SELECT 
+      DepartmentId,
+      Name, 
+      Salary,
+      @rank := IF(DepartmentId != @lastDept, 
+                  1,
+                  IF(Salary < @lastSalary, @rank + 1, @rank)) as Rank,
+      @lastSalary := Salary,
+      @lastDept := DepartmentId
+    FROM 
+      Employee e,
+      (SELECT @rank := 1, @lastSalary := null, @lastDept := null) SQLvars
+    ORDER BY DepartmentId, Salary DESC
+) sub
+JOIN Department d ON d.id = sub.DepartmentId
+WHERE sub.rank <= 3
+
 
 
 

@@ -11,6 +11,24 @@
 # 
 # 
 
+# 2018.02.26 Use a dict
+class Solution(object):
+    def __init__(self):
+        self.dic = set()
+        for i in xrange(0, 100):
+            cur = 2 ** i
+            if cur > 2 ** 32: break
+            self.dic.add(cur)
+        
+        
+    def isPowerOfTwo(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        return n in self.dic
+        
+
 # 2017.04.20
 class Solution(object):
     def isPowerOfTwo(self, n):

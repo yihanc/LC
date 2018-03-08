@@ -33,6 +33,20 @@
 # Subscribe to see which companies asked this question. */
 
 
+-- 2018.03.07
+SELECT 
+  d.Name AS Department,
+  e.Name AS Employee,
+  e.Salary
+FROM Employee e
+JOIN ( 
+    SELECT 
+        DepartmentId AS Id,
+        MAX(salary) AS maxSalary
+    From Employee e
+    GROUP BY DepartmentId ) sub ON e.DepartmentId = sub.id    
+JOIN Department d ON e.DepartmentId = d.id
+WHERE e.Salary = sub.maxSalary
 
 
 

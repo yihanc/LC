@@ -25,6 +25,17 @@
 # */ 
 
 
+-- 2018.03.07
+SELECT sub.Email
+FROM (
+    SELECT 
+      Email, 
+      count(*) as cnt
+    FROM Person p
+    GROUP BY Email
+    HAVING cnt > 1
+) sub
+
 
 
 

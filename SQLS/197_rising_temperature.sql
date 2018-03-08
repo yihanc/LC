@@ -23,6 +23,25 @@
 # +----+*/
 
 
+-- 2018.03.07
+SELECT
+  sub.id
+FROM (
+    SELECT
+        Id,
+        Date,
+        Temperature as Temp,
+        @lastDate as LastDate,
+        @lastTemp as LastTemp,
+        @lastDate := Date,
+        @lastTemp := Temperature
+    FROM
+        Weather w,
+        (SELECT @lastTemp := 2147483647, @lastDate := null) SQLvars 
+    ORDER BY Date
+) sub
+WHERE sub.Temp > sub.LastTemp AND DATEDIFF(Date, lastDate) = 1
+    
 
 
 

@@ -32,6 +32,19 @@
 # Subscribe to see which companies asked this question.
 */
 
+-- 2018.03.06
+SELECT
+  sub.Score,
+  sub.Rank
+FROM (
+  SELECT  
+    s.Score,
+    CAST(IF(@lastScore is NULL OR s.Score = @lastScore, @rank, @rank := @rank + 1) AS UNSIGNED) as Rank,
+    @lastScore := s.Score
+  FROM Scores s,
+      (select @lastScore := null, @rank := 1) vars
+  ORDER BY s.Score Desc
+  ) sub
 
 
 

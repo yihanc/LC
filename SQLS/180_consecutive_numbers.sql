@@ -25,6 +25,20 @@
 
 
 
+-- 2018.03.07
+SELECT DISTINCT sub.Num AS ConsecutiveNums
+FROM (
+    SELECT
+        l.Num,
+        @lastNum AS c1,
+        @lastTwoNum AS c2,
+        @lastTwoNum := @lastNum,
+        @lastNum := Num
+    FROM
+        logs l,
+        (SELECT @lastNum := null, @lastTwoNum := null) v
+) sub
+WHERE sub.Num = sub.c1 AND sub.Num = sub.c2
 
 
 

@@ -25,6 +25,14 @@
 #         self.left = None
 #         self.right = None
 
+# 2018.02.26
+# 
+# if root == p or root == q, root is the root subtrees' LCA
+# LRES = search root.left for LCA else None
+# RRES = search root.right for RCA else None
+# If LRES and RRES both valid, then root is the LCA
+# Else, either lres or rres is LCA if the other is None
+
 # 2017.03.05 Self rewrite
 class Solution(object):
     def lowestCommonAncestor(self, root, p, q):

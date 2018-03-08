@@ -24,6 +24,12 @@
 
 
 
+-- 2018.03.07
+SELECT Name AS Employee
+FROM Employee e
+WHERE e.Salary > (SELECT Salary FROM Employee e2 WHERE e.ManagerId = e2.id)
+
+
 
 
 

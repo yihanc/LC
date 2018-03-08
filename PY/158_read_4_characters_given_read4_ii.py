@@ -17,6 +17,42 @@
 # Note:
 # The read function will only be called once for each test case.
 
+
+# 2018.02.26
+# Similar to 157 except saving buf4, wordRead and j into instance var
+#
+# 
+# i for buf counter
+# j for buf4 counter
+# for i < n: Read from buf4 only when self.j == self.wordRead
+# Then copy char one by one
+# if wordRead < 4, break and return i
+
+class Solution(object):
+    def __init__(self):
+        self.buf4 = [ "", "", "", "" ]
+        self.wordRead = 0
+        self.j = 0
+    
+    def read(self, buf, n):
+        """
+        :type buf: Destination buffer (List[str])
+        :type n: Maximum number of characters to read (int)
+        :rtype: The number of characters read (int)
+        """
+        buf4 = self.buf4
+        i = 0
+        while i < n:
+            if self.j == self.wordRead: 
+                self.wordRead = read4(buf4) 
+                self.j = 0
+            
+            while self.j < self.wordRead and i < n:
+                buf[i] = buf4[self.j]
+                i, self.j = i + 1, self.j + 1
+            if self.wordRead < 4: break
+        return i
+
 # The read4 API is already defined for you.
 # @param buf, a list of characters
 # @return an integer
