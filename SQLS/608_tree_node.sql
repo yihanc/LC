@@ -39,3 +39,21 @@ Note
 
 If there is only one node on the tree, you only need to output its root attributes.
 */
+
+-- 2018.03.07
+
+SELECT Id,
+  CASE
+    WHEN t.p_id is NULL THEN "Root"
+    WHEN t.p_id is NOT NULL AND sub.cnt > 0 THEN "Inner"
+    ELSE "Leaf"
+  END AS Type  
+FROM 
+  tree t
+LEFT JOIN (
+    SELECT p_id, count(*) as cnt
+    FROM tree t
+    WHERE p_id IS NOT NULL
+    GROUP BY p_id ) sub
+ON t.id = sub.p_id
+

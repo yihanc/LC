@@ -1,4 +1,4 @@
-578. Get Highest Answer Rate Question
+/* 578. Get Highest Answer Rate Question
 DescriptionHintsSubmissionsSolutions
 Total Accepted: 233
 Total Submissions: 1038
@@ -30,3 +30,16 @@ Output:
 Explanation:
 question 285 has answer rate 1/1, while question 369 has 0/1 answer rate, so output 285.
 Note: The highest answer rate meaning is: answer number's ratio in show number in the same question.
+*/
+
+-- 2018.03.10
+
+SELECT
+  question_id AS survey_log
+FROM (
+    SELECT
+        question_id, 
+        SUM(IF(action = 'answer', 1, 0)) / COUNT(*) as answer_rate
+    FROM survey_log
+    GROUP BY question_id 
+    ORDER BY answer_rate DESC LIMIT 1 ) sub1
