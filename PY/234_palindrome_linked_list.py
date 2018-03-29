@@ -15,6 +15,26 @@
 #         self.val = x
 #         self.next = None
 
+
+# 2018.03.10
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        res = []
+        cur = head
+        while cur:
+            res.append(cur.val)
+            cur = cur.next
+        
+        i, j = 0, len(res) - 1
+        while i < j and res[i] == res[j]:
+            i, j = i + 1, j - 1
+        return False if i < j else True
+
+
 # 2017.03.25 Better way
 class Solution(object):
     def isPalindrome(self, head):

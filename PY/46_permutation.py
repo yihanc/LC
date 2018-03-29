@@ -12,6 +12,24 @@
 # Show Similar Problems
 # 
 
+# 2018.03.22
+class Solution(object):
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            if len(nums) == 0: res.append(line)
+            
+            for i, num in enumerate(nums):
+                dfs(line + [num], nums[:i] + nums[i+1:])
+            
+        if not nums: return []
+        res = []
+        dfs([], nums)
+        return res
+
 # Better way. Remove num[i] for each DFS. No need for DIC
 class Solution(object):
     def dfs(self, nums, res, line):

@@ -15,7 +15,26 @@
 # 
 # Subscribe to see which companies asked this question
 
-import random
+# 2018.03.10
+class Solution(object):
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        i, j = 0, 0     #i for 0, j for non-zero
+        while i < n:
+            while i < n and nums[i] != 0:
+                i += 1
+            if i == n: return
+            if j <= i: j = i + 1
+            while j < n and nums[j] == 0:
+                j += 1
+            if j == n: return
+            nums[i], nums[j] = nums[j], nums[i]
+        
+
 
 # 2017.03.27 Rewrite
 class Solution(object):

@@ -19,6 +19,24 @@
 # 
 # Subset -> Always append; Pass right
 
+# 2018.03.22
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            res.append(line)
+            for i, num in enumerate(nums):
+                dfs(line + [num], nums[i+1:])
+            
+        if not nums: return []
+        res = []
+        dfs([], nums)
+        return res
+
+
 # 2017.04.05 Another short version
 class Solution(object):
     def subsets(self, nums):

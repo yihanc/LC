@@ -14,6 +14,41 @@
 # 
 # Note: you can assume that no duplicate edges will appear in edges. Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
 
+# 2018.03.22 BFS
+# To satisfy tree
+# 1. All connected
+# 2. No loop
+
+from collections import deque
+class Solution(object):
+    def validTree(self, n, edges):
+        """
+        :type n: int
+        :type edges: List[List[int]]
+        :rtype: bool
+        """
+        neighbors = [ set() for i in xrange(n)]
+        
+        for p1, p2 in edges:
+            neighbors[p1].add(p2)
+            neighbors[p2].add(p1)
+        
+        d = deque()
+        d.append(0)
+        vis = {0}
+        
+        while d:
+            node = d.pop()
+            for neighbor in neighbors[node]:
+                if neighbor in vis: return False
+                neighbors[neighbor].remove(node)        # Removing the path from neighbor to node
+                d.appendleft(neighbor)
+                vis.add(neighbor)
+        return len(vis) == n
+            
+            
+
+
 
 # 2017.05.26
 # Union find 

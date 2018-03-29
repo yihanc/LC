@@ -21,6 +21,33 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.03.22
+class Solution(object):
+    def combinationSum3(self, k, n):
+        """
+        :type k: int
+        :type n: int
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            if len(line) == k:
+                if sum(line) == n:
+                    res.append(line)
+                    return
+                else:
+                    return
+            
+            for i, num in enumerate(nums):
+                dfs(line + [num], nums[i+1:])
+        
+        if k == 0 or n <= 0: return []
+        if n > sum([ 9 - i for i in xrange(k)]): return []
+        res = []
+        nums = [1,2,3,4,5,6,7,8,9]
+        dfs([], nums)
+        return res
+        
+
 # 2017.03.24 Rewrite
 class Solution(object):
     def combinationSum3(self, k, n):

@@ -5,8 +5,8 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        dic = {}
-        for i, num in enumerate(nums):
-            if target - num in dic:
-                return (dic[target-num], i+1)
-            dic[num] = i+1
+        dic = {}        # 1
+        for i, num in enumerate(nums):      # o(3n) = o(n)
+            if target - num in dic:             # o(1)
+                return (dic[target-num], i+1)       o(1)
+            dic[num] = i+1          # o(1), 

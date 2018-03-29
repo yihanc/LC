@@ -18,6 +18,28 @@
 #   []
 # ]
 # Key: Same as subset except When to ignore.
+
+# 2018.03.22
+class Solution(object):
+    def subsetsWithDup(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            res.append(line)
+            for i, num in enumerate(nums):
+                if i != 0 and nums[i] == nums[i-1]: 
+                    continue
+                dfs(line + [num], nums[i+1: ])
+        
+        if not nums: return []
+        nums.sort()
+        res = []
+        dfs([], nums)
+        return res
+
+
 class Solution(object):
     def subsetsWithDup(self, nums):
         """

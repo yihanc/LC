@@ -7,6 +7,29 @@
 # [1,1,2], [1,2,1], and [2,1,1].
 # 
 # Subscribe to see which companies asked this question
+
+# 2018.03.22
+class Solution(object):
+    def permuteUnique(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        def dfs(line, nums):
+            if len(nums) == 0: res.append(line)
+            
+            for i, num in enumerate(nums):
+                if i != 0 and nums[i] == nums[i-1]: 
+                    continue
+                dfs(line + [num], nums[:i] + nums[i+1:])
+                
+        if not nums: return []
+        res = []
+        nums.sort()
+        dfs([], nums)
+        return res
+
+
 class Solution(object):
     def dfs(self, nums, res, path):
         if not nums:

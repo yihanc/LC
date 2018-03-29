@@ -33,6 +33,30 @@
 # 1. Use collections deque for BFS. Popleft
 # 2. Use dic to keep track of node/neighbor and its copy
 
+
+# 2018.03.22 Clone graph
+from collections import deque
+class Solution:
+    # @param node, a undirected graph node
+    # @return a undirected graph node
+    def cloneGraph(self, node):
+        if not node: return None
+        d = deque()
+        d.append(node)
+        dic = {}
+        while d:
+            cur = d.pop()
+            if cur in dic: continue
+            cloned = UndirectedGraphNode(cur.label)
+            dic[cur] = cloned
+            for neighbor in cur.neighbors:
+                d.appendleft(neighbor)
+        
+        for cur, cloned in dic.iteritems():
+            for neighbor in cur.neighbors:
+                cloned.neighbors.append(dic[neighbor])
+        return dic[node]
+
 # 2017.02.22 Rewrite
 # Step 1: BFS to create nodes and add to DICTIONARY MAPPING
 # Step 2: For each node in DIC, add neighbors

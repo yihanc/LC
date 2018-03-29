@@ -8,6 +8,28 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.03.22 DFS
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        def dfs(line, n, nl, nr):
+            if nl == nr and nl + nr == n * 2:
+                res.append(line)
+                return
+            if nr < n and nr < nl:
+                dfs(line + ")", n, nl, nr + 1)
+            
+            if nl < n:
+                dfs(line + "(", n, nl + 1, nr)
+        
+        res = []
+        dfs("", n, 0, 0)
+        return res
+        
+
 # 2017.04.23 Rewrite
 class Solution(object):
     def generateParenthesis(self, n):

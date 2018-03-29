@@ -15,6 +15,32 @@
 # ]
 # Subscribe to see which companies asked this question
 
+# 2018.03.22 DFS
+# To bypass TLE, Calculate upperbound of i to reduce dfs call.
+# Need: k - len(line) element, Left: n - i + 1,
+# Need <= Left -->  k - len(line) <= n - i + 1  --> i <= n + 1 -k + len(line)
+
+class Solution(object):
+    def combine(self, n, k):
+        """
+        :type n: int
+        :type k: int
+        :rtype: List[List[int]]
+        """
+        def dfs(line, start):
+            if len(line) == k:
+                res.append(line)
+                return
+            
+            for i in xrange(start, n + 2 - k + len(line)):         # Need: k - len(line) element, Left: n - i + 1,
+                dfs(line + [i], i + 1)                             # Need <= Left -->  k - len(line) <= n - i + 1  --> i <= n + 1 -k + len(line)
+        
+        if n == 0: return []
+        res = []
+        dfs([], 1)
+        return res
+
+
 # 2017.04.10 Rewrite. BFS
 class Solution(object):
     def combine(self, n, k):

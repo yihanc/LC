@@ -19,6 +19,36 @@
 # Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it is larger in lexical order.
 
 
+# 2018.03.23
+# Greedy + Backward DFS
+# Algorithm
+# 1. Sort tickets backward and construct routes. City with smaller name will appread last. For examplea, { "JFK": ["D", "C", "C", "B", "A" ] }
+# 2. Select the next smallest city to visit and pop, visit(routes[city].pop())
+# 3. If stuck, append to res. 
+# 4. Reverse res to get result
+
+from collections import defaultdict
+class Solution(object):
+    def findItinerary(self, tickets):
+        """
+        :type tickets: List[List[str]]
+        :rtype: List[str]
+        """
+        def visit(airport):
+            while routes[airport]:
+                visit(routes[airport].pop())
+            res.append(airport)
+        
+        routes = defaultdict(list)
+        for a, b in sorted(tickets)[::-1]:
+            routes[a].append(b)
+            
+        res = []
+        visit("JFK")
+        return res[::-1]
+        
+
+
 # 2017.05.13
 # Eulerian path From Stefan Pochmann
 # First keep going forward until you get stuck. That's a good main path already. Remaining tickets form cycles which are found on the way back and get merged into that main path. By writing down the path backwards when retreating from recursion, merging the cycles into the main path is easy - the end part of the path has already been written, the start part of the path hasn't been written yet, so just write down the cycle now and then keep backwards-writing the path.

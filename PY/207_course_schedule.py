@@ -22,6 +22,39 @@
 # The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
 # You may assume that there are no duplicate edges in the input prerequisites.
 
+# 2018.03.22
+# Topological Sort
+from collections import deque
+class Solution(object):
+    def canFinish(self, numCourses, prerequisites):
+        """
+        :type numCourses: int
+        :type prerequisites: List[List[int]]
+        :rtype: bool
+        """
+        ins = [ 0 for i in xrange(numCourses)]
+        outs = [ set() for i in xrange(numCourses)]
+        
+        for cur, pre in prerequisites:
+            ins[cur] += 1
+            outs[pre].add(cur)
+            
+        d = deque()
+        res = []
+        for i in xrange(len(ins)):
+            if ins[i] == 0: 
+                d.appendleft(i)
+                
+        while d:
+            node = d.pop()
+            res.append(node)
+            for neighbor in outs[node]:
+                ins[neighbor] -= 1
+                if ins[neighbor] == 0: d.appendleft(neighbor)
+        return len(res) == numCourses
+            
+                
+
 # 2017.03.14
 # Algorithm Wiki Topological Sort 
 # 1. Traverse and update indegrees[]

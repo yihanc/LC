@@ -10,6 +10,32 @@
 # 
 # return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
 
+# 2018.03.22 Backtracking
+class Solution(object):
+    def restoreIpAddresses(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        def dfs(line, start, s):
+            if len(line) > 4: return
+            
+            if start == len(s) and len(line) == 4:
+                res.append(".".join(line))
+                return
+            
+            if start >= len(s): return
+            
+            dfs(line + [s[start]], start + 1, s)
+            if s[start] != "0" and start + 1 < len(s):
+                dfs(line + [s[start:start+2]], start + 2, s)
+            if s[start] != "0" and start + 2 < len(s) and int(s[start:start + 3]) <= 255 and int(s[start:start + 3]) >= 0:
+                dfs(line + [s[start:start+3]], start + 3, s)
+
+        res = []
+        dfs([], 0, s)
+        return res
+
 # 12.30.2016 Rewrite
 class Solution(object):
     def restoreIpAddresses(self, s):

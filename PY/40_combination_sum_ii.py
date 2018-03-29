@@ -16,6 +16,29 @@
 #   [1, 1, 6]
 # ]
 
+# 2018.03.22
+class Solution(object):
+    def combinationSum2(self, candidates, target):
+        """
+        :type candidates: List[int]
+        :type target: int
+        :rtype: List[List[int]]
+        """
+        def dfs(line, candidates):
+            if sum(line) > target: return
+            if sum(line) == target:
+                res.append(line)
+                return
+            for i, num in enumerate(candidates):
+                if i != 0 and candidates[i] == candidates[i-1]: continue
+                dfs(line + [num], candidates[i+1:])
+        
+        if not candidates: return []
+        res = []
+        candidates.sort()
+        dfs([], candidates)
+        return res
+
 # 2017.03.24 DFS inside
 class Solution(object):
     def combinationSum2(self, candidates, target):

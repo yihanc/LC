@@ -15,6 +15,28 @@
 #         self.next = None
 #         self.random = None
 
+# 2018.03.22
+class Solution(object):
+    def copyRandomList(self, head):
+        """
+        :type head: RandomListNode
+        :rtype: RandomListNode
+        """
+        if not head: return None
+        dic = {}
+        cur = head
+        while cur:
+            clone = RandomListNode(cur.label)
+            dic[cur] = clone
+            cur = cur.next
+        
+        cur = head
+        while cur:
+            if cur.next: dic[cur].next = dic[cur.next]
+            if cur.random: dic[cur].random = dic[cur.random]
+            cur = cur.next
+        return dic[head]
+
 # 2017.04.04 Rewrite and shorter
 class Solution(object):
     def copyRandomList(self, head):

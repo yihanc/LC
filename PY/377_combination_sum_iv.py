@@ -28,6 +28,25 @@
 # How does it change the problem?
 # What limitation we need to add to the question to allow negative numbers?
 
+# 2018.03.22 DP
+class Solution(object):
+    def combinationSum4(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: int
+        """
+        dp = [ 0 for i in xrange(target + 1)]
+        dp[0] = 1
+        
+        for i in xrange(1, target + 1):
+            for num in nums:
+                if i - num >= 0:
+                    dp[i] += dp[i - num]
+        return dp[-1]
+
+
+
 # DP Much faster.. For calculating
 class Solution(object):
     def combinationSum4(self, nums, target):

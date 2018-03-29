@@ -47,6 +47,7 @@
 # 2018.02.25 One stack solution
 # First reversely push to stack
 # hasNext() to find next available element
+# Not a good answer because hasNext is not idempotent
 
 from collections import deque
 class NestedIterator(object):
