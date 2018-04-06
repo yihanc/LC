@@ -18,6 +18,11 @@
 # Subscribe to see which companies asked this question.
 */
 
+-- 2018.04.06
+Select
+  IFNULL((SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1,1), NULL) as SecondHighestSalary
+
+
 -- 2018.03.06
 # Write your MySQL query statement below
 SELECT DISTINCT Salary AS SecondHighestSalary

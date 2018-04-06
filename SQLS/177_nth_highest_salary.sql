@@ -18,6 +18,18 @@ For example, given the above Employee table, the nth highest salary where n = 2 
 +------------------------+
 */
 
+-- 2018.04.06
+CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
+BEGIN
+  DECLARE M INT;
+  SET M = N - 1;
+  RETURN (
+      # Write your MySQL query statement below.
+      SELECT
+        IFNULL((SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT M, 1), NULL)
+  );
+END
+
 -- 2018.03.06
 
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT

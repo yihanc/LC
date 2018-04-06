@@ -32,6 +32,16 @@
 # Subscribe to see which companies asked this question.
 */
 
+-- 2018.04.06 Better
+# Write your MySQL query statement below
+SELECT
+  Score,
+  @rank := @rank + (@last != (@last := Score)) as Rank
+FROM
+  Scores,
+  (SELECT @rank := 0, @last := -1) init
+ORDER BY Score Desc  
+
 -- 2018.03.06
 SELECT
   sub.Score,

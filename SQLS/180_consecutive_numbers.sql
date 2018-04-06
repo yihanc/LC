@@ -24,6 +24,15 @@
 */
 
 
+-- 2018.04.06
+SELECT
+  a.Num AS ConsecutiveNums
+FROM Logs a
+LEFT JOIN Logs b ON a.id = b.id - 1
+LEFT JOIN Logs c ON b.id = c.id - 1
+WHERE a.Num = b.Num AND b.Num = c.Num
+GROUP BY a.Num
+
 
 -- 2018.03.07
 SELECT DISTINCT sub.Num AS ConsecutiveNums

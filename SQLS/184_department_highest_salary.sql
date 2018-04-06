@@ -33,6 +33,19 @@
 # Subscribe to see which companies asked this question. */
 
 
+-- 2018.04.06 First get Max of each. Then join and select
+SELECT
+    c.name AS Department,
+    a.Name as Employee,
+    a.Salary as Salary
+FROM Employee a
+LEFT JOIN (
+    SELECT DepartmentId, MAX(Salary) as max FROM Employee GROUP BY DepartmentID
+) b ON a.departmentId = b.departmentId
+JOIN Department c ON a.departmentid = c.id
+WHERE a.Salary = b.max
+
+
 -- 2018.03.07
 SELECT 
   d.Name AS Department,

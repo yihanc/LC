@@ -25,6 +25,12 @@
 # */ 
 
 
+-- 2018.04.06 No subquery
+SELECT Email
+FROM Person a
+GROUP BY EMAIL
+HAVING COUNT(Email) > 1
+
 -- 2018.03.07
 SELECT sub.Email
 FROM (

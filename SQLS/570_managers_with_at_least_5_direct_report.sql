@@ -22,6 +22,18 @@ Note:
 No one would report to himself.
 */
 
+-- 2018.04.06 subquery in where
+SELECT NAME
+FROM Employee e
+WHERE e.Id IN (
+    SELECT ManagerId
+    FROM Employee e
+    GROUP BY ManagerId
+    HAVING COUNT(*) >= 5
+)
+
+
+
 -- 2018.03.07
 SELECT e.Name
 FROM (

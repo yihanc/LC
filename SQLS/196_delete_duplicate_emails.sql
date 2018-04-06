@@ -23,6 +23,13 @@ For example, after running your query, the above Person table should have the fo
 | 2  | bob@example.com  |
 +----+------------------+ */
 
+-- 2018.04.06
+DELETE FROM Person WHERE id NOT IN (
+    SELECT * FROM (
+        SELECT Min(Id) FROM Person p GROUP BY Email
+    ) as t
+)
+
 
 -- 2018.03.07
 DELETE FROM PERSON

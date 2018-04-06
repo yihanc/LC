@@ -46,6 +46,17 @@
 */
 
 
+-- 2018.04.06
+-- GROUP BY + SUM IF
+SELECT
+  Request_at AS Day,
+  ROUND((SUM(IF(Status != 'completed', 1, 0)) / COUNT(*)), 2) as 'Cancellation Rate'
+FROM Trips
+WHERE Client_id NOT IN (SELECT Users_ID FROM Users WHERE Role = 'client' AND Banned = 'Yes')
+AND request_at BETWEEN '2013-10-01' AND '2013-10-03'
+GROUP BY Request_at
+
+
 -- 2018.03.08
 SELECT 
   request_at as Day,

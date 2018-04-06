@@ -22,6 +22,13 @@
 # | Joe      |
 # +----------+
 
+-- 2018.04.06 Self join
+SELECT
+  a.Name AS Employee
+FROM Employee a
+LEFT JOIN Employee b ON a.ManagerId = b.Id
+WHERE a.Salary > b.Salary
+
 
 
 -- 2018.03.07

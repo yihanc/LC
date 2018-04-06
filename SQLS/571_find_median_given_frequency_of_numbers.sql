@@ -21,6 +21,14 @@ Write a query to find the median of all numbers and name the result as median.
 */
 
 
+-- 2018.04.06
+SELECT AVG(Number) as median
+From Numbers n
+WHERE n.Frequency >=
+ABS((SELECT SUM(FREQUENCY) FROM Numbers n1 WHERE n.Number >= n1.Number) -
+(SELECT SUM(FREQUENCY) FROM Numbers n2 WHERE n.Number <= n2.Number))
+
+
 -- 2018.03.08
 
 SELECT ROUND(MAX(sub.median), 4) AS median

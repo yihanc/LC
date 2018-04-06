@@ -35,6 +35,18 @@ Write a SQL query to find the median salary of each company. Bonus points if you
 +-----+------------+--------+
 */
 
+
+-- 2018.04.06 Inspired by 571
+SELECT
+  id,
+  Company,
+  Salary
+FROM Employee e
+WHERE 1 >= ABS((SELECT COUNT(*) FROM Employee e1 WHERE e.company = e1.company AND e.Salary >= e1.Salary) -
+           (SELECT COUNT(*) FROM Employee e2 WHERE e.company = e2.company AND e.Salary <= e2.Salary)) 
+GROUP BY Company, Salary           
+ORDER BY Company, Salary
+
 -- 2018.03.09
 
 SELECT

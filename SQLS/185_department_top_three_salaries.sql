@@ -38,6 +38,24 @@
 */
 
 
+-- 2018.04.06
+-- SELECT salary maximum only 2 are larger than it
+
+SELECT
+  d.Name as Department,
+  e1.Name as Employee,
+  e1.Salary
+FROM Employee e1
+JOIN Department d ON e1.departmentid = d.id
+WHERE 3 > (
+    SELECT COUNT(DISTINCT Salary)
+    FROM Employee e2
+    WHERE e1.Salary < e2.Salary
+    AND e1.departmentid = e2.departmentid
+)
+ORDER BY d.name, e1.Salary
+
+
 -- 2018.03.07
 # Write your MySQL query statement below
 

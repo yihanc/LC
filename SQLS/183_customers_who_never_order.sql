@@ -34,6 +34,11 @@
 # +-----------+ */
 
 
+-- 2018.04.06
+SELECT Name as Customers
+FROM Customers
+WHERE id NOT IN (SELECT CustomerID from Orders)
+
 
 -- 2018.03.07
 SELECT Name AS Customers
