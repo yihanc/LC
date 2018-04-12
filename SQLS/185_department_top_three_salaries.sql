@@ -38,22 +38,24 @@
 */
 
 
+-- 20
+
+
 -- 2018.04.06
 -- SELECT salary maximum only 2 are larger than it
 
-SELECT
-  d.Name as Department,
-  e1.Name as Employee,
-  e1.Salary
-FROM Employee e1
-JOIN Department d ON e1.departmentid = d.id
-WHERE 3 > (
+SELECT 
+  d.Name AS Department,
+  e.Name AS Employee,
+  e.Salary
+FROM Employee e
+JOIN Department d ON e.departmentId = d.id
+WHERE (
     SELECT COUNT(DISTINCT Salary)
     FROM Employee e2
-    WHERE e1.Salary < e2.Salary
-    AND e1.departmentid = e2.departmentid
-)
-ORDER BY d.name, e1.Salary
+    WHERE e.departmentId = e2.departmentId AND e2.Salary > e.Salary
+) <= 2
+ORDER BY DepartmentId, Salary Desc
 
 
 -- 2018.03.07
@@ -80,7 +82,6 @@ FROM (
 ) sub
 JOIN Department d ON d.id = sub.DepartmentId
 WHERE sub.rank <= 3
-
 
 
 

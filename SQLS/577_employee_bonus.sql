@@ -1,4 +1,5 @@
-/*577. Employee Bonus
+/*
+577. Employee Bonus
 DescriptionHintsSubmissionsDiscussSolution
 Select all employee's name and bonus whose bonus is < 1000.
 
@@ -31,11 +32,13 @@ Example ouput:
 | Dan   | 500   |
 | Brad  | null  |
 +-------+-------+
+
+
 */
 
--- 2018.03.07
+-- 2018.04.06
 
 SELECT name, bonus
 FROM Employee e
 LEFT JOIN Bonus b ON e.empId = b.empId
-WHERE bonus < 1000 OR bonus is NULL
+WHERE b.bonus < 1000 or b.bonus is NULL

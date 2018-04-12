@@ -29,6 +29,13 @@ Note:
 The students should not be counted duplicate in each course.
 */
 
+-- 2018.04.06 One query
+SELECT class
+FROM courses
+GROUP BY class
+HAVING COUNT(DISTINCT student) >= 5
+
+
 -- 2018.03.07
 SELECT sub.class
 FROM (

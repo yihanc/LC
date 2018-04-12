@@ -1,4 +1,5 @@
-/* 585. Investments in 2016
+/*
+585. Investments in 2016
 DescriptionHintsSubmissionsDiscussSolution
 Write a query to print the sum of all total investment values in 2016 (TIV_2016), to a scale of 2 decimal places, for all policy holders who meet the following criteria:
 
@@ -41,14 +42,10 @@ And its location is the same with the third record, which makes the third record
 So, the result is the sum of TIV_2016 of the first and last record, which is 45.
 */
 
--- 2018.03.10
 
+-- 2018.04.06 Subquery first 
 SELECT SUM(TIV_2016) as TIV_2016
-FROM insurance i
-LEFT JOIN (
-    SELECT lat, lon, COUNT(*) as cnt FROM insurance GROUP BY lat, lon
-) sub1 ON i.lat = sub1.lat AND i.lon = sub1.lon
-LEFT JOIN (
-    SELECT TIV_2015, COUNT(TIV_2015) as cnt FROM insurance GROUP BY TIV_2015
-) sub2 ON i.TIV_2015 = sub2.TIV_2015
-WHERE sub1.cnt = 1 AND sub2.cnt > 1
+FROM insurance
+WHERE PID IN ( SELECT pid FROM insurance GROUP BY lat, lon HAVING COUNT(*) = 1) 
+AND TIV_2015 IN (SELECT TIV_2015 FROM insurance GROUP BY TIV_2015 HAVING COUNT(*) > 1) 
+

@@ -8,6 +8,39 @@
 # return [1,1,2,2].
 # Note 0 is represented as the sea, 1 is represented as the island. If two 1 is adjacent, we consider them in the same island. We only consider up/down/left/right adjacent.
 
+
+# 2018.04.08
+class Solution(object):
+    def numIslands2(self, m, n, positions):
+        """
+        :type m: int
+        :type n: int
+        :type positions: List[List[int]]
+        :rtype: List[int]
+        """
+        roots = [ i for i in xrange(m * n)]
+        vis = set()
+        cnt = 0
+        res = []
+        for x, y in positions:
+            cnt += 1
+            vis.add((x, y))
+            r1 = self.find(roots, x * n + y)
+            for pair in [[0, -1], [-1, 0], [0, 1], [1, 0] ]:
+                xx, yy = x + pair[0], y + pair[1]
+                if xx >= 0 and xx < m and yy >= 0 and yy < n and (xx, yy) in vis:
+                    r2 = self.find(roots, xx * n + yy)
+                    if r1 != r2:
+                        roots[r2] = r1
+                        cnt -= 1
+            res.append(cnt)            
+        return res
+        
+    
+    def find(self, roots, x):
+        if roots[x] != x:
+            roots[x] = self.find(roots, roots[x])
+        return roots[x]
         
 # 2017.05.27
 # Union find

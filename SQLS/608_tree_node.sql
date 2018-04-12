@@ -40,6 +40,20 @@ Note
 If there is only one node on the tree, you only need to output its root attributes.
 */
 
+-- 2018.04.07 Case When + Self JOIN
+
+SELECT
+  a.id,
+  CASE
+    WHEN (a.p_id is NULL) THEN 'Root'
+    WHEN (b.id is NULL) THEN 'Leaf'
+    ELSE 'Inner'
+  END AS Type
+FROM tree a
+LEFT JOIN tree b ON a.id = b.p_id
+GROUP BY a.id
+
+
 -- 2018.03.07
 
 SELECT Id,

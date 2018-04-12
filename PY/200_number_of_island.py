@@ -27,6 +27,42 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2018.04.08 recursive path compression
+# Note that, when unioning, 
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        if not grid or not grid[0]: return 0
+        m, n = len(grid), len(grid[0])
+        roots = [ i for i in xrange(m * n) ]
+        
+        cnt = 0
+        for i in xrange(m):
+            for j in xrange(n):
+                #print(i, j, "cnt", cnt, roots)
+
+                if grid[i][j] == "0": continue
+                
+                r1 = self.find(roots, i * n + j)
+                cnt += 1
+                for pair in [[0, -1], [-1, 0]]:
+                    xx, yy = i + pair[0], j + pair[1]
+                    if xx >= 0 and xx < m and yy >= 0 and yy < n and grid[xx][yy] == "1":
+                        r2 = self.find(roots, xx * n + yy)
+                        if r1 != r2:
+                            roots[r2] = r1
+                            cnt -= 1
+        return cnt      
+                        
+    
+    def find(self, roots, x):
+        if roots[x] != x:
+            roots[x] = self.find(roots, roots[x])       # Paths compression
+        return roots[x]
+
 # 2018.02.22
 # Union Find
 class Solution(object):

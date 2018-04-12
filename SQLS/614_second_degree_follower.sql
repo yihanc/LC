@@ -28,6 +28,16 @@ Please display the result in follower's alphabet order.
 
 */
 
+
+-- 2018.04.07 Simpler
+SELECT
+  a.follower,
+  COUNT(DISTINCT b.follower) AS num
+FROM follow a
+JOIN follow b ON a.follower = b.followee
+GROUP BY a.follower
+
+
 -- 2018.03.07
 
 SELECT

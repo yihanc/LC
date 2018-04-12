@@ -32,6 +32,11 @@ Can you write a query to return the accept rate but for every month?
 How about the cumulative accept rate for every day?
 */
 
+-- 2018.04.06
+SELECT
+IFNULL(ROUND ( ((SELECT COUNT(DISTINCT requester_id, accepter_id) FROM request_accepted) /
+(SELECT COUNT(DISTINCT sender_id, send_to_id) FROM friend_request) ), 2), 0) as accept_rate
+
 -- 2018.03.07
 
 SELECT

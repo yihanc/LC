@@ -13,6 +13,44 @@
 #         self.left = None
 #         self.right = None
 
+
+# 2018.04.07 With Cache 80ms
+class Solution:
+    def __init__(self):
+        self.cache = {}
+        
+    def isBalanced(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root: return True
+        l = self.getHeight(root.left)
+        r = self.getHeight(root.right)
+        return abs(l - r) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+     
+    def getHeight(self, root):
+        if not root: return 0
+        if root in self.cache: 
+            return self.cache[root]
+        
+        if root.left in self.cache:
+            l = self.cache[root.left]
+        else:
+            l = self.getHeight(root.left)
+            self.cache[root.left] = l
+        
+        if root.right in self.cache:
+            r = self.cache[root.right]
+        else:
+            r = self.getHeight(root.right)
+            self.cache[root.right] = r
+            
+        self.cache[root] = max(l, r) + 1
+        return max(l, r) + 1
+
+# Without cache
+
 class Solution(object):
     def isBalanced(self, root):
         """

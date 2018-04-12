@@ -15,7 +15,15 @@ Note: Every point is unique, which means there is no duplicates in table point.
 Follow-up: What if all these points have an id and are arranged from the left most to the right most of x axis?
 */
 
--- 2018.03.10
+-- 2018.03.10 Self join
+
+SELECT
+  b.x - a.x as shortest
+FROM point a
+JOIN point b ON a.x < b.x
+ORDER BY shortest LIMIT 1
+
+-- 
 
 SELECT 
   min(sub.x - sub.last) AS shortest

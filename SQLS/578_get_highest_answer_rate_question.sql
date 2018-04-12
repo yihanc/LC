@@ -1,10 +1,6 @@
-/* 578. Get Highest Answer Rate Question
-DescriptionHintsSubmissionsSolutions
-Total Accepted: 233
-Total Submissions: 1038
-Difficulty: Medium
-Contributors:
-Douglas1612
+/*
+578. Get Highest Answer Rate Question
+DescriptionHintsSubmissionsDiscussSolution
 Get the highest answer rate question from a table survey_log with these columns: uid, action, question_id, answer_id, q_num, timestamp.
 
 uid means user id; action has these kind of values: "show", "answer", "skip"; answer_id is not null when action column is "answer", while is null for "show" and "skip"; q_num is the numeral order of the question in current session.
@@ -30,16 +26,13 @@ Output:
 Explanation:
 question 285 has answer rate 1/1, while question 369 has 0/1 answer rate, so output 285.
 Note: The highest answer rate meaning is: answer number's ratio in show number in the same question.
+
 */
 
--- 2018.03.10
+-- 2018.04.06 One SQL, NO subquery
 
-SELECT
-  question_id AS survey_log
-FROM (
-    SELECT
-        question_id, 
-        SUM(IF(action = 'answer', 1, 0)) / COUNT(*) as answer_rate
-    FROM survey_log
-    GROUP BY question_id 
-    ORDER BY answer_rate DESC LIMIT 1 ) sub1
+SELECT question_id AS survey_log
+FROM survey_log
+GROUP BY question_id
+ORDER BY SUM(IF(action = 'answer', 1, 0)) / COUNT(*) DESC LIMIT 1
+

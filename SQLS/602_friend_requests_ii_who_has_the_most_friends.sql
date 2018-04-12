@@ -23,6 +23,19 @@ In the real world, multiple people could have the same most number of friends, c
 
 */
 
+-- 2018.04.07
+SELECT
+    rid as id,
+    COUNT(*) as num
+FROM (
+SELECT requester_id as rid, accepter_id  as aid FROM request_accepted
+UNION ALL
+SELECT accepter_id as rid, requester_id as aid FROM request_accepted
+) sub
+GROUP BY rid
+ORDER BY num DESC LIMIT 1
+
+
 
 -- 2018.03.10
 SELECT

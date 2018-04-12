@@ -19,6 +19,39 @@
 # X O X X
 # Subscribe to see which companies asked this question
 
+# 2018.04.08
+from collections import deque
+class Solution(object):
+    def solve(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: void Do not return anything, modify board in-place instead.
+        """
+        if not board or not board[0]: return
+        m, n = len(board), len(board[0])
+        vis = set()
+        d = deque()
+        for i in xrange(m):
+            for j in xrange(n):
+                if (i == 0 or j == 0 or i == m - 1 or j == n - 1) and board[i][j] == "O":
+                    d.appendleft((i, j))
+    
+        while d:
+            i, j = d.pop()
+            if (i, j) in vis: continue
+            
+            vis.add((i, j))
+            for pair in [[0, -1], [-1, 0], [0, 1], [1, 0]]:
+                ii, jj = i + pair[0], j + pair[1]
+                if ii >= 0 and ii < m and jj >= 0 and jj < n and board[ii][jj] == "O" and (ii, jj) not in vis:
+                    d.appendleft((ii, jj))
+
+        for i in xrange(m):
+            for j in xrange(n):
+                if (i, j) not in vis and board[i][j] == "O":
+                    board[i][j] = 'X'
+        return
+
 
 # BFS Algorithms:
 # 1. Scan bondaries and appendleft to deque()

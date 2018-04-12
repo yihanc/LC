@@ -33,6 +33,18 @@ Each day only have one row record, and the dates are increasing with id increasi
 
 */
 
+
+-- 2018.04.06
+SELECT s1.*
+FROM stadium s1, stadium s2, stadium s3
+WHERE (( s1.id - 2 = s2.id AND s1.id - 1 = s3.id )
+OR (s1.id - 1 = s2.id AND s1.id + 1 = s3.id )
+OR (s1.id + 1 = s2.id AND s1.id + 2 = s3.id))
+AND s1.people >= 100
+AND s2.people >= 100
+AND s3.people >= 100
+GROUP BY s1.id
+
 -- 2018.03.10
 
 SELECT

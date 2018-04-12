@@ -25,6 +25,49 @@
 # 
 # Subscribe to see which companies asked this question.
 
+# 2018.04.11 Sweepline
+        # 1. preprocess critical points, lefts and rights
+        # 2. Then for each CP do:
+        #    2.1 Everything in rights, add height to_delete
+        #    2.2 Keep popping minheap if it is in to_delete and to_delete value > 0
+        #    2.3 For everything in lefts, add into minheap
+        #    2.4 Output [cp, height] from minheap if height is different than last in the result.
+from heapq import *
+from collections import defaultdict
+class Solution(object):
+    def getSkyline(self, buildings):
+        """
+        :type buildings: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        cps = set()
+        lefts = defaultdict(list)
+        rights = defaultdict(list)
+        
+        for l, r, h in buildings:
+            cps.add(l)
+            cps.add(r)
+            lefts[l].append(h)
+            rights[r].append(h)
+        
+        hq = [0]
+        to_delete = defaultdict(int)
+        res = []
+        for cp in sorted(cps):
+            for height in rights[cp]:
+                to_delete[height] += 1
+            
+            while hq and -hq[0] in to_delete and to_delete[-hq[0]] > 0:
+                to_delete[-hq[0]] -= 1
+                heappop(hq)
+        
+            for height in lefts[cp]:
+                heappush(hq, -height)
+
+            if not res or res[-1][1] != -hq[0]:         # Remove duplicate
+                res.append([cp, -hq[0]])
+        return res
+
 
 # 2018.01.06 SweepLine
 # Sort critical point

@@ -1,4 +1,6 @@
 /*
+584. Find Customer Referee
+DescriptionHintsSubmissionsDiscussSolution
 Given a table customer holding customers information and the referee.
 
 +------+------+-----------+
@@ -25,9 +27,8 @@ For the sample data above, the result is:
 +------+
 */
 
--- 2018.03.07
+-- 2018.04.06
 
 SELECT name
 FROM customer
-WHERE referee_id != 2 OR referee_id is NULL
-
+WHERE referee_id is NULL OR referee_id != '2'

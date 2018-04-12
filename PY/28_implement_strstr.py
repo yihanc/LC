@@ -8,6 +8,22 @@
 
 # Other fast algorithms available (KMP, Sunny)
 
+# 2018.04.07
+class Solution:
+    def strStr(self, haystack, needle):
+        """
+        :type haystack: str
+        :type needle: str
+        :rtype: int
+        """
+        m, n = len(haystack), len(needle)
+        if n > m: return -1
+        if n == 0: return 0
+        for i in range(m):
+            if haystack[i] == needle[0] and needle == haystack[i:i+n]:
+                return i
+        return -1
+
 # Naive algorithms
 # Careful: "" needle, return 0
 class Solution(object):

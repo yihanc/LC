@@ -21,6 +21,15 @@ Note:
 If there is no such number, just output null.
 */
 
+-- 2018.04.07
+SELECT IFNULL((
+    SELECT num
+    FROM number
+    GROUP BY num
+    HAVING COUNT(*) = 1
+    ORDER BY num DESC LIMIT 1 ), null) as num
+
+
 -- 2018.03.07
 
 SELECT

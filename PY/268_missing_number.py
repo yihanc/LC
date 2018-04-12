@@ -17,6 +17,18 @@
 # Credits:
 # Special thanks to @jianchao.li.fighter for adding this problem and creating all test cases.
 
+# 2018.04.07 Set method
+class Solution(object):
+    def missingNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        nums = set(nums)
+        for i in xrange(0, len(nums)):
+            if i not in nums:
+                return i
+        return len(nums)
 
 # 2018.02.24
 

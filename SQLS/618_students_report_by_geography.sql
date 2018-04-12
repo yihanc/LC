@@ -16,6 +16,40 @@ For the sample input, the output is:
 Follow-up: If it is unknown which continent has the most students, can you write a query to generate the student report?
 */
 
+-- 2018.04.07
+/*
+The idea is Generate 3 tables for each contient with rank
+Then join them back using the rank
+
+From original table ->
+T1:
+Jack 1
+Jane 2
+
+T2
+Xi 1
+
+T3
+Pascal 1
+
+Then After JOIN it become
+1 JACK 1 XI 1 Pascal
+2 Jane null, null, null, null
+
+*/
+
+SELECT
+  a.name as America,
+  b.name as Asia,
+  c.name as Europe
+FROM ( SELECT @arow := @arow + 1 as row, name FROM student, (SELECT @arow := 0) init WHERE continent = 'America' ORDER BY name) a
+LEFT JOIN 
+    ( SELECT @brow := @brow + 1 as row, name FROM student, (SELECT @brow := 0) init WHERE continent = 'Asia' ORDER BY name) b 
+ON a.row = b.row
+LEFT JOIN 
+    ( SELECT @crow := @crow + 1 as row, name FROM student, (SELECT @crow := 0) init WHERE continent = 'Europe' ORDER BY name) c
+ON a.row = c.row
+
 
 -- 2018.03.08
 
@@ -44,20 +78,3 @@ LEFT JOIN (
     FROM student s, (SELECT @r3 := 0) SQLvar3
     WHERE continent = 'Europe'
     ORDER BY Name) sub3 ON sub1.rank = sub3.rank
-
-SELECT s1.* FROM stadium AS s1, stadium AS s2, stadium as s3
-    WHERE 
-    ((s1.id + 1 = s2.id
-    AND s1.id + 2 = s3.id)
-    OR 
-    (s1.id - 1 = s2.id
-    AND s1.id + 1 = s3.id)
-    OR
-    (s1.id - 2 = s2.id
-    AND s1.id - 1 = s3.id)
-    )
-    AND s1.people>=100 
-    AND s2.people>=100
-    AND s3.people>=100
-
-    GROUP BY s1.id

@@ -1,4 +1,5 @@
-/* 579. Find Cumulative Salary of an Employee
+/*
+579. Find Cumulative Salary of an Employee
 DescriptionHintsSubmissionsDiscussSolution
 The Employee table holds the salary information in a year.
 
@@ -52,17 +53,15 @@ Employ '3' has two salary records except its most recent pay month '4': month '3
 
 */
 
-
--- 2018.03.10
-
+-- 2018.04.06
 SELECT
     e1.Id,
     e1.Month,
-    e1.Salary + IFNULL(e2.Salary, 0) + IFNULL(e3.Salary, 0) as Salary
+    e1.Salary + IFNULL(e2.Salary,0) + IFNULL(e3.Salary, 0) AS Salary
 FROM Employee e1
-LEFT JOIN Employee e2 ON e1.month - 1 = e2.month AND e1.id = e2.id
-LEFT JOIN Employee e3 ON e1.month - 2 = e3.month AND e1.id = e3.id    
-WHERE e1.month != (SELECT MAX(month) FROM Employee e4 WHERE e1.id = e4.id)
-ORDER BY e1.id, e1.month DESC
-
-
+LEFT JOIN Employee e2 ON e1.id = e2.id AND e1.Month = e2.Month + 1
+LEFT JOIN Employee e3 ON e2.id = e3.id AND e2.Month = e3.Month + 1
+WHERE e1.Month != (
+    SELECT max(Month) FROM Employee e4 WHERE e4.id = e1.id
+)
+ORDER BY e1.Id, e1.Month DESC

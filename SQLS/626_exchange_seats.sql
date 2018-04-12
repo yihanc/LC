@@ -29,6 +29,17 @@ Note:
 If the number of students is odd, there is no need to change the last one's seat.
 */
 
+
+-- 2018.04.07 Self JOIN no subquery
+SELECT
+  a.id,
+  IFNULL(b.student, a.student) AS student
+FROM seat a
+LEFT JOIN seat b ON (a.id % 2 = 1 AND a.id + 1 = b.id) 
+OR (a.id % 2 = 0 AND a.id - 1 = b.id)
+ORDER BY a.id 
+
+
 -- 2018.03.07
 
 SELECT

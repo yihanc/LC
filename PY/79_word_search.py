@@ -19,6 +19,44 @@
 # word = "SEE", -> returns true,
 # word = "ABCB", -> returns false.
 
+# 2018.04.08
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        if not board: return False
+        if not word: return True
+        m, n = len(board), len(board[0])
+        res = [False]
+        for i in xrange(m):
+            for j in xrange(n):
+                if board[i][j] == word[0]:
+                    self.dfs(board, i, j, word, 0, set(), res)
+                    if res[0]: return True
+        return res[0]
+    
+    def dfs(self, board, x, y, word, word_i, vis, res):
+        if word_i >= len(word) or board[x][y] != word[word_i]: 
+            return
+        
+        if word_i == len(word) - 1:
+            res[0] = True
+            return
+
+        vis.add((x, y))
+        m, n = len(board), len(board[0])
+        pairs = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        for pair in pairs:
+            xx, yy = x + pair[0], y + pair[1]
+            if xx >= 0 and xx < m and yy >= 0 and yy < n and (xx, yy) not in vis:
+                self.dfs(board, xx, yy, word, word_i + 1, vis, res)
+                if res[0]: return
+        vis.remove((x, y))
+
+
 # 12.28.2016 Rewrite
 
 class Solution(object):
