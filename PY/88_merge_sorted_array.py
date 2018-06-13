@@ -18,6 +18,37 @@
 # [1,3,4] 4,[2] 1 -> [1,3,4]
 # [1,3,4,5] 4,[2] 1 -> [1,2,3,4]
 
+# 2018.06.12 Rewrite
+# Similar to LC 21, merge two sorted list
+# Use 3 pointers, i for cur ele in nums1, j for cur ele in nums2, k for the biggest
+        
+class Solution(object):
+    def merge(self, nums1, m, nums2, n):
+        """
+        :type nums1: List[int]
+        :type m: int
+        :type nums2: List[int]
+        :type n: int
+        :rtype: void Do not return anything, modify nums1 in-place instead.
+        """
+        i, j, k = m - 1, n - 1, m + n - 1
+        while i >= 0 and j >= 0:
+            if nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                i, k = i - 1, k - 1
+            else:
+                nums1[k] = nums2[j]
+                j, k = j - 1, k - 1
+        
+        # When loop finished, there could elements left either in nums1 (j == -1) or in nums2 (i == -1)
+        if i == -1:         # If some elements left in nums2, copy to nums1
+            while j >= 0:
+                nums1[k] = nums2[j]
+                j, k = j - 1, k - 1
+        else:               # If some left in nums1, we do nothing since they are in the right positions.
+            pass
+
+        
 # 2017.04.04 Shorter solution
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
