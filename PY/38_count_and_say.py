@@ -12,6 +12,35 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.06.12 Rewrite using a helper functions.
+class Solution(object):
+    def countAndSay(self, n):
+        """
+        :type n: int
+        :rtype: str
+        """
+        tmp = "1"
+        while n > 1:
+            tmp = self.gen_next_lvl(tmp)
+            n -= 1
+        return tmp
+    
+    def gen_next_lvl(self, s):
+        res = ""
+        count = 1
+        i = 0
+        while i < len(s):
+            if i == len(s) - 1 or s[i] != s[i+1]:                   # When do we need to stop and output?
+                res += str(count) + s[i]                            # 1) i is at the end
+                                                                    # 2) cur char is different than the last char
+                
+                count = 1                                           # Reset count to 1
+            else:                                                   # Else, cur char == next char
+                count += 1
+            i += 1  
+        return res
+                
+
 # 2017.03.11. Rewrite
 class Solution(object):
     def countAndSay(self, n):
