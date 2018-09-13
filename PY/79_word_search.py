@@ -19,6 +19,53 @@
 # word = "SEE", -> returns true,
 # word = "ABCB", -> returns false.
 
+# 2018.09.12
+class Solution(object):
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        def dfs(board, i, j, is_vis, word_index):
+            # Reach the last char of word
+            if word_index == len(word) - 1:
+                self.res = True
+                return
+        
+            m, n = len(board), len(board[0])
+            candidates = [[i+1, j], [i-1, j], [i, j+1], [i, j-1]]
+            for ii, jj in candidates:
+                if ii < 0 or jj < 0 or ii >= m or jj >= n or is_vis[ii][jj] or board[ii][jj] != word[word_index+1]:
+                    continue
+                
+                is_vis[ii][jj] = True
+                dfs(board, ii, jj, is_vis, word_index + 1)
+                if self.res:
+                    return True
+                is_vis[ii][jj] = False
+                
+
+        if not board: return False
+        if len(word) == 0: return True
+        
+        self.res = False
+        
+        m, n = len(board), len(board[0])
+        is_vis = [ [ False for j in xrange(n) ] for i in xrange(m) ] 
+        
+        for i in xrange(m):
+            for j in xrange(n):
+                if board[i][j] == word[0]:
+                    is_vis[i][j] = True
+                    dfs(board, i, j, is_vis, 0)
+                    is_vis[i][j] = False
+                    if self.res: 
+                        return True
+        return False
+                    
+                
+
 # 2018.04.08
 class Solution(object):
     def exist(self, board, word):
