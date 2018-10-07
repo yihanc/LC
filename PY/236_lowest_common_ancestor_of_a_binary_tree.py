@@ -25,6 +25,27 @@
 #         self.left = None
 #         self.right = None
 
+# 2018.10.06
+# self-write
+class Solution(object):
+    def lowestCommonAncestor(self, root, p, q):
+        """
+        :type root: TreeNode
+        :type p: TreeNode
+        :type q: TreeNode
+        :rtype: TreeNode
+        """
+        if not root: return None
+        if root == p: return p
+        if root == q: return q
+        ll = self.lowestCommonAncestor(root.left, p, q)
+        rr = self.lowestCommonAncestor(root.right, p, q)
+        if not ll and not rr: return None
+        if not ll: return rr
+        if not rr: return ll
+        return root
+
+
 # 2018.02.26
 # 
 # if root == p or root == q, root is the root subtrees' LCA
