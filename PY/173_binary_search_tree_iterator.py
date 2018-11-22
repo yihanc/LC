@@ -21,6 +21,30 @@
 #         self.left = None
 #         self.right = None
 
+# 2018.11.20 
+# Online solution
+
+class BSTIterator:
+    # @param root, a binary search tree's root node
+    def __init__(self, root):
+        self.stack = list()
+        self.pushAll(root)
+
+    # @return a boolean, whether we have a next smallest number
+    def hasNext(self):
+        return self.stack
+
+    # @return an integer, the next smallest number
+    def next(self):
+        tmpNode = self.stack.pop()
+        self.pushAll(tmpNode.right)
+        return tmpNode.val
+        
+    def pushAll(self, node):
+        while node is not None:
+            self.stack.append(node)
+            node = node.left
+
 # 2018.03.10 stack traversal
 '''
 **hasNext() should be IDEMPOTENT**
