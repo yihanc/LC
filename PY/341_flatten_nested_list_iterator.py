@@ -44,6 +44,66 @@
 #        :rtype List[NestedInteger]
 #        """
 
+# 2018.11.23
+# self wrote
+# Use self.L and self.index to keep track of the current Integer
+# To find out next,
+# First, self.index += 1
+# if self.index is pointing to a list, keep looping and adding the current L, index + 1 into stack
+# if self.index == len(self.L), pop from stack and find out the next
+
+class NestedIterator(object):
+
+    def __init__(self, nestedList):
+        """
+        Initialize your data structure here.
+        :type nestedList: List[NestedInteger]
+        """
+        self.stack = []
+        self.L = nestedList
+        self.index = 0
+        self.findNext()   # Stop at next INT
+            
+        
+
+    def next(self):
+        """
+        :rtype: int
+        """
+        res = self.L[self.index].getInteger()
+        # print("NEXT : ", res)
+        self.index += 1
+        self.findNext()
+        return res
+        
+
+    def hasNext(self):
+        """
+        :rtype: bool
+        """
+        return True if self.L else False
+        
+    def findNext(self):
+        # print("findNext : ", self.L, self.index)
+        if not self.L and not self.stack:
+            return
+        
+        while self.stack or self.index <= len(self.L):
+            if self.index == len(self.L):
+                if self.stack:
+                    self.L, self.index = self.stack.pop()
+                else:
+                    self.L = []
+            else:
+                if self.L[self.index].isInteger():
+                    return
+                else:
+                    self.stack.append([self.L, self.index + 1])
+                    self.L = self.L[self.index].getList()
+                    self.index = 0
+        return 
+
+
 # 2018.02.25 One stack solution
 # First reversely push to stack
 # hasNext() to find next available element
