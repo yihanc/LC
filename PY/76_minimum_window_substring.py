@@ -17,6 +17,46 @@
 # 
 # Subscribe to see which companies asked this question
 
+# 2018.11.23 Editor's Solution
+from collections import Counter
+class Solution:
+    def minWindow(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: str
+        """
+        if not t or not s:
+            return ""
+        
+        dict_t = Counter(t)
+        required = len(dict_t)
+        formed = 0
+        l, r = 0, 0
+        formed = 0
+        window_counts = {}
+        ans = float('inf'), None, None
+        
+        while r < len(s):
+            c = s[r]
+            window_counts[c] = window_counts.get(c, 0) + 1
+            
+            if c in dict_t and window_counts[c] == dict_t[c]:
+                formed += 1
+                
+            while l <= r and formed == required:
+                c = s[l]
+                if r - l + 1 < ans[0]:
+                    ans = (r - l + 1, l, r)
+                
+                window_counts[c] -= 1
+                if c in dict_t and window_counts[c] < dict_t[c]:
+                    formed -= 1
+                
+                l += 1
+            r += 1
+        return "" if ans[0] == float("inf") else s[ans[1] : ans[2] + 1]
+
 # 2018.02.23 Minimum Window Substring
 # Use dic and cnt to maintain states
 # s[l:r] = Window
