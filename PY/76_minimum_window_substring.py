@@ -33,7 +33,6 @@ class Solution:
         required = len(dict_t)
         formed = 0
         l, r = 0, 0
-        formed = 0
         window_counts = {}
         ans = float('inf'), None, None
         
